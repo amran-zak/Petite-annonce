@@ -18,7 +18,7 @@ function NotFoundPage(): JSX.Element {
         flexDirection={"column"}
         justifyContent={"center"}
         alignItems={"center"}
-        sx={{ height: "100vh" }}
+        sx={{ height: "95vh" }}
       >
         <img src={PageNotFound} width="300px" alt="Not Found 404 img" />
         <div>
