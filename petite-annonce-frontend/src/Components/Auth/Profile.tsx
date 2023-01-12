@@ -208,7 +208,7 @@ export default function Login(): JSX.Element {
                             variant="contained"
                             sx={{ mt: 5, mb: 2, mx: 'auto' }}
                         >
-                            Voir toutes mes annonces
+                            Voir mes {fadeMesAnnonces.length} annonces
                         </Button>
                     </Grid>
                     <Grid sm={5} sx={{ mx: 'auto', mt: 5 }}>
@@ -230,6 +230,9 @@ export default function Login(): JSX.Element {
                                                 >
                                                     <VisibilityIcon/>
                                                 </Button>
+                                            </Grid>
+                                            <Grid xs={12} sm={2} sx={{ m: 'auto' }}>
+                                                {index+1}/{fadeMesAnnonces.length}
                                             </Grid>
                                             <Grid xs={12} sm={2} sx={{ mx: 'auto' }}>
                                                 <Button
@@ -264,7 +267,7 @@ export default function Login(): JSX.Element {
                             variant="contained"
                             sx={{ mt: 5, mb: 2, mx: 'auto' }}
                         >
-                            Voir tous mes favoris
+                            Voir mes {fadeMesFavoris.length} favoris
                         </Button>
                     </Grid>
                     <Grid sm={5} sx={{ mx: 'auto', mt: 5 }}>
@@ -286,6 +289,9 @@ export default function Login(): JSX.Element {
                                                 >
                                                     <VisibilityIcon/>
                                                 </Button>
+                                            </Grid>
+                                            <Grid xs={12} sm={2} sx={{ m: 'auto' }}>
+                                                {index+1}/{fadeMesFavoris.length}
                                             </Grid>
                                             <Grid xs={12} sm={2} sx={{ mx: 'auto' }}>
                                                 <Button
