@@ -98,8 +98,8 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose} href="/connexion">Connexion</MenuItem>
+      <MenuItem onClick={handleMenuClose} href="/inscription">Inscription</MenuItem>
     </Menu>
   );
 
