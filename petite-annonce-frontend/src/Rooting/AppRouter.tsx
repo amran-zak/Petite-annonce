@@ -6,6 +6,7 @@ import Home from "../Components/Annonces/Home";
 import Login from "../Components/Auth/Login";
 import SignUp from "../Components/Auth/SignUp";
 import New_password from "../Components/Auth/New_password";
+import Profile from "../Components/Auth/Profile";
 
 
 export default function AppRouter(): JSX.Element {
@@ -21,6 +22,7 @@ export default function AppRouter(): JSX.Element {
             <Route path="/connexion" element={<Login/>} />
             <Route path="/inscription" element={<SignUp/>} />
             <Route path="/nouveau_mot_de_passe" element={<New_password/>} />
+            <Route path="/profile" element={<Profile/>} />
             {/*<Route path='/forbiddenAccess' element={<LoginPage/>} />*/}
             <Route path="/*" element={<NotFoundPage />} />
           </Routes>
