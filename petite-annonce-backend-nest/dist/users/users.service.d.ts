@@ -1,9 +1,12 @@
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { Model } from "mongoose";
+import { User } from "./users.model";
 export declare class UsersService {
-    create(createUserDto: CreateUserDto): string;
-    findAll(): string;
-    findOne(id: number): string;
-    update(id: number, updateUserDto: UpdateUserDto): string;
-    remove(id: number): string;
+    private readonly userModel;
+    constructor(userModel: Model<User>);
+    insertUser(firstname: string, lastname: string, email: string, password: string, number: number, address: string, code_postal: number, city: string, img: string): Promise<User & Required<{
+        _id: string;
+    }>>;
+    getUser(email: string): Promise<User & Required<{
+        _id: string;
+    }>>;
 }
