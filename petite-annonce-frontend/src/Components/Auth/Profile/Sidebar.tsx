@@ -13,14 +13,20 @@ const list = [
   {
     id: 1,
     name: "Nombre d'annonce",
-    value: 32,
+    value: 10,
     icon: 'cottageicon',
   },
   {
     id: 2,
     name: "Nombre de favoris",
-    value: 26,
+    value: 3,
     icon: 'favorite',
+  },
+  {
+    id: 3,
+    name: "Nombre de réservations",
+    value: 1,
+    icon: 'calendar_month',
   }
 ]
 function Sidebar() {
