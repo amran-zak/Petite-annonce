@@ -19,7 +19,7 @@ const theme = createTheme();
 export default function New_password(): JSX.Element {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
+        // const data = new FormData(event.currentTarget);
     };
     return (
         <ThemeProvider theme={theme}>
