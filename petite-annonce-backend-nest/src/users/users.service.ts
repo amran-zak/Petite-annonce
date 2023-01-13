@@ -23,9 +23,12 @@ export class UsersService {
     }
 
     async getUser(email: string) {
-        console.log("toto");
         const user = await this.userModel.findOne({ email });
         return user;
+    }
+
+    async updatePassword(id: string, password: string) {
+        return this.userModel.updateOne({"_id": id}, {"password": password});
     }
 
     // create(createUserDto: CreateUserDto) {
@@ -40,9 +43,6 @@ export class UsersService {
     //     return `This action returns a #${id} user`;
     // }
     //
-    // update(id: number, updateUserDto: UpdateUserDto) {
-    //     return `This action updates a #${id} user`;
-    // }
     //
     // remove(id: number) {
     //     return `This action removes a #${id} user`;

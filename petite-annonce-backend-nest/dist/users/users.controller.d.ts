@@ -7,7 +7,10 @@ export declare class UsersController {
         userId: any;
         email: string;
     }>;
-    login(req: any): any;
+    login(email: string, password: string, req: any): Promise<{
+        User: any;
+        msg: string;
+    }>;
     getHello(req: any): string;
     logout(req: any): any;
 }

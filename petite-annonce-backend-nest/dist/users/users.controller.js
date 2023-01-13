@@ -30,9 +30,17 @@ let UsersController = class UsersController {
             email: result.email
         };
     }
-    login(req) {
+    async login(email, password, req) {
+        const user = await this.usersService.getUser(email);
+        if (!user) {
+            throw new common_1.BadRequestException("Utilisateur introuvable");
+        }
+        if (!bcrypt.compareSync(password, user.password)) {
+            throw new common_1.BadRequestException("Email ou Mot de passe incorrects");
+        }
+        req.user = user;
         return { User: req.user,
-            msg: 'User logged in' };
+            msg: 'Utilisateur connecté!' };
     }
     getHello(req) {
         return req.user;
@@ -59,10 +67,12 @@ __decorate([
 ], UsersController.prototype, "addUser", null);
 __decorate([
     (0, common_1.Post)('/login'),
-    __param(0, (0, common_1.Request)()),
+    __param(0, (0, common_1.Body)('email')),
+    __param(1, (0, common_1.Body)('password')),
+    __param(2, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Object)
+    __metadata("design:paramtypes", [String, String, Object]),
+    __metadata("design:returntype", Promise)
 ], UsersController.prototype, "login", null);
 __decorate([
     (0, common_1.UseGuards)(authenticated_guard_1.AuthenticatedGuard),

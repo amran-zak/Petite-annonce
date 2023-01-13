@@ -31,9 +31,11 @@ let UsersService = class UsersService {
         return newUser;
     }
     async getUser(email) {
-        console.log("toto");
         const user = await this.userModel.findOne({ email });
         return user;
+    }
+    async updatePassword(id, password) {
+        return this.userModel.updateOne({ "_id": id }, { "password": password });
     }
 };
 UsersService = __decorate([

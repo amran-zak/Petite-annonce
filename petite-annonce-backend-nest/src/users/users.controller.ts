@@ -1,4 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Request, UseGuards} from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Request,
+  UseGuards,
+  BadRequestException
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -43,9 +54,26 @@ export class UsersController {
 
   // @UseGuards(LocalAuthGuard)
   @Post('/login')
-  login(@Request() req): any {
+  async login(
+      @Body('email') email: string,
+      @Body('password') password: string,
+      @Request() req
+  ) {
+
+    const user = await this.usersService.getUser(email);
+
+    if (!user) {
+      throw new BadRequestException("Utilisateur introuvable");
+    }
+
+    if (!bcrypt.compareSync(password, user.password)) {
+      throw new BadRequestException("Email ou Mot de passe incorrects");
+    }
+
+    req.user = user;
+
     return {User: req.user,
-      msg: 'User logged in'};
+      msg: 'Utilisateur connecté!'};
   }
 
   @UseGuards(AuthenticatedGuard)

@@ -9,4 +9,5 @@ export declare class UsersService {
     getUser(email: string): Promise<User & Required<{
         _id: string;
     }>>;
+    updatePassword(id: string, password: string): Promise<import("mongodb").UpdateResult>;
 }
