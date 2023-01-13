@@ -8,10 +8,8 @@ export default function AppRouter(): JSX.Element {
   return (
     <BrowserRouter>
       <div className="app-container">
-        <div>
-          <Header />
-        </div>
         <div className="app-body">
+          <Header />
           <Routes>
             <Route path="/login" element="" />
             <Route path="/" element={<Home />} />
