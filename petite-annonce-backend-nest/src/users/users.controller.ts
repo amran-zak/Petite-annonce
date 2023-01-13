@@ -15,7 +15,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
 import { LocalAuthGuard} from "../auth/local.auth.guard";
-import { AuthenticatedGuard } from 'src/auth/authenticated.guard';
+import { AuthenticatedGuard } from '../auth/authenticated.guard';
 
 @Controller('users')
 export class UsersController {
