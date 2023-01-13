@@ -1,9 +1,10 @@
 import { NestFactory } from "@nestjs/core"
 import { AppModule } from "./app.module"
-import * as passport from "passport"
-
+// import * as passport from "passport"
+import passport from "passport"
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const session = require('express-session')
+// const session = require('express-session')
+import session from "express-session";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
