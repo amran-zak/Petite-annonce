@@ -12,7 +12,23 @@ export default function CollapsibleTable() {
 
   return (
     <React.Fragment>
-        <TableContainer component={Paper}>
+        <TableContainer
+            sx={{
+            height: '60vh',
+            overflow: "hidden",
+            overflowY: "scroll",
+            "&::-webkit-scrollbar": {
+            width: 10
+            },
+            "&::-webkit-scrollbar-track": {
+            backgroundColor: "lightgrey"
+            },
+            "&::-webkit-scrollbar-thumb": {
+            backgroundColor: "primary.light",
+            border: 'none'
+            }
+            }}
+        >
         <Table aria-label="collapsible table">
             <TableHead>
                 <TableRow>
@@ -20,7 +36,6 @@ export default function CollapsibleTable() {
                     <TableCell>Annonce</TableCell>
                     <TableCell>Nom</TableCell>
                     <TableCell>Prix</TableCell>
-                    <TableCell>Dates</TableCell>
                     <TableCell/>
                 </TableRow>
             </TableHead>
@@ -38,16 +53,16 @@ export default function CollapsibleTable() {
                                 src="https://a0.muscache.com/im/pictures/miso/Hosting-678699115983888002/original/9136a64e-e2d2-4f02-a9c9-cf28d469a6c9.jpeg?im_w=1200" 
                                 sx={{ objectFit: 'cover', mr: 2 }}
                             ></Avatar>
-                            <Typography>à Fraisans</Typography>
+                            <Typography>
+                                à Fraisans
+                                <br></br>du 23-06-2022<br></br>au 30-06-2022
+                            </Typography>
                         </TableCell>
                         <TableCell>
                             <Typography>Gîte Spa privatif : Chez l'Pierre</Typography>
                         </TableCell>
                         <TableCell>
                             155 € par nuit
-                        </TableCell>
-                        <TableCell>
-                            du 23-06-2022<br></br>au 30-06-2022
                         </TableCell>
                         <TableCell>
                         <Grid container>
