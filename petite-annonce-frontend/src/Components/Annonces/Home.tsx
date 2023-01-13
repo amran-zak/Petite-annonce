@@ -1,7 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 import * as React from "react";
 import {
-  Grid,
   Box,
   Icon,
   Divider,
@@ -20,7 +19,7 @@ import {
   FormControlLabel,
 } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import ItemList from "./ItemList";
 
 import { grey } from "@mui/material/colors";
@@ -31,7 +30,6 @@ import MuiAccordionSummary, {
   AccordionSummaryProps,
 } from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
-import { filter } from "vue/types/umd";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -78,11 +76,11 @@ function Home(): JSX.Element {
   const handleSelectChange = (event: SelectChangeEvent) => {
     setState(event.target.value);
   };
-  const navigate = useNavigate();
-  const routeChange = () => {
-    const path = `/details`;
-    navigate(path);
-  };
+  // const navigate = useNavigate();
+  // const routeChange = () => {
+  //   const path = `/details`;
+  //   navigate(path);
+  // };
   const tri: Array<string> = [
     "Plus récent",
     "Plus ancien",
