@@ -5,7 +5,11 @@ import { MongooseModule} from "@nestjs/mongoose";
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { PasswordModule } from './password/password.module';
+<<<<<<< Updated upstream
 import { CategoryModule } from './category/category.module';
+=======
+import { TypeModule } from './type/type.module';
+>>>>>>> Stashed changes
 
 @Module({
   imports: [
@@ -15,7 +19,11 @@ import { CategoryModule } from './category/category.module';
       UsersModule,
       AuthModule,
       PasswordModule,
+<<<<<<< Updated upstream
       CategoryModule,
+=======
+      TypeModule,
+>>>>>>> Stashed changes
   ],
   controllers: [AppController],
   providers: [AppService],
