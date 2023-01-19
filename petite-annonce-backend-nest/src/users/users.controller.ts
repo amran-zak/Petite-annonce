@@ -22,7 +22,7 @@ export class UsersController {
       @Body('city') city: string,
       @Body('img') img: string,
   ) {
-     console.log( @Body)   
+    
     const hashedPassword = await bcrypt.hash(password, 10);
     const result = await this.usersService.insertUser(
         firstName,
