@@ -9,6 +9,7 @@ const MemoryStore = require('memorystore')(session)
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
+    app.enableCors();
     app.use(session({
         cookie: { maxAge: 86400000 },
         store: new MemoryStore({
