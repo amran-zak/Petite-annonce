@@ -71,7 +71,7 @@ export default function BasicTabs() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <UserSettings></UserSettings>
+        <UserSettings/>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <AnnouncementsList/>
