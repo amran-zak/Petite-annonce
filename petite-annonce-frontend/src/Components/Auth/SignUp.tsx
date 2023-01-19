@@ -10,10 +10,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-
-const theme = createTheme();
 
 export default function SignUp() {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -26,10 +22,9 @@ export default function SignUp() {
     };
 
     return (
-        <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="md" sx={{ mb: 5}}>
+            <Container component="main" maxWidth="md" sx={{ py: 5, overflowY: 'scroll', height: '100vh', maxWidth: '100vw !important' }}>
                 <CssBaseline/>
-                <Box sx={{marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 5 }}>
                     <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                         <LockOutlinedIcon/>
                     </Avatar>
@@ -104,7 +99,7 @@ export default function SignUp() {
                                 <Button 
                                     variant="contained" 
                                     component="label" 
-                                    sx={{ mt: 1}}
+                                    sx={{ mt: 1, backgroundColor: '#694ed4 !important;' }}
                                 >
                                     Ajouter une photo de profile&nbsp;<AddPhotoAlternateIcon/>
                                     <input type="file" hidden/>
@@ -137,17 +132,17 @@ export default function SignUp() {
                                     autoComplete="city"
                                 />
                             </Grid>
-                        </Grid>
-                        <Button 
-                            type="submit" 
-                            fullWidth 
-                            variant="contained" 
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Inscription
-                        </Button>
-                        <Grid container justifyContent="flex-end">
-                            <Grid item>
+                            <Grid item xs={12} sm={6}>
+                                <Button
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    sx={{ mt: 3, mb: 2 }}
+                                >
+                                    Inscription
+                                </Button>
+                            </Grid>
+                            <Grid item xs={12} sm={6} sx={{ my: 'auto' }}>
                                 <Link href="/connexion" variant="body2">
                                     Vous avez déjà un compte ? Connectez-vous !
                                 </Link>
@@ -156,6 +151,5 @@ export default function SignUp() {
                     </Box>
                 </Box>
             </Container>
-        </ThemeProvider>
     );
 }

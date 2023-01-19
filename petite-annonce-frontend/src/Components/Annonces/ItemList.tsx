@@ -13,7 +13,12 @@ export default function ItemList() {
   return (
     <Box sx={{ position: "relative", mb: 2 }}>
       <Card>
-        <CardActionArea sx={{ display: "flex", flexDirection: "row" }}>
+        <CardActionArea sx={{ 
+                            display: "flex", flexDirection: "row", 
+                            backgroundColor: 'white !important',
+                            borderBottom: '#694ed4 2px solid'
+                        }}
+        >
           <CardMedia
             component="img"
             height="180"

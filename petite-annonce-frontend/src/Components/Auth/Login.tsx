@@ -23,7 +23,7 @@ export default function Login(): JSX.Element {
     };
     return (
         <ThemeProvider theme={theme}>
-            <Grid container component="main" sx={{ height: '100vh' }}>
+            <Grid container component="main" sx={{ overflowY: 'scroll', height: '100vh' }}>
                 <CssBaseline/>
                 <Grid
                 item

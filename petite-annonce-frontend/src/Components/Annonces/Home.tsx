@@ -258,12 +258,12 @@ function Home(): JSX.Element {
                     variant="outlined"
                     aria-label="outlined button group"
                   >
-                    <Button>1</Button>
-                    <Button>2</Button>
-                    <Button>3</Button>
-                    <Button>4</Button>
-                    <Button>5</Button>
-                    <Button>6+</Button>
+                    <Button sx={{ backgroundColor: 'white !important' }}>1</Button>
+                    <Button sx={{ backgroundColor: 'white !important' }}>2</Button>
+                    <Button sx={{ backgroundColor: 'white !important' }}>3</Button>
+                    <Button sx={{ backgroundColor: 'white !important' }}>4</Button>
+                    <Button sx={{ backgroundColor: 'white !important' }}>5</Button>
+                    <Button sx={{ backgroundColor: 'white !important' }}>6+</Button>
                   </ButtonGroup>
                 </AccordionDetails>
               </Accordion>
@@ -395,8 +395,8 @@ function Home(): JSX.Element {
             <Button fullWidth variant="contained" sx={{ marginRight: "14px" }}>
               Valider
             </Button>
-            <Button fullWidth variant="outlined">
-              Reset
+            <Button fullWidth variant="outlined" sx={{ color: 'white' }}>
+              Annuler
             </Button>
           </Toolbar>
         </AppBar>
@@ -435,7 +435,7 @@ function Home(): JSX.Element {
           sx={{
             pr: 3,
             display: "flex",
-            flexDirection: "column",
+            flexDirection: "column"
           }}
         >
           {Array.from(Array(10)).map((_, index) => (

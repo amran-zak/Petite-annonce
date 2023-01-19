@@ -46,3 +46,7 @@ html {
 ::-webkit-scrollbar-button {
   display: none;
 }
+
+Button {
+  background-color: #694ed4 !important;
+}
