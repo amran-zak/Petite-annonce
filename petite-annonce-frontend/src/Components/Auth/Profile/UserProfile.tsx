@@ -1,8 +1,9 @@
+import * as React from 'react'
 import { Box, Stack, Container } from '@mui/material'
 import Sidebar from './Sidebar'
 import Content from './Content'
 
-function UserProfile(): JSX.Element {
+export default function UserProfile() {
     return (
         <Box>
             <Container
@@ -23,4 +24,3 @@ function UserProfile(): JSX.Element {
     )
 }
 
-export default UserProfile

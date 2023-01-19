@@ -1,37 +1,11 @@
 import * as React from 'react'
-import { Box, Avatar, Collapse, Grid, Button, IconButton, Table, TableBody, TableCell,
-  TableContainer, TableHead, TableRow, Typography, Paper } from '@mui/material'
+import { Box, Avatar, Collapse, Grid, Button, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
 /* icons */
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import EditIcon from '@mui/icons-material/Edit'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 
-function createData(
-  image: string,
-  name: string,
-  lieu: string,
-  description: string,
-  price: string,
-) {
-  return {
-    image,
-    name,
-    lieu,
-    description,
-    price,
-    history: [
-      {
-        caracteristique: 'surface',
-        value: '55 m^2', 
-      },
-      {
-        caracteristique: 'nombre de pièces',
-        value: '3',
-      },
-    ],
-  }
-}
 export default function CollapsibleTable() {
   const [open, setOpen] = React.useState(false)
   
@@ -116,12 +90,12 @@ export default function CollapsibleTable() {
                     <Collapse in={open} timeout="auto" unmountOnExit>
                       <Box sx={{ margin: 1 }}>
                         <Typography sx={{ fontWeight: 'bold' }}>Description</Typography>
-                        <p>Dans un quartier calme de Dax, maison mitoyenne par un coté composée d'un salon séjour, une cuisine, 2 chambres, une salle d'eau, WC.</p>
-                        <p>En extérieur attenant à la cuisine, une véranda ainsi qu'un cabanon présent sur la parcelle.<br></br>
-                        Le tout sur une parcelle d'environ 390m² entièrement clôturée.</p>
+                        <p>Dans un quartier calme de Dax, maison mitoyenne par un coté composée d&apos;un salon séjour, une cuisine, 2 chambres, une salle d&apos;eau, WC.</p>
+                        <p>En extérieur attenant à la cuisine, une véranda ainsi qu&apos;un cabanon présent sur la parcelle.<br></br>
+                        Le tout sur une parcelle d&apos;environ 390m² entièrement clôturée.</p>
                         <p>Travaux de gros oeuvre à prévoir</p>
                         <p>EXCLUSIVITE STEPHANE PLAZA IMMOBILIER.</p>
-                        <p>* Honoraires à la charge du vendeur<br></br>
+                        <p>* Honoraires à la charge du vendeur<br/>
                         Hors frais notariés, de publicité et d’enregistrement.</p>
                       </Box>
                     </Collapse>

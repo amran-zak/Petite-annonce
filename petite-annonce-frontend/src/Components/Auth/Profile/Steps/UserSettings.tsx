@@ -1,6 +1,7 @@
+import * as React from 'react'
 import { Grid, TextField, Box, Button } from '@mui/material'
 
-function AccountSettings() {
+export default function AccountSettings() {
     return (
         <Box pb={4} display="flex" flexDirection="column">
             <Grid container spacing={2} sx={{ mt: 2 }}>
@@ -105,5 +106,3 @@ function AccountSettings() {
         </Box>
     )
 }
-
-export default AccountSettings

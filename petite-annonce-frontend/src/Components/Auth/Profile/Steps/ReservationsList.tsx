@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { Box, Avatar, Collapse, Grid, Button, IconButton, Table, TableBody, TableCell,
-  TableContainer, TableHead, TableRow, Typography, Paper } from '@mui/material'
+import { Box, Avatar, Collapse, Grid, Button, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
 /* icons */
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
@@ -59,7 +58,7 @@ export default function CollapsibleTable() {
                             </Typography>
                         </TableCell>
                         <TableCell>
-                            <Typography>Gîte Spa privatif : Chez l'Pierre</Typography>
+                            <Typography>Gîte Spa privatif : Chez l&apos;Pierre</Typography>
                         </TableCell>
                         <TableCell>
                             155 € par nuit
@@ -92,9 +91,9 @@ export default function CollapsibleTable() {
                             <Collapse in={open} timeout="auto" unmountOnExit>
                             <Box sx={{ margin: 1 }}>
                                 <Typography sx={{ fontWeight: 'bold' }}>Description</Typography>
-                                    <p>Besoin d'un séjour détente ? D'une capacité de 2 à 4 personnes le Gîte Spa chez l'Pierre du Relais des Forges vous propose un hébergement insolite tout confort équipé d'un SPA privatif (sauna et bains à remous) dans le Jura !</p>
-                                    <p>N'attendez plus pour découvrir le charme de notre gîte SPA, équipé également d'une terrasse privative pour pourrez profiter des beaux jours dans notre magnifique domaine.<br></br>
-                                    Vous disposerez également d'un accès à notre piscine chauffée extérieure ouverte en saison.</p>
+                                    <p>Besoin d&apos;un séjour détente ? D&apos;une capacité de 2 à 4 personnes le Gîte Spa chez l&apos;Pierre du Relais des Forges vous propose un hébergement insolite tout confort équipé d&apos;un SPA privatif (sauna et bains à remous) dans le Jura !</p>
+                                    <p>N&apos;attendez plus pour découvrir le charme de notre gîte SPA, équipé également d&apos;une terrasse privative pour pourrez profiter des beaux jours dans notre magnifique domaine.<br></br>
+                                    Vous disposerez également d&apos;un accès à notre piscine chauffée extérieure ouverte en saison.</p>
                             </Box>
                             </Collapse>
                         </TableCell>

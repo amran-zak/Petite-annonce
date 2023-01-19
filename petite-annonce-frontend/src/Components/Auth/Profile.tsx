@@ -27,10 +27,9 @@ import 'react-slideshow-image/dist/styles.css'
 
 const theme = createTheme();
 
-export default function Login(): JSX.Element {
+function Login(): JSX.Element {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
     };
     const fadeMesAnnonces = [
         { url: house, ville: 'ville 1', titre: 'titre annonce 1' },
@@ -219,7 +218,7 @@ export default function Login(): JSX.Element {
                                         <h3>{fadeImage.titre}</h3>
                                         <span>{fadeImage.ville}</span>
                                         <div className="image-container">
-                                            <img src={fadeImage.url} style={{ height: '200px' }}/>
+                                            <img src={fadeImage.url} style={{ height: '200px' }} alt="photo de profile"/>
                                         </div>
                                         <Grid container sx={{ mt: 3 }}>
                                             <Grid xs={12} sm={2} sx={{ mx: 'auto' }}>
@@ -278,7 +277,7 @@ export default function Login(): JSX.Element {
                                         <h3>{fadeImage.titre}</h3>
                                         <span>{fadeImage.ville}</span>
                                         <div className="image-container">
-                                            <img src={fadeImage.url} style={{ height: '200px' }}/>
+                                            <img src={fadeImage.url} style={{ height: '200px' }} alt="photo"/>
                                         </div>
                                         <Grid container sx={{ mt: 3 }}>
                                             <Grid xs={12} sm={2} sx={{ mx: 'auto' }}>
@@ -313,3 +312,4 @@ export default function Login(): JSX.Element {
         </ThemeProvider>
     );
 }
+
