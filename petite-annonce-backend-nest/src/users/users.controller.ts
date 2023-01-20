@@ -1,15 +1,28 @@
 import {  Body, Controller, Delete, Get, Param, Post, Put, Res, UploadedFile, UseGuards, UseInterceptors,} from '@nestjs/common';
 import { UsersService } from './users.service';
-import { RegisterUserDTO, UpdateUserDTO } from './dto/create-user.dto';
+import { RegisterUserDTO, UpdateUserDTO } from './dto/register-user.dto';
 import * as bcrypt from 'bcrypt';
 import { LocalAuthGuard} from "../auth/local.auth.guard";
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { User} from "./model/users.model";
+import {FileInterceptor} from "@nestjs/platform-express";
 
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
+
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(FileInterceptor('file'))
+  @Post('upload')
+  uploadAvatar(@UploadedFile() file: Express.Multer.File) {
+    try {
+      return this.usersService.UploadAvatarToCloudinary(file);
+    } catch (error) {
+      console.log(error);
+      throw new Error(error);
+    }
+  }
 
   @UseGuards(JwtAuthGuard)
   @Get()

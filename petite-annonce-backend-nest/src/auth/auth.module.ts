@@ -3,9 +3,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PassportModule } from '@nestjs/passport';
 import { MailModule } from '../mail/mail.module';
-import { UserSchema } from '../user/schemas/user.schema';
+import { UserSchema } from '../users/model/users.model';
 
-import { SharedModule } from '../shared/shared.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { jwtConstants } from './constants';
@@ -13,12 +12,13 @@ import { JwtAuthGuard } from './jwt-auth.guard';
 import { JwtStrategy } from './jwt.strategy';
 import { LocalAuthGuard } from './local.auth.guard';
 import { LocalStrategy } from './local.strategy';
+import { UsersModule } from "../users/users.module";
 
 @Module({
   imports: [
-    SharedModule,
     PassportModule,
     MailModule,
+    UsersModule,
     JwtModule.register({
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '7d' },
@@ -31,7 +31,7 @@ import { LocalStrategy } from './local.strategy';
     LocalStrategy,
     JwtStrategy,
     JwtAuthGuard,
-    LocalAuthGuard,
+    LocalAuthGuard
   ],
   exports: [AuthService],
 })

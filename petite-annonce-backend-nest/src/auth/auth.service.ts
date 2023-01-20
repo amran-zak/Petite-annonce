@@ -1,9 +1,9 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UserService } from '../users/user.service';
+import { UsersService } from '../users/users.service';
 import * as bcrypt from 'bcrypt';
 import { RegisterUserDTO } from '../users/dto/register-user.dto';
-import { User } from '../users/schemas/user.schema';
+import { User } from '../users/model/users.model';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { MailService } from '../mail/mail.service';
@@ -12,7 +12,7 @@ import { MailService } from '../mail/mail.service';
 export class AuthService {
   constructor(
       @InjectModel('User') private readonly userModel: Model<User>,
-      private userService: UserService,
+      private userService: UsersService,
       private jwtService: JwtService,
       private mailService: MailService,
   ) {}

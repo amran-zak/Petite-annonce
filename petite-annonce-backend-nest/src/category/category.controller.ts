@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Res, Put} from '@nestjs/common';
+import {Controller, Get, Post, Body, Param, Delete, UseGuards, Res, Put} from '@nestjs/common';
 import { CategoryService } from './category.service';
 import {
   CreateCategoryDto,
