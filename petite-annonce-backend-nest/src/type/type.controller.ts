@@ -9,7 +9,7 @@ import {  Body,
   UseGuards,} from '@nestjs/common';
 import { TypeService } from './type.service';
 import { CreateTypeDto, UpdateTypeDto } from './dto/create-type.dto';
-import { AuthenticatedGuard} from "../auth/authenticated.guard";
+import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 import { Type } from './model/type.model';
 
 
@@ -17,7 +17,7 @@ import { Type } from './model/type.model';
 export class TypeController {
   constructor(private readonly typeService: TypeService) {}
 
-  @UseGuards(AuthenticatedGuard)
+  @UseGuards(JwtAuthGuard)
   @Post('/create')
   async create(@Res() res, @Body() createTypeDto: CreateTypeDto): Promise<Type> {
     try {
@@ -59,7 +59,7 @@ export class TypeController {
     }
   }
 
-  @UseGuards(AuthenticatedGuard)
+  @UseGuards(JwtAuthGuard)
   @Put('update/:id')
   async update(@Res() res, @Param('id') id: string, @Body() UpdateTypeDto: UpdateTypeDto,): Promise<Type> {
     try {
@@ -77,7 +77,7 @@ export class TypeController {
     }
   }
 
-  @UseGuards(AuthenticatedGuard)
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async delete(
       @Res() res,

@@ -4,14 +4,14 @@ import {
   CreateCategoryDto,
   UpdateCategoryDto
 } from './dto/create-category.dto';
-import { AuthenticatedGuard } from 'src/auth/authenticated.guard';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { Category } from "./model/category.model";
 
 @Controller('category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
-  @UseGuards(AuthenticatedGuard)
+  @UseGuards(JwtAuthGuard)
   @Post('/create')
   async create(
       @Res() res,
@@ -62,7 +62,7 @@ export class CategoryController {
     }
   }
 
-  @UseGuards(AuthenticatedGuard)
+  @UseGuards(JwtAuthGuard)
   @Put('update/:id')
   async update(
       @Res() res,
@@ -84,7 +84,7 @@ export class CategoryController {
     }
   }
 
-  @UseGuards(AuthenticatedGuard)
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async delete(
       @Res() res,

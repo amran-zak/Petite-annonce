@@ -16,7 +16,7 @@ import {
   CreatePostDto,
   UpdatePostDto
 } from './dto/create-post.dto';
-import { AuthenticatedGuard} from "../auth/authenticated.guard";
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { PostModel } from "./model/post.model";
 import {FilesInterceptor} from "@nestjs/platform-express";
 import {diskStorage} from "multer";
@@ -26,7 +26,7 @@ import {editFileName, imageFileFilter} from "../utils/file-uploading.utils";
 export class PostController {
   constructor(private readonly postService: PostService) {}
 
-  // @UseGuards(AuthenticatedGuard)
+  // @UseGuards(JwtAuthGuard)
   @Post('create')
   @UseInterceptors(
       FilesInterceptor('images[]', 10, {
@@ -102,7 +102,7 @@ export class PostController {
     }
   }
 
-  @UseGuards(AuthenticatedGuard)
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   async update(
       @Res() res,
@@ -124,7 +124,7 @@ export class PostController {
     }
   }
 
-  @UseGuards(AuthenticatedGuard)
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async delete(
       @Res() res,
