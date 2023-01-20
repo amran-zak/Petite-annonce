@@ -7,18 +7,26 @@ import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { IconButton } from '@mui/material';
 
 export default function SignUp() {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+    };
+
+    const [images, setImages] = React.useState([]);
+
+    const handleChange = (e: { target: { files: any; }; }) => {
+        const selectedFiles = e.target.files;
+        setImages(selectedFiles);
+    };
+
+    const handleDelete = (index: number) => {
+        setImages(prevImages => Array.from(prevImages).filter((_, i) => i !== index));
     };
 
     return (
@@ -86,52 +94,86 @@ export default function SignUp() {
                                     autoComplete="new-password"
                                 />
                             </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField 
-                                    fullWidth 
-                                    name="phone" 
-                                    label="Numéro de téléphone" 
-                                    id="phone" 
-                                    autoComplete="phone"
-                                />
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} sm={6}>
+                                    <Grid item xs={12} sm={12} sx={{ ml: 2, mt: 3 }}>
+                                        <TextField
+                                            fullWidth
+                                            name="phone"
+                                            label="Numéro de téléphone"
+                                            id="phone"
+                                            autoComplete="phone"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={12} sx={{ ml: 2, mt: 3 }}>
+                                        <TextField
+                                            fullWidth
+                                            name="address"
+                                            label="Adresse"
+                                            id="address"
+                                            autoComplete="address"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={12} sx={{ ml: 2, mt: 3 }}>
+                                        <TextField
+                                            fullWidth
+                                            name="codepostal"
+                                            label="Code postal"
+                                            id="codepostal"
+                                            autoComplete="codepostal"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={12} sx={{ ml: 2, mt: 3 }}>
+                                        <TextField
+                                            fullWidth
+                                            name="city"
+                                            label="Ville"
+                                            id="city"
+                                            autoComplete="city"
+                                        />
+                                    </Grid>
+                                </Grid>
+                                <Grid item xs={12} sm={6} sx={{ mt: 3 }}>
+                                    <div>
+                                        <input
+                                            accept="image/*"
+                                            style={{ display: 'none' }}
+                                            id="contained-button-file"
+                                            multiple={false}
+                                            type="file"
+                                            onChange={handleChange}
+                                        />
+                                        <label htmlFor="contained-button-file">
+                                            <Button variant="contained" component="span"
+                                                    sx={{ backgroundColor: '#694ed4 !important;' }}
+                                            >
+                                                Ajouter des photos <AddAPhotoIcon />
+                                            </Button>
+                                        </label>
+                                        <Grid container spacing={2}>
+                                            {Array.from(images).map((image, index) => (
+                                                <Grid item xs={12} sm={12} key={index} sx={{ mt: 3 }}>
+                                                    <img src={URL.createObjectURL(image)}
+                                                         style={{
+                                                             width: '100%',
+                                                             height: 'auto',
+                                                             maxWidth: '200px',
+                                                             maxHeight: '200px',
+                                                             margin: 1
+                                                         }}
+                                                         alt={image}
+                                                    />
+                                                    <IconButton onClick={() => handleDelete(index)} sx={{ backgroundColor: 'transparent !important' }}>
+                                                        <DeleteIcon color="secondary"/>
+                                                    </IconButton>
+                                                </Grid>
+                                            ))}
+                                        </Grid>
+                                        {images.length === 0 && <Typography align="center" variant="subtitle1" color="textSecondary" sx={{ mt: 2 }}>Aucune image sélectionnée</Typography>}
+                                    </div>
+                                </Grid>
                             </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <Button 
-                                    variant="contained" 
-                                    component="label" 
-                                    sx={{ mt: 1, backgroundColor: '#694ed4 !important;' }}
-                                >
-                                    Ajouter une photo de profile&nbsp;<AddPhotoAlternateIcon/>
-                                    <input type="file" hidden/>
-                                </Button>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField 
-                                    fullWidth 
-                                    name="address" 
-                                    label="Adresse" 
-                                    id="address" 
-                                    autoComplete="address"
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField 
-                                    fullWidth 
-                                    name="codepostal" 
-                                    label="Code postal" 
-                                    id="codepostal" 
-                                    autoComplete="codepostal"
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField 
-                                    fullWidth 
-                                    name="city" 
-                                    label="Ville" 
-                                    id="city" 
-                                    autoComplete="city"
-                                />
-                            </Grid>
+
                             <Grid item xs={12} sm={6}>
                                 <Button
                                     type="submit"

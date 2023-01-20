@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Box, Button, Card, CardMedia, Container, Grid, Modal, Paper, TextField, Typography } from '@mui/material/';
+import Map, { Marker, NavigationControl } from "react-map-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
+
+const token = "pk.eyJ1IjoiZ2lzZmVlZGJhY2siLCJhIjoiY2l2eDJndmtjMDFkeTJvcHM4YTNheXZtNyJ9.-HNJNch_WwLIAifPgzW2Ig";
 
 const images = [
     {
@@ -24,7 +28,7 @@ const images = [
     },
 ];
 
-const currencies = [
+const currencies = [ // a adapter en fonction des informations qu'aura indiquer le déposeur de l'annonce
     { value: '1', label: '1 personne', },
     { value: '2', label: '2 personnes', },
     { value: '3', label: '3 personnes', },
@@ -36,10 +40,33 @@ export default function View_AirBnb() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const [marker] = useState({
+        longitude: -122.4,
+        latitude: 37.8
+    });
+
+
     return (
         <Container sx={{ pb: 5, textAlign: 'left', overflowY: 'scroll', height: '100vh', maxWidth: '100vw !important', marginLeft: '0', top: '30px'}}>
-            <Typography component="h1" variant="h5" sx={{ my: 3 }}>Title de l'annonce</Typography>
-            <Typography><u>Lieux de l'annonce</u></Typography>
+            <Grid container spacing={2} sx={{ mt: 5 }}>
+                <Grid xs={12} sx={{ textAlign: 'right' }}>
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        sx={{ mt: 5, mb: 2, backgroundColor: '#694ed4 !important;' }}
+                        href="/modifier_annonce_airbnb"
+                    >
+                        MODIFIER L'ANNONCE
+                    </Button>
+                </Grid>
+                <Grid xs={12} sx={{ mx: 2 }}>
+                    <Typography component="h1" variant="h5" sx={{ my: 3 }}>Title de l'annonce</Typography>
+                </Grid>
+                <Grid xs={12} sx={{ mx: 2 }}>
+                    <Typography><a href="#carte"><u>Lieux de l'annonce</u></a></Typography>
+                </Grid>
+            </Grid>
             <Grid container spacing={2} sx={{ my: 3 }}>
                 {images.map(image => (
                     <Grid key={image.img} item xs={12} sm={3} sx={{ mx: 'auto' }}>
@@ -185,6 +212,22 @@ export default function View_AirBnb() {
                             </Grid>
                         </form>
                     </Card>
+                </Grid>
+                <Grid container xs={12} sm={10} sx={{ pt: 2, mx: 'auto' }} id={'carte'}>
+                    <Typography component="h1" variant="h5" sx={{ mb: 3 }}>Localisation</Typography>
+                    <Map
+                        initialViewState={{
+                            longitude: -122.4,
+                            latitude: 37.8,
+                            zoom: 14,
+                        }}
+                        mapboxAccessToken={token}
+                        style={{ width: "100%", height: 400}}
+                        mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+                    >
+                        <NavigationControl />
+                        <Marker longitude={marker.longitude} latitude={marker.latitude} />
+                    </Map>
                 </Grid>
             </Grid>
 
