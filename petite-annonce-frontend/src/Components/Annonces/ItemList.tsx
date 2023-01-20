@@ -9,6 +9,9 @@ import Favorite from "@mui/icons-material/Favorite";
 import prod1 from "../../Style/Img/itemImg.jpg";
 export default function ItemList() {
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
+  const addFavoris = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+  };
 
   return (
     <Box sx={{ position: "relative", mb: 2 }}>
@@ -32,6 +35,7 @@ export default function ItemList() {
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
+                mb: "10px",
               }}
             >
               <div>
@@ -53,6 +57,7 @@ export default function ItemList() {
               </div>
               <Checkbox
                 {...label}
+                onClick={addFavoris}
                 icon={<FavoriteBorder />}
                 checkedIcon={<Favorite color="error" />}
               />

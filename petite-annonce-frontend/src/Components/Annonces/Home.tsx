@@ -19,7 +19,7 @@ import {
   FormControlLabel,
 } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ItemList from "./ItemList";
 
 import { grey } from "@mui/material/colors";
@@ -76,11 +76,11 @@ function Home(): JSX.Element {
   const handleSelectChange = (event: SelectChangeEvent) => {
     setState(event.target.value);
   };
-  // const navigate = useNavigate();
-  // const routeChange = () => {
-  //   const path = `/details`;
-  //   navigate(path);
-  // };
+  const navigate = useNavigate();
+  const routeChange = () => {
+    const path = `/details`;
+    navigate(path);
+  };
   const tri: Array<string> = [
     "Plus récent",
     "Plus ancien",
@@ -89,6 +89,7 @@ function Home(): JSX.Element {
   ];
   return (
     <Box
+      onClick={routeChange}
       sx={{
         display: "flex",
         flexDirection: "row",

@@ -1,0 +1,341 @@
+.description {
+  flex-basis: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .description {
+    padding: 10px;
+    margin-top: 25px;
+  }
+}
+
+.description h1 {
+  color: var(--vd-blue);
+  text-transform: capitalize;
+  font-weight: 700;
+  font-size: 22px;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .description h1 {
+    font-size: 18px;
+    margin: 0;
+  }
+}
+
+.description p.desc {
+  color: var(--d-grayish-blue);
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+.description .countdown {
+  color: var(--d-grayish-blue);
+  font-weight: 500;
+  font-size: smaller;
+  line-height: 3;
+  margin-bottom: 10px;
+}
+@media (max-width: 768px) {
+  .description p.desc {
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+.description s {
+  color: var(--grayish-blue);
+}
+
+.description .price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+@media (max-width: 768px) {
+  .description .price {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+.description .price p {
+  margin: 0;
+}
+
+.description .price .main-tag {
+  display: flex;
+  flex-direction: column;
+}
+.description .price .main-tag p:first-of-type {
+  color: var(--vd-blue);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.description .price .main-tag p:last-of-type {
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+.description .price s {
+  font-weight: 700;
+}
+
+.description .buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .description .buttons {
+    flex-direction: column;
+  }
+  .description .buttons > * {
+    width: 100%;
+  }
+}
+
+.description .buttons .amount {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 15px;
+  width: 180px;
+  background-color: hsl(226.7, 42.9%, 95.9%);
+  border-radius: 7px;
+}
+@media (max-width: 992px) {
+  .description .buttons .amount {
+    width: 150px;
+  }
+}
+@media (max-width: 768px) {
+  .description .buttons .amount {
+    width: 100%;
+  }
+}
+
+.description .buttons .amount .minus {
+  display: flex;
+}
+
+.description .buttons .amount p {
+  font-weight: 700;
+  margin: 0;
+}
+
+.description .buttons .add-to-cart {
+  padding: 15px 40px;
+  background-color: var(--orange);
+  color: #fff;
+  text-transform: capitalize;
+  font-weight: 700;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  flex: 1;
+  transition: 0.3s;
+  box-shadow: 0px 30px 20px -8px var(--pale-orange);
+}
+@media (max-width: 992px) {
+  .description .buttons .add-to-cart {
+    flex: unset;
+    padding: 15px 20px;
+  }
+}
+.description .buttons .add-to-cart:hover {
+  opacity: 0.6;
+}
+
+.description .buttons .add-to-cart svg path {
+  fill: #fff;
+}
+
+.gallery {
+  flex-basis: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.gallery .image img {
+  width: 500px;
+  height: 415px;
+  border-radius: 10px;
+  cursor: pointer;
+  object-fit: cover;
+}
+@media (max-width: 992px) {
+  .gallery .image img {
+    height: 350px;
+  }
+}
+
+.gallery .thumbnails {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.gallery .thumbnails .img-holder {
+  position: relative;
+  height: 90px;
+  width: 90px;
+}
+@media (max-width: 992px) {
+  .gallery .thumbnails .img-holder {
+    height: 75px;
+    width: 75px;
+  }
+}
+
+.gallery .thumbnails img {
+  height: 90px;
+  width: 90px;
+  border-radius: 10px;
+  cursor: pointer;
+  object-fit: cover;
+}
+@media (max-width: 992px) {
+  .gallery .thumbnails img {
+    height: 75px;
+    width: 75px;
+  }
+}
+
+.gallery .backdrop .backdrop-content .image {
+  position: relative;
+}
+
+.gallery .backdrop-content .image .icon-button-prev {
+  position: absolute;
+  left: -21px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.gallery .backdrop-content .image .icon-button-next {
+  position: absolute;
+  right: -21px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.gallery .backdrop .thumbnails {
+  position: relative;
+}
+
+.gallery .backdrop .thumbnails .img-holder-backd {
+  height: 75px;
+  width: 75px;
+  position: relative;
+}
+
+.gallery .backdrop .thumbnails img {
+  height: 75px;
+}
+
+.activated {
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  height: 100%;
+  width: 100%;
+  z-index: 99;
+  border: 3px solid #1976d2;
+  border-radius: 10px;
+  background-color: #e3dfdfab;
+}
+
+@mixin truncate($rows, $line-height, $background: "") {
+  position: relative;
+  overflow: hidden;
+  max-height: $line-height * $rows;
+  line-height: $line-height;
+
+  &:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100px;
+    height: $line-height;
+
+    @if $background != "" {
+      background: linear-gradient(
+        to right,
+        rgba($background, 0) 0%,
+        rgba($background, 1) 100%
+      );
+    }
+  }
+
+  // If supports line-clamp then add an ellipsis overflow and hide the gradient
+  // This will work in Chrome and Opera, otherwise a gradient will gradually hide the text.
+
+  @supports (-webkit-line-clamp: $rows) {
+    display: -webkit-box;
+    -webkit-line-clamp: $rows;
+    -webkit-box-orient: vertical;
+
+    &:after {
+      display: none;
+    }
+  }
+}
+
+.show-hide-text {
+  display: flex;
+  flex-wrap: wrap;
+
+  a {
+    order: 2;
+  }
+
+  p {
+    @include truncate(8, 20px, #fff); // rows, line-height, gradient fallback
+  }
+}
+
+.show-less {
+  display: none;
+
+  &:target {
+    display: block;
+
+    ~ p {
+      display: block;
+      max-height: 100%;
+    }
+
+    + a {
+      display: none;
+    }
+  }
+}
+
+// Presentation styles
+
+.wrapper {
+  max-width: 900px;
+  margin-bottom: 30px;
+
+  p {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
