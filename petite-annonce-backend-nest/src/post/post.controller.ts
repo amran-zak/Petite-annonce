@@ -9,7 +9,7 @@ import {
   UseGuards,
   Res,
   UseInterceptors,
-  UploadedFiles
+  UploadedFiles, Request
 } from '@nestjs/common';
 import { PostService } from './post.service';
 import {
@@ -21,12 +21,13 @@ import { PostModel } from "./model/post.model";
 import {FilesInterceptor} from "@nestjs/platform-express";
 import {diskStorage} from "multer";
 import {editFileName, imageFileFilter} from "../utils/file-uploading.utils";
+import {User} from "../users/model/users.model";
 
 @Controller('post')
 export class PostController {
   constructor(private readonly postService: PostService) {}
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Post('create')
   @UseInterceptors(
       FilesInterceptor('images[]', 10, {
@@ -39,6 +40,7 @@ export class PostController {
   )
   async create(
       @Res() res,
+      @Request() req,
       @UploadedFiles() images,
       @Body() createPostDto: CreatePostDto,
       @Body() updatePostDto: UpdatePostDto
@@ -47,20 +49,26 @@ export class PostController {
 
       const post = await this.postService.createPost(createPostDto);
 
-      const response = [];
-      const filesName: Array<string> = [];
-      images.forEach((image) => {
+      if (images) {
+        const response = [];
+        const filesName: Array<string> = [];
+        images.forEach((image) => {
 
-        filesName.push(image.filename);
+          filesName.push(image.filename);
 
-        const fileReponse = {
-          originalname: image.originalname,
-          filename: image.filename
-        };
-        response.push(fileReponse);
-      });
+          const fileReponse = {
+            originalname: image.originalname,
+            filename: image.filename
+          };
+          response.push(fileReponse);
+        });
 
-      await this.postService.addImages(post._id, filesName, updatePostDto);
+        await this.postService.addImages(post._id, filesName, updatePostDto);
+      }
+
+      // console.log(user);
+      //
+      // await this.postService.addUser(post._id, user, updatePostDto);
 
       return res.json({
         message: "L'annonce à bien été crée !",

@@ -1,4 +1,4 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {ConflictException, createParamDecorator, Injectable} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import * as bcrypt from 'bcrypt';
@@ -47,8 +47,8 @@ export class AuthService {
     return bcrypt.hash(password, salt);
   }
 
-  async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.userService.findOne(username);
+  async validateUser(email: string, pass: string): Promise<any> {
+    const user = await this.userService.findOne(email);
 
     if (user && (await bcrypt.compare(pass, user.password))) {
       const { password, ...rest } = user;
@@ -58,9 +58,10 @@ export class AuthService {
     return null;
   }
 
-  async login(email: string) {
+  async login(user: any) {
     const payload = {
-      email: email,
+      userID: user._doc._id,
+      email: user._doc.email,
     };
 
     return {

@@ -38,12 +38,22 @@ export class AuthController {
     // @UseGuards(JwtAuthGuard)
     @Post('login')
     async login(@Res() res, @Request() req) {
-        const userToken = await this.authService.login(req.body.email);
+
+        const user = await this.authService.validateUser(req.body.email, req.body.password);
+
+        if (user) {
+            const userToken = await this.authService.login(user);
+            return res.json({
+                message: "Utilisateur bien connecté !",
+                userToken,
+                user
+            });
+        }
 
         return res.json({
-            message: "Utilisateur bien connecté !",
-            userToken
-        });
+            message: "Utilisateur introuvable !"
+        })
+
     }
 
 }

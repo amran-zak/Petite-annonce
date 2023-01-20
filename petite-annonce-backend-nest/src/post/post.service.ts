@@ -3,6 +3,7 @@ import { CreatePostDto, UpdatePostDto } from './dto/create-post.dto';
 import { PostModel } from "./model/post.model";
 import {InjectModel} from "@nestjs/mongoose";
 import {Model} from "mongoose";
+import {User} from "../users/model/users.model";
 
 @Injectable()
 export class PostService {
@@ -62,6 +63,20 @@ export class PostService {
       const post = await this.postModel.findByIdAndUpdate(
           id,
           { images: images },
+          updatePostDto
+      );
+
+      return post;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async addUser(id: string, user: User, updatePostDto: UpdatePostDto): Promise<PostModel> {
+    try {
+      const post = await this.postModel.findByIdAndUpdate(
+          id,
+          { user: user},
           updatePostDto
       );
 

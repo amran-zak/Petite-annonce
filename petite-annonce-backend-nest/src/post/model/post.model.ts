@@ -2,7 +2,7 @@ import * as mongoose from "mongoose"
 
 export const PostSchema = new mongoose.Schema(
     {
-        title: {type: String, required: false},
+        title: {type: String, required: true},
         description: {type: String, required: false},
         dateCreate: {type: Date, required: false},
         price: {type: Number, required: false},
