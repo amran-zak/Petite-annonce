@@ -14,13 +14,46 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import background from "../../Style/Img/house.jpeg";
 
+import LoginData from '../../Types/Login.types';
+import AuthService from '../../Services/Auth.services'
+
 const theme = createTheme();
 
 export default function Login(): JSX.Element {
+
+    const [user, setUser] = React.useState(undefined);
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    
+    const onchangeEmail = (e: any) => {
+        setEmail(e.target.value);
+    }
+    const onchangePassword = (e: any) => {
+        setPassword(e.target.value);
+    }
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        // const data = new FormData(event.currentTarget);
+        
+        const data = new FormData(event.currentTarget);
+        const login_data: LoginData = {
+            email: data.get('email'),
+            password: data.get('password')
+        };
+        AuthService.login(login_data)
+        .then((response: any) => {
+            setUser(response.data.User.firstname);
+            if (response.data.User) {
+                localStorage.setItem("user", JSON.stringify(response.data.User));
+                setEmail(''); setPassword('');
+            }
+        })
+        .catch((e: Error) => {
+        console.log(e);
+        });
+
     };
+
     return (
         <ThemeProvider theme={theme}>
             <Grid container component="main" sx={{ height: '100vh' }}>
@@ -55,6 +88,12 @@ export default function Login(): JSX.Element {
                         <Typography component="h1" variant="h5">
                             Connexion
                         </Typography>
+                        { user ? (<Typography component="h1" variant="h5">
+                       Hi {user} 👋🙂
+                    </Typography>)
+                    : (<Typography component="h1" variant="h5">
+                        
+                    </Typography>)}
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                             <TextField
                                 margin="normal"
@@ -65,6 +104,8 @@ export default function Login(): JSX.Element {
                                 name="email"
                                 autoComplete="email"
                                 autoFocus
+                                value={email}
+                                onChange={onchangeEmail}
                             />
                             <TextField
                                 margin="normal"
@@ -75,6 +116,8 @@ export default function Login(): JSX.Element {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                value={password}
+                                onChange={onchangePassword}
                             />
                             <FormControlLabel
                                 control={<Checkbox value="remember" color="primary" />}
@@ -107,5 +150,6 @@ export default function Login(): JSX.Element {
                 </Grid>
             </Grid>
         </ThemeProvider>
+
     );
 }
