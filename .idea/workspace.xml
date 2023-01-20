@@ -3,13 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="026b130f-75da-4e7a-b9a2-b00a002a772b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/.eslintrc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Steps/AnnouncementsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Steps/AnnouncementsList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Steps/FavouritesList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Steps/FavouritesList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Steps/ReservationsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Steps/ReservationsList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Steps/UserSettings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Steps/UserSettings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/UserProfile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/UserProfile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +41,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -82,5 +79,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
