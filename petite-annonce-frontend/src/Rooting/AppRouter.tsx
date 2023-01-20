@@ -7,6 +7,7 @@ import Details from "../Components/Annonces/DetailPage/DetailPage";
 import Login from "../Components/Auth/Login";
 import SignUp from "../Components/Auth/SignUp";
 import New_password from "../Components/Auth/New_password";
+import UserProfile from "../Components/Auth/Profile/UserProfile"
 
 export default function AppRouter(): JSX.Element {
   return (
@@ -15,13 +16,12 @@ export default function AppRouter(): JSX.Element {
         <div className="app-body">
           <Header />
           <Routes>
-            <Route path="/login" element="" />
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home/>} />
             <Route path="/details" element={<Details />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/connexion" element={<Login />} />
-            <Route path="/inscription" element={<SignUp />} />
-            <Route path="/nouveau_mot_de_passe" element={<New_password />} />
+            <Route path="/connexion" element={<Login/>} />
+            <Route path="/inscription" element={<SignUp/>} />
+            <Route path="/nouveau_mot_de_passe" element={<New_password/>} />
+            <Route path="/profile" element={<UserProfile/>} />
             {/*<Route path='/forbiddenAccess' element={<LoginPage/>} />*/}
             <Route path="/*" element={<NotFoundPage />} />
           </Routes>
