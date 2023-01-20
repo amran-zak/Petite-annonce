@@ -1,7 +1,9 @@
 import * as React from "react";
+/* material */
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
@@ -9,6 +11,7 @@ import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+/* icons */
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
@@ -98,8 +101,16 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose} href="/connexion">Connexion</MenuItem>
-      <MenuItem onClick={handleMenuClose} href="/inscription">Inscription</MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Link href="/connexion" underline="none">
+          Connexion
+        </Link>
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Link href="/inscription" underline="none">
+          Inscription
+        </Link>
+      </MenuItem>
     </Menu>
   );
 
