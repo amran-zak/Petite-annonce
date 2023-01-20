@@ -12,7 +12,7 @@ export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
   @UseGuards(AuthenticatedGuard)
-  @Post()
+  @Post('/create')
   async create(
       @Res() res,
       @Body() createCategoryDto: CreateCategoryDto
@@ -31,7 +31,7 @@ export class CategoryController {
     }
   }
 
-  @Get()
+  @Get('/categories')
   async findAll(@Res() res): Promise<Category[]> {
     try {
       const categories = await this.categoryService.findAll();
@@ -45,7 +45,7 @@ export class CategoryController {
     }
   }
 
-  @Get(':id')
+  @Get('categorie/:id')
   async findById(
       @Res() res,
       @Param('id') id: string
@@ -63,7 +63,7 @@ export class CategoryController {
   }
 
   @UseGuards(AuthenticatedGuard)
-  @Put(':id')
+  @Put('update/:id')
   async update(
       @Res() res,
       @Param('id') id: string,

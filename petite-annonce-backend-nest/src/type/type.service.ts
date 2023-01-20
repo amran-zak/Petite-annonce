@@ -59,7 +59,13 @@ export class TypeService {
     }
   }
 
-  // remove(id: number) {
-  //   return `This action removes a #${id} type`;
-  // }
+  async deleteType(id: string) {
+    try {
+      await this.typeModel.findByIdAndDelete(id);
+
+      throw new HttpException("Type supprimé", HttpStatus.OK);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }

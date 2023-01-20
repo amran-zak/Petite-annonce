@@ -18,7 +18,7 @@ export class TypeController {
   constructor(private readonly typeService: TypeService) {}
 
   @UseGuards(AuthenticatedGuard)
-  @Post()
+  @Post('/create')
   async create(@Res() res, @Body() createTypeDto: CreateTypeDto): Promise<Type> {
     try {
       const type = await this.typeService.createType(
@@ -33,7 +33,7 @@ export class TypeController {
     }
   }
 
-  @Get()
+  @Get('/types')
   async findAll(@Res() res): Promise<Type[]> {
     try {
       const type = await this.typeService.findAll();
@@ -46,10 +46,10 @@ export class TypeController {
     }
   }
 
-  @Get('typeID')
-  async findById(@Res() res,  @Param('typeID') typeID: string): Promise<Type> {
+  @Get('type/:id')
+  async findById(@Res() res,  @Param('id') id: string): Promise<Type> {
     try {
-      const type = await this.typeService.findById(typeID);
+      const type = await this.typeService.findById(id);
       return res.json({
         message: 'Catégorie obtenue avec succès',
         type,
@@ -60,11 +60,11 @@ export class TypeController {
   }
 
   @UseGuards(AuthenticatedGuard)
-  @Put(':typeID')
-  async update(@Res() res, @Param('typeID') typeID: string, @Body() UpdateTypeDto: UpdateTypeDto,): Promise<Type> {
+  @Put('update/:id')
+  async update(@Res() res, @Param('id') id: string, @Body() UpdateTypeDto: UpdateTypeDto,): Promise<Type> {
     try {
       const type = await this.typeService.updateType(
-          typeID,
+          id,
           UpdateTypeDto,
       );
       return res.json({
@@ -77,8 +77,20 @@ export class TypeController {
     }
   }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.typeService.remove(+id);
-  // }
+  @UseGuards(AuthenticatedGuard)
+  @Delete(':id')
+  async delete(
+      @Res() res,
+      @Param('id') id: string
+  ) {
+    try {
+      await this.typeService.deleteType(id);
+
+      return res.json({
+        message: "Le type a bien été supprimé !"
+      })
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }
