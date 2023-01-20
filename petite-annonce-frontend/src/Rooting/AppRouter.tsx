@@ -8,11 +8,11 @@ import Login from "../Components/Auth/Login";
 import SignUp from "../Components/Auth/SignUp";
 import New_password from "../Components/Auth/New_password";
 import UserProfile from "../Components/Auth/Profile/UserProfile"
-import Add_AirBnb from "../Components/AirBnb/Add_AirBnb";
-import View_Airbnb from "../Components/AirBnb/View_AirBnb";
-import Modify_Airbnb from "../Components/AirBnb/Modify_AirBnb";
+import Add_AirBnb from "../Components/Annonces/AirBnb/Add_AirBnb";
+import View_Airbnb from "../Components/Annonces/AirBnb/View_AirBnb";
+import Modify_Airbnb from "../Components/Annonces/AirBnb/Modify_AirBnb";
 
-import AirBNB from "../Components/AirBnb/DetailPage/DetailPage";
+import AirBNB from "../Components/Annonces/AirBnb/DetailPage/DetailPage";
 
 
 

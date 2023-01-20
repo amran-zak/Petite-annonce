@@ -1,10 +1,10 @@
 import * as React from "react";
 import { useState } from "react";
 import "./DetailPage.scss";
-import prod1 from "../../../Style/Img/img1.jpg";
-import prod2 from "../../../Style/Img/img2.jpg";
-import prod3 from "../../../Style/Img/img3.jpg";
-import prod4 from "../../../Style/Img/img4.jpg";
+import prod1 from "../../../../Style/Img/img1.jpg";
+import prod2 from "../../../../Style/Img/img2.jpg";
+import prod3 from "../../../../Style/Img/img3.jpg";
+import prod4 from "../../../../Style/Img/img4.jpg";
 
 const THUMBS = [prod1, prod2, prod3, prod4];
 

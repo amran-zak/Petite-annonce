@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import * as React from "react";
+import { useState } from "react";
 import {Box, Button, Card, CardMedia, Container, Grid, Modal, Paper, TextField, Typography } from '@mui/material/';
 import Map, { Marker, NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";

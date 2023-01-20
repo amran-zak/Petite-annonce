@@ -7,7 +7,6 @@ import {
   Container,
   Avatar,
   Typography,
-  Link,
   Checkbox,
   Divider,
   Icon, Card, TextField, Button,
@@ -24,6 +23,7 @@ import "./DetailPage.scss";
 import Map, { Marker, NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { DPE, GES } from "react-dpe-generator";
+import {useState} from "react";
 
 const token =
   "pk.eyJ1IjoiZ2lzZmVlZGJhY2siLCJhIjoiY2l2eDJndmtjMDFkeTJvcHM4YTNheXZtNyJ9.-HNJNch_WwLIAifPgzW2Ig";
@@ -89,6 +89,17 @@ const currencies = [ // a adapter en fonction des informations qu'aura indiquer 
   { value: '5', label: '5 personnes', },
 ];
 function DetailPage(): JSX.Element {
+  const [selectedValue, setSelectedValue] = useState("1");
+  const [result, setResult] = useState(0);
+
+  const calculateResult = (value: string) => {
+    setResult(parseInt(value) * 340 + 220);
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedValue(event.target.value);
+    calculateResult(event.target.value);
+  };
   return (
     <Box sx={{ mt: 6 }}>
       <Container maxWidth="xl" sx={{ overflowY: "scroll", height: "80vh" }}>
@@ -333,9 +344,9 @@ function DetailPage(): JSX.Element {
                 backgroundColor: 'rgb(240,237,255)'
               }}
               >
-                <Typography component="h1" variant="h5" sx={{ ml: 3, mb:5 }}>... € / nuit</Typography>
+                <Typography component="h1" variant="h5" sx={{ mb:5 }}>340 € / nuit</Typography>
                 <form noValidate>
-                  <Grid container spacing={2} xs={12} sm={12} sx={{ mt: 3 }}>
+                  <Grid container xs={12} sm={12} sx={{ mt: 3 }}>
                     <Grid xs={12} sm={6} sx={{ textAlign: 'center'}}>
                       <TextField
                           id="date-picker-checkin"
@@ -361,8 +372,9 @@ function DetailPage(): JSX.Element {
                     <Grid xs={12} sm={12} sx={{ mt:5, textAlign: 'center'}}>
                       <TextField
                           id="filled-select-currency-native"
+                          onChange={handleChange}
                           select
-                          defaultValue="1"
+                          value={selectedValue}
                           sx={{ backgroundColor: 'white' }}
                           SelectProps={{
                             native: true,
@@ -379,16 +391,16 @@ function DetailPage(): JSX.Element {
                     </Grid>
 
                     <Grid container xs={12} sm={12} sx={{ mt: 5, mx: 5 }}>
-                      <Grid xs={12} sm={6}>... € x 5 nuits</Grid>
-                      <Grid xs={12} sm={6} sx={{ textAlign: 'right' }}>... €</Grid>
+                      <Grid xs={12} sm={6}>340 € x 5 nuits</Grid>
+                      <Grid xs={12} sm={6} sx={{ textAlign: 'right' }}>1 700 €</Grid>
                     </Grid>
                     <Grid container xs={12} sm={12} sx={{ mx: 5 }}>
                       <Grid xs={12} sm={6}>Frais de service</Grid>
-                      <Grid xs={12} sm={6} sx={{ textAlign: 'right' }}>... €</Grid>
+                      <Grid xs={12} sm={6} sx={{ textAlign: 'right' }}>200 €</Grid>
                     </Grid>
                     <Grid container xs={12} sm={12} sx={{ mx: 5 }}>
                       <Grid xs={12} sm={6}>Taxes</Grid>
-                      <Grid xs={12} sm={6} sx={{ textAlign: 'right' }}>... €</Grid>
+                      <Grid xs={12} sm={6} sx={{ textAlign: 'right' }}>20 €</Grid>
                     </Grid>
 
                     <Grid container xs={12} sm={12} sx={{ mt:5, mx: 5, p: 1, borderBottom: '#694ed4 2px solid' }}>
@@ -399,7 +411,7 @@ function DetailPage(): JSX.Element {
                       </Grid>
                       <Grid xs={12} sm={6} sx={{ textAlign: 'right' }}>
                         <Typography component="h1" variant="h5">
-                          ... €
+                          {result} €
                         </Typography>
                       </Grid>
                     </Grid>
