@@ -34,11 +34,11 @@ export class AuthController {
         }
     }
 
-    @UseGuards(LocalAuthGuard)
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(LocalAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     @Post('login')
     async login(@Res() res, @Request() req) {
-        const userToken = await this.authService.login(req.user);
+        const userToken = await this.authService.login(req.body.email);
 
         return res.json({
             message: "Utilisateur bien connecté !",

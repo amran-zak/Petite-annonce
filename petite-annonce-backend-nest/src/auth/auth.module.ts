@@ -17,7 +17,7 @@ import { UsersModule } from "../users/users.module";
 @Module({
   imports: [
     PassportModule,
-    MailModule,
+    // MailModule,
     UsersModule,
     JwtModule.register({
       secret: jwtConstants.secret,

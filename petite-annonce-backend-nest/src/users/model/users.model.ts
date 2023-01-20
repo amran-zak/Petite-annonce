@@ -11,7 +11,7 @@ export const UserSchema = new mongoose.Schema(
         code_postal: {type: Number, required: true},
         city: {type: String, required: true},
         img: {type: String, required: false},
-        isEmailConfirmed: {type: Boolean},
+        isEmailConfirmed: {type: Boolean, default: true},
         createdAt: {type: Date, default: Date.now}
     }
 )

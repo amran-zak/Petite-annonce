@@ -14,7 +14,7 @@ export class AuthService {
       @InjectModel('User') private readonly userModel: Model<User>,
       private userService: UsersService,
       private jwtService: JwtService,
-      private mailService: MailService,
+      // private mailService: MailService,
   ) {}
 
   async registerUser(registerUserDTO: RegisterUserDTO): Promise<User> {
@@ -35,7 +35,7 @@ export class AuthService {
       user.password = await this.hashPassword(password, salt);
 
       const token = Math.floor(1000 + Math.random() * 9000).toString();
-      await this.mailService.sendUserConfirmation(user, token);
+      // await this.mailService.sendUserConfirmation(user, token);
 
       return await user.save();
     } catch (error) {
@@ -58,10 +58,9 @@ export class AuthService {
     return null;
   }
 
-  async login(user: any) {
+  async login(email: string) {
     const payload = {
-      id: user._doc._id,
-      email: user._doc.email,
+      email: email,
     };
 
     return {
