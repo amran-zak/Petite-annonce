@@ -1,50 +1,76 @@
-import {Injectable} from '@nestjs/common';
-import {InjectModel} from "@nestjs/mongoose";
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
 import {Model} from "mongoose";
-import {User} from "./users.model";
+import {User} from "./model/users.model";
+import * as bcrypt from 'bcrypt';
+import { UpdateUserDTO } from './dto/create-user.dto';
+
+
 
 @Injectable()
 export class UsersService {
     constructor(@InjectModel('user') private readonly userModel: Model<User>) {
     }
 
-    async insertUser(firstname: string, lastname: string,
-                     email: string, password: string,
-                     number: number, address: string,
-                     code_postal: number, city: string, img: string) {
-        const newUser = new this.userModel({
-            firstname, lastname,
-            email, password,
-            number, address,
-            code_postal, city, img
-        });
-        await newUser.save();
-        return newUser;
+    async findOne(email: string): Promise<User> {
+        try {
+            return await this.userModel.findOne({ email });
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+    private hashPassword(password, salt): Promise<string> {
+        return bcrypt.hash(password, salt);
     }
 
-    async getUser(email: string) {
-        const user = await this.userModel.findOne({ email });
-        return user;
+    async findAll(): Promise<User[]> {
+        return await this.userModel.find();
     }
 
-    async updatePassword(id: string, password: string) {
-        return this.userModel.updateOne({"_id": id}, {"password": password});
+    async findUserById(userID: string): Promise<User> {
+        try {
+            const user = await this.userModel.findById(userID);
+            if (!user) {
+                throw new HttpException('User not found', HttpStatus.NO_CONTENT);
+            }
+            return user;
+        } catch (error) {
+            throw new Error(error);
+        }
     }
 
-    // create(createUserDto: CreateUserDto) {
-    //     return 'This action adds a new user';
-    // }
-    //
-    // findAll() {
-    //     return `This action returns all users`;
-    // }
-    //
-    // findOne(id: number) {
-    //     return `This action returns a #${id} user`;
-    // }
-    //
-    //
-    // remove(id: number) {
-    //     return `This action removes a #${id} user`;
-    // }
+    async updateUser(
+        userID: string,
+        updateUserDTO: UpdateUserDTO,
+    ): Promise<User> {
+        try {
+            const { password } = updateUserDTO;
+
+            const salt = await bcrypt.genSalt();
+            const hashPassword = await this.hashPassword(password, salt);
+            updateUserDTO.password = hashPassword;
+
+            const user = await this.userModel.findByIdAndUpdate(
+                userID,
+                updateUserDTO,
+                { new: true },
+            );
+
+            return user;
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+
+    async deleteUSer(userID: string): Promise<User> {
+        try {
+            const user = await this.userModel.findByIdAndUpdate(userID, {
+                state: false,
+            });
+
+            return user;
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
 }

@@ -1,103 +1,70 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, Request, UseGuards, BadRequestException} from '@nestjs/common';
+import {  Body, Controller, Delete, Get, Param, Post, Put, Res, UploadedFile, UseGuards, UseInterceptors,} from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { RegisterUserDTO, UpdateUserDTO } from './dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
 import { LocalAuthGuard} from "../auth/local.auth.guard";
-import { AuthenticatedGuard } from '../auth/authenticated.guard';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { User} from "./model/users.model";
+
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post('/signup')
-  async addUser(
-      @Body('lastname') lastName: string,
-      @Body('firstname') firstName: string,
-      @Body('email') email: string,
-      @Body('number') number: number,
-      @Body('password') password: string,
-      @Body('address') address: string,
-      @Body('code_postal') code_postal: number,
-      @Body('city') city: string,
-      @Body('img') img: string,
-  ) {
-    
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const result = await this.usersService.insertUser(
-        firstName,
-        lastName,
-        email,
-        hashedPassword,
-        number,
-        address,
-        code_postal,
-        city,
-        img
-    );
-    return {
-      msg: 'Utilisateur enregistré',
-      userId: result.id,
-      email: result.email
+  @UseGuards(JwtAuthGuard)
+  @Get()
+  async findAll(@Res() res): Promise<User[]> {
+    try {
+      const users = await this.usersService.findAll();
+      return res.json({
+        message: 'Utilisateurs obtenus',
+        users,
+      });
+    } catch (error) {
+      throw new Error(error);
     }
   }
 
-  // @UseGuards(LocalAuthGuard)
-  @Post('/login')
-  async login(
-      @Body('email') email: string,
-      @Body('password') password: string,
-      @Request() req
-  ) {
-
-    const user = await this.usersService.getUser(email);
-
-    if (!user) {
-      throw new BadRequestException("Utilisateur introuvable");
+  @UseGuards(JwtAuthGuard)
+  @Get(':userID')
+  async findById(@Res() res, @Param('userID') userID): Promise<User> {
+    try {
+      const user = await this.usersService.findUserById(userID);
+      return res.json({
+        message: 'Utilisateur obtenu ',
+        user,
+      });
+    } catch (error) {
+      throw new Error(error);
     }
+  }
 
-    if (!bcrypt.compareSync(password, user.password)) {
-      throw new BadRequestException("Email ou Mot de passe incorrects");
+  @UseGuards(JwtAuthGuard)
+  @Put(':userID')
+  async update(@Res() res, @Param('userID') userID, @Body() updateUserDTO: UpdateUserDTO,): Promise<User> {
+    try {
+      const user = await this.usersService.updateUser(userID, updateUserDTO);
+      return res.json({
+        message: 'Utilisateur mis à jour',
+        user,
+      });
+    } catch (error) {
+      console.log(error);
+      throw new Error(error);
     }
-
-    req.user = user;
-
-    return {User: req.user,
-      msg: 'Utilisateur connecté!'};
   }
 
-  @UseGuards(AuthenticatedGuard)
-  @Get('/protected')
-  getHello(@Request() req): string {
-    return req.user;
+  @UseGuards(JwtAuthGuard)
+  @Delete(':userID')
+  async delete(@Res() res, @Param('userID') userID: string): Promise<User> {
+    try {
+      const user = await this.usersService.deleteUSer(userID);
+      return res.json({
+        message: 'Utilisateur supprimé',
+        user,
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
   }
-
-  @Get('/logout')
-  logout(@Request() req): any {
-    req.session.destroy();
-    return { msg: 'The user session has ended' }
-  }
-  // create(@Body() createUserDto: CreateUserDto) {
-  //   return this.usersService.create(createUserDto);
-  // }
-  //
-  // @Get()
-  // findAll() {
-  //   return this.usersService.findAll();
-  // }
-  //
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.usersService.findOne(+id);
-  // }
-  //
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-  //   return this.usersService.update(+id, updateUserDto);
-  // }
-  //
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.usersService.remove(+id);
-  // }
 }

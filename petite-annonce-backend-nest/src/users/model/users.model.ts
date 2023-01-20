@@ -10,7 +10,9 @@ export const UserSchema = new mongoose.Schema(
         address: {type: String, required: true},
         code_postal: {type: Number, required: true},
         city: {type: String, required: true},
-        img: {type: String, required: false}
+        img: {type: String, required: false},
+        isEmailConfirmed: {type: Boolean},
+        createdAt: {type: Date, default: Date.now}
     }
 )
 
@@ -25,4 +27,6 @@ export interface User extends mongoose.Document {
     code_postal: number;
     city: string;
     img: string;
+    isEmailConfirmed: boolean;
+    createdAt?: Date;
 }
