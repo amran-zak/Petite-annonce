@@ -91,14 +91,16 @@ const currencies = [ // a adapter en fonction des informations qu'aura indiquer 
 function DetailPage(): JSX.Element {
   const [selectedValue, setSelectedValue] = useState("1");
   const [result, setResult] = useState(0);
+  const frais_services = 200;
+  const taxes = 20;
 
-  const calculateResult = (value: string) => {
-    setResult(parseInt(value) * 340 + 220);
+  const calculateResult = (value: string, frais_services, taxes) => {
+    setResult(parseInt(value) * 340 + frais_services + taxes);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedValue(event.target.value);
-    calculateResult(event.target.value);
+    calculateResult(event.target.value, frais_services, taxes);
   };
   return (
     <Box sx={{ mt: 6 }}>
@@ -390,17 +392,13 @@ function DetailPage(): JSX.Element {
                       </TextField>
                     </Grid>
 
-                    <Grid container xs={12} sm={12} sx={{ mt: 5, mx: 5 }}>
-                      <Grid xs={12} sm={6}>340 € x 5 nuits</Grid>
-                      <Grid xs={12} sm={6} sx={{ textAlign: 'right' }}>1 700 €</Grid>
-                    </Grid>
-                    <Grid container xs={12} sm={12} sx={{ mx: 5 }}>
+                    <Grid container xs={12} sm={12} sx={{ m: 5 }}>
                       <Grid xs={12} sm={6}>Frais de service</Grid>
-                      <Grid xs={12} sm={6} sx={{ textAlign: 'right' }}>200 €</Grid>
+                      <Grid xs={12} sm={6} sx={{ textAlign: 'right' }}>{frais_services} €</Grid>
                     </Grid>
                     <Grid container xs={12} sm={12} sx={{ mx: 5 }}>
                       <Grid xs={12} sm={6}>Taxes</Grid>
-                      <Grid xs={12} sm={6} sx={{ textAlign: 'right' }}>20 €</Grid>
+                      <Grid xs={12} sm={6} sx={{ textAlign: 'right' }}>{taxes} €</Grid>
                     </Grid>
 
                     <Grid container xs={12} sm={12} sx={{ mt:5, mx: 5, p: 1, borderBottom: '#694ed4 2px solid' }}>

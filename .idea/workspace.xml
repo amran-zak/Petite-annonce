@@ -3,13 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="753cc4f7-f33c-4934-9e61-35f304903eab" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/AirBnb/Add_AirBnb.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/AirBnb/Add_AirBnb.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/AirBnb/DetailPage/DetailPage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/AirBnb/DetailPage/DetailPage.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/AirBnb/DetailPage/DetailPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/AirBnb/DetailPage/DetailPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/AirBnb/DetailPage/Gallery.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/AirBnb/DetailPage/Gallery.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/AirBnb/Modify_AirBnb.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/AirBnb/Modify_AirBnb.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/AirBnb/View_AirBnb.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/AirBnb/View_AirBnb.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Rooting/AppRouter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Rooting/AppRouter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/AirBnb/DetailPage/DetailPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/AirBnb/DetailPage/DetailPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
