@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import * as React from "react";
+import { useState } from "react";
 import "./DetailPage.scss";
 import prod1 from "../../../Style/Img/img1.jpg";
 import prod2 from "../../../Style/Img/img2.jpg";
