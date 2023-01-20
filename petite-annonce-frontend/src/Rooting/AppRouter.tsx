@@ -3,11 +3,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NotFoundPage from "../Components/404/NotFound";
 import Header from "../Components/NavBar/Header";
 import Home from "../Components/Annonces/Home";
+import Details from "../Components/Annonces/DetailPage/DetailPage";
 import Login from "../Components/Auth/Login";
 import SignUp from "../Components/Auth/SignUp";
 import New_password from "../Components/Auth/New_password";
 import UserProfile from "../Components/Auth/Profile/UserProfile"
-
 
 export default function AppRouter(): JSX.Element {
   return (
@@ -17,6 +17,7 @@ export default function AppRouter(): JSX.Element {
           <Header />
           <Routes>
             <Route path="/" element={<Home/>} />
+            <Route path="/details" element={<Details />} />
             <Route path="/connexion" element={<Login/>} />
             <Route path="/inscription" element={<SignUp/>} />
             <Route path="/nouveau_mot_de_passe" element={<New_password/>} />

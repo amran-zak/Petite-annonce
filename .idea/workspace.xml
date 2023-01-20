@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/DetailPage/Gallery.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/DetailPage/Gallery.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
