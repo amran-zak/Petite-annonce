@@ -54,14 +54,14 @@ export default function View_AirBnb() {
                     <Button
                         type="submit"
                         variant="contained"
-                        sx={{ mt: 5, mb: 2, backgroundColor: '#694ed4 !important;' }}
+                        sx={{ backgroundColor: '#694ed4 !important;' }}
                         href="/modifier_annonce_airbnb"
                     >
                         MODIFIER L'ANNONCE
                     </Button>
                 </Grid>
                 <Grid xs={12} sx={{ mx: 2 }}>
-                    <Typography component="h1" variant="h5" sx={{ my: 3 }}>Title de l'annonce</Typography>
+                    <Typography component="h1" variant="h4" sx={{ my: 3 }}>Title de l'annonce</Typography>
                 </Grid>
                 <Grid xs={12} sx={{ mx: 2 }}>
                     <Typography><a href="#carte"><u>Lieux de l'annonce</u></a></Typography>
