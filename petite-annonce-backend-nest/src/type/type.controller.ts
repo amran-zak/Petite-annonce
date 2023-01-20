@@ -10,7 +10,7 @@ import {  Body,
 import { TypeService } from './type.service';
 import { CreateTypeDto, UpdateTypeDto } from './dto/create-type.dto';
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
-import { Type } from './model/type.model';
+import { Type } from './interfaces/type.interface';
 
 
 @Controller('type')
@@ -33,7 +33,7 @@ export class TypeController {
     }
   }
 
-  @Get('/types')
+  @Get()
   async findAll(@Res() res): Promise<Type[]> {
     try {
       const type = await this.typeService.findAll();
@@ -46,10 +46,10 @@ export class TypeController {
     }
   }
 
-  @Get('type/:id')
-  async findById(@Res() res,  @Param('id') id: string): Promise<Type> {
+  @Get(':typeID')
+  async findById(@Res() res,  @Param('typeID') typeID: string): Promise<Type> {
     try {
-      const type = await this.typeService.findById(id);
+      const type = await this.typeService.findById(typeID);
       return res.json({
         message: 'Catégorie obtenue avec succès',
         type,
@@ -60,11 +60,11 @@ export class TypeController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Put('update/:id')
-  async update(@Res() res, @Param('id') id: string, @Body() UpdateTypeDto: UpdateTypeDto,): Promise<Type> {
+  @Put(':typeID')
+  async update(@Res() res, @Param('typeID') typeID: string, @Body() UpdateTypeDto: UpdateTypeDto,): Promise<Type> {
     try {
       const type = await this.typeService.updateType(
-          id,
+          typeID,
           UpdateTypeDto,
       );
       return res.json({
@@ -78,13 +78,13 @@ export class TypeController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Delete(':id')
+  @Delete(':typeID')
   async delete(
       @Res() res,
-      @Param('id') id: string
+      @Param('typeID') typeID: string
   ) {
     try {
-      await this.typeService.deleteType(id);
+      await this.typeService.deleteType(typeID);
 
       return res.json({
         message: "Le type a bien été supprimé !"

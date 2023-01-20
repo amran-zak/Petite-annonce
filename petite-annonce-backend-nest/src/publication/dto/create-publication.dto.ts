@@ -1,6 +1,6 @@
 import {IsBoolean, IsDate, IsNotEmpty, IsNumber, MaxLength, MinLength} from 'class-validator';
 
-export class CreatePostDto {
+export class CreatePublicationDto {
     @IsNotEmpty()
     @MinLength(8, { message: 'The min length of title is 8 characters' })
     @MaxLength(20, { message: 'The max length of title is 8 characters' })
@@ -57,11 +57,6 @@ export class CreatePostDto {
     @MaxLength(50, { message: 'The max length of category is 50 characters' })
     category: string;
 
-    @IsNotEmpty()
-    @MinLength(3, { message: 'The min length of user is 3 characters' })
-    @MaxLength(50, { message: 'The max length of user is 50 characters' })
-    user: string;
-
 }
 
-export type UpdatePostDto = Partial<CreatePostDto>;
+export type updatePublicationDto = Partial<CreatePublicationDto>;
