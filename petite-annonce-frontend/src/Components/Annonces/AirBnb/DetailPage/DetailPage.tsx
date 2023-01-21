@@ -213,18 +213,10 @@ function DetailPage(): JSX.Element {
                   </div>
                 </Box>
                 <h1>Maison 5 pièces 115 m²</h1>
-                <Typography
-                  gutterBottom
-                  variant="body2"
-                  color="text.secondary"
-                  align="left"
-                >
-                  5 Pièces · 115 m² · Villenave-d Ornon 33140
-                </Typography>
 
                 <div className="price">
                   <div className="main-tag">
-                    <p>340 € / nuit<br/>Charges comprises</p>
+                    <p>340 € / nuit</p>
                   </div>
                 </div>
               </Box>
@@ -346,7 +338,7 @@ function DetailPage(): JSX.Element {
                 backgroundColor: 'rgb(240,237,255)'
               }}
               >
-                <Typography component="h1" variant="h5" sx={{ mb:5 }}>340 € / nuit</Typography>
+                <Typography component="h1" variant="h5" sx={{ mb: 5, mt: 1 }}>340 € / nuit</Typography>
                 <form noValidate>
                   <Grid container xs={12} sm={12} sx={{ mt: 3 }}>
                     <Grid xs={12} sm={6} sx={{ textAlign: 'center'}}>
@@ -375,13 +367,10 @@ function DetailPage(): JSX.Element {
                       <TextField
                           id="filled-select-currency-native"
                           onChange={handleChange}
-                          select
+                          type="number"
                           value={selectedValue}
-                          sx={{ backgroundColor: 'white' }}
-                          SelectProps={{
-                            native: true,
-                          }}
-                          helperText="Nombre de personne(s)"
+                          sx={{ backgroundColor: 'white', width: '10vw' }}
+                          helperText="Nombre de nuit(s)"
                           variant="filled"
                       >
                         {currencies.map((option) => (

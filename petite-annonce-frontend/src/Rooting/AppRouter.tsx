@@ -8,11 +8,11 @@ import Login from "../Components/Auth/Login";
 import SignUp from "../Components/Auth/SignUp";
 import New_password from "../Components/Auth/New_password";
 import UserProfile from "../Components/Auth/Profile/UserProfile"
-import Add_AirBnb from "../Components/Annonces/AirBnb/Add_AirBnb";
-import View_Airbnb from "../Components/Annonces/AirBnb/View_AirBnb";
-import Modify_Airbnb from "../Components/Annonces/AirBnb/Modify_AirBnb";
 
 import AirBNB from "../Components/Annonces/AirBnb/DetailPage/DetailPage";
+import AirBNB_test from "../Components/Annonces/AirBnb/Add_AirBnb";
+
+import Add_Annonces from "../Components/Annonces/Add_Annonces";
 
 
 
@@ -29,10 +29,9 @@ export default function AppRouter(): JSX.Element {
             <Route path="/inscription" element={<SignUp/>} />
             <Route path="/nouveau_mot_de_passe" element={<New_password/>} />
             <Route path="/profile" element={<UserProfile/>} />
-            <Route path="/voir_annonce_airbnb" element={<View_Airbnb/>} />
-            <Route path="/ajouter_annonce_airbnb" element={<Add_AirBnb/>} />
-            <Route path="/modifier_annonce_airbnb" element={<Modify_Airbnb/>} />
             <Route path="/airbnb" element={<AirBNB/>} />
+            <Route path="/ajouter_annonce" element={<Add_Annonces/>} />
+            <Route path="/test" element={<AirBNB_test/>} />
             {/*<Route path='/forbiddenAccess' element={<LoginPage/>} />*/}
             <Route path="/*" element={<NotFoundPage />} />
           </Routes>
