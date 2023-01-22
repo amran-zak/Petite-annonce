@@ -1,14 +1,5 @@
 import * as React from 'react';
-/* material */
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-/* icons */
+import { Avatar, Button, CssBaseline, TextField, Paper, Box, Grid, createTheme, ThemeProvider } from '@mui/material';
 import ArticleIcon from '@mui/icons-material/Article';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import EditIcon from '@mui/icons-material/Edit';
@@ -16,18 +7,15 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import Typography from '@mui/material/Typography';
 import CollectionsIcon from '@mui/icons-material/Collections';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-/* image */
 import photo_profile from "../../Style/Img/photo-profile.png";
 import house from "../../Style/Img/house.jpeg";
 import not_find from "../../Style/Img/NotFound.png";
-/* fade */
 import { Fade } from 'react-slideshow-image';
-/* css */
 import 'react-slideshow-image/dist/styles.css'
 
 const theme = createTheme();
 
-function Login(): JSX.Element {
+export default function Profile(): JSX.Element {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
     };

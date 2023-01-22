@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { useState, useRef } from 'react'
-import { Box, List, Icon, Avatar, Badge, Button, Stack, styled, IconButton, Typography, Divider, ListItemIcon,
-  ListItem, ListItemText } from '@mui/material'
+import { Box, List, Icon, Avatar, Badge, Button, Stack, styled, IconButton, Typography, Divider, ListItemIcon, ListItem, ListItemText } from '@mui/material'
 import { PhotoCamera } from '@mui/icons-material'
 
 const SmallAvatar = styled(Avatar)(({ theme }) => ({
@@ -109,7 +108,9 @@ function Sidebar() {
         </List>
         <Divider light />
         <Stack p={5} spacing={3}>
-          <Button variant="outlined" color="error">
+          <Button variant="outlined" color="error"
+                  sx={{ backgroundColor: 'transparent !important' }}
+          >
             Supprimer votre compte
           </Button>
         </Stack>

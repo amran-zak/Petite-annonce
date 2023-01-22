@@ -1,25 +1,9 @@
 import * as React from "react";
 import Gallery from "./Gallery";
 import { grey } from "@mui/material/colors";
-import {
-  Box,
-  Grid,
-  Container,
-  Avatar,
-  Typography,
-  Checkbox,
-  Divider,
-  Icon, Card, TextField, Button,
-} from "@mui/material";
-import IconButton from "@mui/material/Button";
-import {
-  Call,
-  Chat,
-  FavoriteBorder,
-  Favorite,
-  Share,
-} from "@mui/icons-material";
-import "./DetailPage.scss";
+import { Box, Grid, Container, Avatar, Typography, Checkbox, Divider, Icon, Card, TextField, Button, IconButton } from "@mui/material";
+import { Call, Chat, FavoriteBorder, Favorite, Share } from "@mui/icons-material";
+import "../../DetailPage.scss";
 import Map, { Marker, NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { DPE, GES } from "react-dpe-generator";

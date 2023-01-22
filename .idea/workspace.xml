@@ -4,6 +4,24 @@
     <list default="true" id="753cc4f7-f33c-4934-9e61-35f304903eab" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/Add_Annonces.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/Add_Annonces.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/AirBnb/DetailPage/DetailPage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/DetailPage.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/AirBnb/DetailPage/DetailPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/AirBnb/DetailPage/DetailPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/AirBnb/DetailPage/Gallery.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/AirBnb/DetailPage/Gallery.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/DetailPage/DetailPage.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/DetailPage/DetailPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/DetailPage/DetailPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/DetailPage/Gallery.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/DetailPage/Gallery.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/ItemList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/ItemList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/New_password.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/New_password.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Content.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Content.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Sidebar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Steps/AnnouncementsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Steps/AnnouncementsList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Steps/FavouritesList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Steps/FavouritesList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Steps/ReservationsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Steps/ReservationsList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/SignUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/SignUp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/NavBar/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/NavBar/Header.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

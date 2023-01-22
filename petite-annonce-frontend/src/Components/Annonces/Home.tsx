@@ -1,35 +1,14 @@
-/* eslint-disable react/react-in-jsx-scope */
 import * as React from "react";
-import {
-  Box,
-  Icon,
-  Divider,
-  Checkbox,
-  Typography,
-  FormControl,
-  ButtonGroup,
-  Button,
-  AppBar,
-  Toolbar,
-  FormGroup,
-  InputLabel,
-  MenuItem,
-  OutlinedInput,
-  InputAdornment,
-  FormControlLabel,
-} from "@mui/material";
+import { Box, Icon, Divider, Checkbox, Typography, FormControl, ButtonGroup, Button, AppBar, Toolbar, FormGroup, InputLabel, MenuItem, OutlinedInput, InputAdornment, FormControlLabel } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useNavigate } from "react-router-dom";
 import ItemList from "./ItemList";
-
 import { grey } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
-import MuiAccordionSummary, {
-  AccordionSummaryProps,
-} from "@mui/material/AccordionSummary";
+import MuiAccordionSummary, { AccordionSummaryProps } from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />

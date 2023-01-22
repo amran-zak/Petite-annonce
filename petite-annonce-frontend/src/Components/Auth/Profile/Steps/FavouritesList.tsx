@@ -1,7 +1,5 @@
 import * as React from 'react'
-import { Box, Avatar, Collapse, Grid, Button, IconButton, Table, TableBody, TableCell,
-  TableContainer, TableHead, TableRow, Typography, Checkbox } from '@mui/material'
-/* icons */
+import { Box, Avatar, Collapse, Grid, Button, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Checkbox } from '@mui/material'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder"
@@ -47,7 +45,7 @@ export default function CollapsibleTable() {
               <TableBody key={index}>
                 <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} key={index}>
                   <TableCell>
-                    <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+                    <IconButton aria-label="expand row" sx={{ backgroundColor: 'transparent !important' }} size="small" onClick={() => setOpen(!open)}>
                       {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
                   </TableCell>

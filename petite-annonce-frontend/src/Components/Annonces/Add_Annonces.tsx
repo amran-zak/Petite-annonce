@@ -1,9 +1,8 @@
 import * as React from "react";
 import { grey } from "@mui/material/colors";
-import { Box, Grid, Container, Avatar, Typography, Divider, Card, TextField, Button } from "@mui/material";
-import IconButton from "@mui/material/Button";
+import { Box, Grid, Container, Avatar, Typography, Divider, Card, TextField, Button, IconButton } from "@mui/material";
 import "mapbox-gl/dist/mapbox-gl.css";
-import {useState} from "react";
+import { useState } from "react";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -72,7 +71,6 @@ function Add_Annonces(): JSX.Element {
     const chargesValue = useValue("charges");
     const [selectedValueChargescomp, setSelectedValueChargescomp] = useState("1");
 
-
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, type: string) => {
         const value = event.target.value;
 
@@ -128,7 +126,7 @@ function Add_Annonces(): JSX.Element {
         }
     };
     return (
-        <Box sx={{ mt: 6 }}>
+        <Box sx={{ mt: 6 }} component="form" noValidate>
             <Container maxWidth="xl" sx={{ overflowY: "scroll", height: "80vh" }}>
                 <Grid container>
                     <Grid item xs={7}>
@@ -139,6 +137,7 @@ function Add_Annonces(): JSX.Element {
                             <Grid xs={12}>
                                 <TextField
                                     id="typeannonce"
+                                    required
                                     onChange={(event) => handleChange(event, 'typeannonce')}
                                     select
                                     value={selectedValueTypeannonce}
@@ -220,6 +219,7 @@ function Add_Annonces(): JSX.Element {
                                             <Typography variant="caption">Type de bien</Typography>
                                             <TextField
                                                 id="typebien"
+                                                required
                                                 onChange={(event) => handleChange(event, 'typebien')}
                                                 select
                                                 value={selectedValueTypebien}
@@ -254,6 +254,7 @@ function Add_Annonces(): JSX.Element {
                                             <Typography variant="caption">Meublé / non Meublé</Typography>
                                             <TextField
                                                 id="meuble"
+                                                required
                                                 onChange={(event) => handleChange(event, 'meuble')}
                                                 select
                                                 value={selectedValueMeuble}
@@ -289,6 +290,7 @@ function Add_Annonces(): JSX.Element {
                                             <Typography>
                                                 <TextField
                                                     id="surface"
+                                                    required
                                                     onChange={(event) => handleChange(event, 'surface')}
                                                     type="text"
                                                     value={surfaceValue.surface}
@@ -318,6 +320,7 @@ function Add_Annonces(): JSX.Element {
                                             <Typography>
                                                 <TextField
                                                     id="room"
+                                                    required
                                                     onChange={(event) => handleChange(event, 'room')}
                                                     type="text"
                                                     value={roomValue.room}
@@ -347,6 +350,7 @@ function Add_Annonces(): JSX.Element {
                                                 <Typography>
                                                     <TextField
                                                         id="piece"
+                                                        required
                                                         onChange={(event) => handleChange(event, 'piece')}
                                                         type="text"
                                                         value={pieceValue.price}
@@ -378,6 +382,7 @@ function Add_Annonces(): JSX.Element {
                                                 <Typography>
                                                     <TextField
                                                         id="person"
+                                                        required
                                                         onChange={(event) => handleChange(event, 'person')}
                                                         type="text"
                                                         value={personValue.person}
@@ -408,6 +413,7 @@ function Add_Annonces(): JSX.Element {
                                             <Typography>
                                                 <TextField
                                                     id="garden"
+                                                    required
                                                     onChange={(event) => handleChange(event, 'garden')}
                                                     select
                                                     value={selectedValueGarden}
@@ -445,6 +451,7 @@ function Add_Annonces(): JSX.Element {
                                                 <Typography>
                                                     <TextField
                                                         id="bathroom"
+                                                        required
                                                         onChange={(event) => handleChange(event, 'bathroom')}
                                                         type="text"
                                                         value={bathroomValue.bathroom}
@@ -475,6 +482,7 @@ function Add_Annonces(): JSX.Element {
                                                 <Typography>
                                                     <TextField
                                                         id="wc"
+                                                        required
                                                         onChange={(event) => handleChange(event, 'wc')}
                                                         type="text"
                                                         value={wcValue.wc}
@@ -504,6 +512,7 @@ function Add_Annonces(): JSX.Element {
                                                 <Typography variant="caption">Charges comprises</Typography>
                                                 <TextField
                                                     id="chargescomp"
+                                                    required
                                                     onChange={(event) => handleChange(event, 'chargescomp')}
                                                     select
                                                     value={selectedValueChargescomp}
@@ -534,7 +543,8 @@ function Add_Annonces(): JSX.Element {
                             )}
                             {selectedValueTypeannonce === "3" && (
                                 <TextField
-                                    id="details1"
+                                    id="details"
+                                    required
                                     label="Détails de votre annonce"
                                     multiline
                                     fullWidth
@@ -558,6 +568,7 @@ function Add_Annonces(): JSX.Element {
                             <Box sx={{ width: "100%" }}>
                                 <TextField
                                     id="titre"
+                                    required
                                     label="Titre de l'annonce"
                                     fullWidth
                                     variant="outlined"
@@ -567,6 +578,7 @@ function Add_Annonces(): JSX.Element {
                             <Box sx={{ width: "100%" }}>
                                 <TextField
                                     id="adresse"
+                                    required
                                     label="Adresse"
                                     fullWidth
                                     variant="outlined"
@@ -574,8 +586,9 @@ function Add_Annonces(): JSX.Element {
                                 />
                             </Box>
                             <TextField
-                                id="details1"
-                                label="Détails de votre annonce"
+                                id="details"
+                                required
+                                label="Décrivez l'équipement présent dans votre logement"
                                 multiline
                                 fullWidth
                                 rows={8}
@@ -631,6 +644,7 @@ function Add_Annonces(): JSX.Element {
                                     <Typography>
                                         <TextField
                                             id="prix"
+                                            required
                                             onChange={(event) => handleChange(event, 'prix')}
                                             type="text"
                                             value={prixValue.prix}
@@ -646,6 +660,7 @@ function Add_Annonces(): JSX.Element {
                                             <Typography>
                                                 <TextField
                                                     id="frais"
+                                                    required
                                                     onChange={(event) => handleChange(event, 'frais')}
                                                     type="text"
                                                     value={fraisValue.frais}
@@ -661,6 +676,7 @@ function Add_Annonces(): JSX.Element {
                                             <Typography>
                                                 <TextField
                                                     id="charges"
+                                                    required
                                                     onChange={(event) => handleChange(event, 'charges')}
                                                     type="text"
                                                     value={chargesValue.charges}

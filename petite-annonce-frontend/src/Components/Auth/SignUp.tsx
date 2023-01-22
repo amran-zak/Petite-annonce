@@ -1,23 +1,11 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container, IconButton, } from '@mui/material';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import DeleteIcon from '@mui/icons-material/Delete';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
 import UserData from '../../Types/User.types';
 import AuthService from '../../Services/Auth.services'
 
-const theme = createTheme();
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { IconButton } from '@mui/material';
 
 export default function SignUp() {
 
@@ -46,28 +34,12 @@ export default function SignUp() {
         setEmail(e.target.value);
     }
 
-    const onchangeNumber = (e: any) => {
-        setNumber(e.target.value);
-    }
-
     const onchangePassword = (e: any) => {
         setPassword(e.target.value);
     }
 
     const onchangeConfPassword = (e: any) => {
         setConfPassword(e.target.value);
-    }
-
-    const onchangeAddress = (e: any) => {
-        setAddress(e.target.value);
-    }
-
-    const onchangeCode_postal = (e: any) => {
-        setCode_postal(e.target.value);
-    }
-
-    const onchangeCity = (e: any) => {
-        setCity(e.target.value);
     }
 
     const [images, setImages] = React.useState([]);
@@ -106,7 +78,7 @@ export default function SignUp() {
         .then((response: any) => {
             setMessage(response.data.msg);
             setEmail(''); setLastname(''); setFirstname('');
-            setNumber(''); setAddress(''), setCity(''); setCode_postal('');
+            setNumber(''); setAddress(''); setCity(''); setCode_postal('');
             setPassword(''); setConfPassword('');
         })
         .catch((e: Error) => {
@@ -158,7 +130,7 @@ export default function SignUp() {
                                     onChange={onchangeLastName}
                                 />
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={12} sm={6}>
                                 <TextField 
                                     required 
                                     fullWidth 
@@ -168,6 +140,15 @@ export default function SignUp() {
                                     autoComplete="email"
                                     value={email}
                                     onChange={onchangeEmail}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    fullWidth
+                                    name="phone"
+                                    label="Numéro de téléphone"
+                                    id="phone"
+                                    autoComplete="phone"
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -198,15 +179,6 @@ export default function SignUp() {
                             </Grid>
                             <Grid container spacing={2}>
                                 <Grid item xs={12} sm={6}>
-                                    <Grid item xs={12} sm={12} sx={{ ml: 2, mt: 3 }}>
-                                        <TextField
-                                            fullWidth
-                                            name="phone"
-                                            label="Numéro de téléphone"
-                                            id="phone"
-                                            autoComplete="phone"
-                                        />
-                                    </Grid>
                                     <Grid item xs={12} sm={12} sx={{ ml: 2, mt: 3 }}>
                                         <TextField
                                             fullWidth

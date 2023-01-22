@@ -1,17 +1,6 @@
 import * as React from 'react';
-/* material */
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-/* icons */
+import { Avatar, Button, CssBaseline, TextField, Paper, Box, Grid, Typography, createTheme, ThemeProvider } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-/* image */
 import background from "../../Style/Img/house.jpeg";
 
 const theme = createTheme();
