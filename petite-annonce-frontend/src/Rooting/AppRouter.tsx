@@ -8,12 +8,8 @@ import Login from "../Components/Auth/Login";
 import SignUp from "../Components/Auth/SignUp";
 import New_password from "../Components/Auth/New_password";
 import UserProfile from "../Components/Auth/Profile/UserProfile"
-
 import AirBNB from "../Components/Annonces/AirBnb/DetailPage/DetailPage";
-import AirBNB_test from "../Components/Annonces/AirBnb/Add_AirBnb";
-
 import Add_Annonces from "../Components/Annonces/Add_Annonces";
-
 
 
 export default function AppRouter(): JSX.Element {
@@ -31,7 +27,6 @@ export default function AppRouter(): JSX.Element {
             <Route path="/profile" element={<UserProfile/>} />
             <Route path="/airbnb" element={<AirBNB/>} />
             <Route path="/ajouter_annonce" element={<Add_Annonces/>} />
-            <Route path="/test" element={<AirBNB_test/>} />
             {/*<Route path='/forbiddenAccess' element={<LoginPage/>} />*/}
             <Route path="/*" element={<NotFoundPage />} />
           </Routes>

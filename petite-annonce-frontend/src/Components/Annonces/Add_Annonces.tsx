@@ -30,20 +30,9 @@ const jardin = [
     { value: '2', label: 'Non', }
 ];
 function Add_Annonces(): JSX.Element {
-    const [selectedValue, setSelectedValue] = useState("1");
-    const [result, setResult] = useState(0);
-
-    const frais_services = 200;
-    const taxes = 20;
-
-
 
     const handleDelete = (index: number) => {
         setImages(prevImages => Array.from(prevImages).filter((_, i) => i !== index));
-    };
-
-    const calculateResult = (value: string, frais_services, taxes) => {
-        setResult(parseInt(value) * 340 + frais_services + taxes);
     };
 
     const error_message = 'Entrez un nombre';
@@ -59,14 +48,14 @@ function Add_Annonces(): JSX.Element {
     const [errorPerson, setErrorPerson] = useState("");
     const [errorBathroom, setErrorBathroom] = useState("");
     const [errorWc, setErrorWc] = useState("");
-    const [errorDep, setErrorDep] = useState("");
+    const [errorDpe, setErrorDpe] = useState("");
     const [errorGes, setErrorGes] = useState("");
     const [errorPrix, setErrorPrix] = useState("");
     const [errorFrais, setErrorFrais] = useState("");
     const [errorCharges, setErrorCharges] = useState("");
 
     const [selectedValueTypeannonce, setSelectedValueTypeannonce] = useState("1");
-    const [images, setImages] = useState([]);
+    const [images, setImages] = React.useState<FileList | File[]>([]);
     const [selectedValueTypebien, setSelectedValueTypebien] = useState("1");
     const [selectedValueMeuble, setSelectedValueMeuble] = useState("1");
     const surfaceValue = useValue("surface");
@@ -76,20 +65,24 @@ function Add_Annonces(): JSX.Element {
     const [selectedValueGarden, setSelectedValueGarden] = useState("1");
     const bathroomValue = useValue("bathroom");
     const wcValue = useValue("wc");
-    const depValue = useValue("dep");
+    const dpeValue = useValue("dpe");
     const gesValue = useValue("ges");
     const prixValue = useValue("prix");
     const fraisValue = useValue("frais");
     const chargesValue = useValue("charges");
     const [selectedValueChargescomp, setSelectedValueChargescomp] = useState("1");
 
-    const handleChangeImage = (e: { target: { files: any; }; }) => {
-        const selectedFiles = e.target.files;
-        setImages(selectedFiles);
-    };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, type: string) => {
         const value = event.target.value;
+
+        if(type === 'image') {
+            if (event.target instanceof HTMLInputElement) {
+                const selectedFiles = Array.from(event.target.files);
+                setImages(selectedFiles);
+            }
+        }
+
         if(type === 'typeannonce') {
             setSelectedValueTypeannonce(event.target.value);
         }
@@ -114,7 +107,7 @@ function Add_Annonces(): JSX.Element {
             if(type === 'person'){ setErrorPerson(error_message); }
             if(type === 'bathroom'){ setErrorBathroom(error_message); }
             if(type === 'wc'){ setErrorWc(error_message); }
-            if(type === 'dep'){ setErrorDep(error_message); }
+            if(type === 'dpe'){ setErrorDpe(error_message); }
             if(type === 'ges'){ setErrorGes(error_message); }
             if(type === 'prix'){ setErrorPrix(error_message); }
             if(type === 'frais'){ setErrorFrais(error_message); }
@@ -127,7 +120,7 @@ function Add_Annonces(): JSX.Element {
             if(type === 'person'){ setErrorPerson(""); personValue.setSelectedValue(value); }
             if(type === 'bathroom'){ setErrorBathroom(""); bathroomValue.setSelectedValue(value); }
             if(type === 'wc'){ setErrorWc(""); wcValue.setSelectedValue(value); }
-            if(type === 'dep'){ setErrorDep(""); depValue.setSelectedValue(value); }
+            if(type === 'dpe'){ setErrorDpe(""); dpeValue.setSelectedValue(value); }
             if(type === 'ges'){ setErrorGes(""); gesValue.setSelectedValue(value); }
             if(type === 'prix'){ setErrorPrix(""); prixValue.setSelectedValue(value); }
             if(type === 'frais'){ setErrorFrais(""); fraisValue.setSelectedValue(value); }
@@ -170,9 +163,9 @@ function Add_Annonces(): JSX.Element {
                                 id="image"
                                 multiple
                                 type="file"
-                                onChange={handleChangeImage}
+                                onChange={(event) => handleChange(event, 'image')}
                             />
-                            <label htmlFor="contained-button-file">
+                            <label htmlFor="image">
                                 <Button variant="contained" component="span"
                                         sx={{ backgroundColor: '#694ed4 !important;' }}
                                 >
@@ -190,7 +183,7 @@ function Add_Annonces(): JSX.Element {
                                                  maxHeight: '200px',
                                                  margin: 1
                                              }}
-                                             alt={image}
+                                             alt=""
                                         />
                                         <IconButton onClick={() => handleDelete(index)} sx={{ backgroundColor: 'transparent !important' }}>
                                             <DeleteIcon color="secondary"/>
@@ -298,7 +291,7 @@ function Add_Annonces(): JSX.Element {
                                                     id="surface"
                                                     onChange={(event) => handleChange(event, 'surface')}
                                                     type="text"
-                                                    value={surfaceValue.dep}
+                                                    value={surfaceValue.surface}
                                                     sx={{ backgroundColor: 'white', width: '10vw' }}
                                                     variant="filled"
                                                     error={errorSurface !== ''}
@@ -327,7 +320,7 @@ function Add_Annonces(): JSX.Element {
                                                     id="room"
                                                     onChange={(event) => handleChange(event, 'room')}
                                                     type="text"
-                                                    value={roomValue.dep}
+                                                    value={roomValue.room}
                                                     sx={{ backgroundColor: 'white', width: '10vw' }}
                                                     variant="filled"
                                                     error={errorRoom !== ''}
@@ -337,63 +330,67 @@ function Add_Annonces(): JSX.Element {
                                         </Box>
                                     </Box>
                                 </Grid>
-                                <Grid item xs={2} sm={4} md={4}>
-                                    <Box display="flex" flexDirection="row" alignItems="center">
-                                        <Avatar
-                                            sx={{ width: 30, height: 30, bgcolor: grey[400] }}
-                                        >
-                                        </Avatar>
-                                        <Box
-                                            display="flex"
-                                            flexDirection="column"
-                                            alignItems="start"
-                                            ml="5px"
-                                        >
-                                            <Typography variant="caption">Pièce(s)</Typography>
-                                            <Typography>
-                                                <TextField
-                                                    id="piece"
-                                                    onChange={(event) => handleChange(event, 'piece')}
-                                                    type="text"
-                                                    value={pieceValue.dep}
-                                                    sx={{ backgroundColor: 'white', width: '10vw' }}
-                                                    variant="filled"
-                                                    error={errorPiece !== ''}
-                                                    helperText={errorPiece}
-                                                />
-                                            </Typography>
+                                {(selectedValueTypeannonce === "1" || selectedValueTypeannonce === "2") && (
+                                    <Grid item xs={2} sm={4} md={4}>
+                                        <Box display="flex" flexDirection="row" alignItems="center">
+                                            <Avatar
+                                                sx={{ width: 30, height: 30, bgcolor: grey[400] }}
+                                            >
+                                            </Avatar>
+                                            <Box
+                                                display="flex"
+                                                flexDirection="column"
+                                                alignItems="start"
+                                                ml="5px"
+                                            >
+                                                <Typography variant="caption">Pièce(s)</Typography>
+                                                <Typography>
+                                                    <TextField
+                                                        id="piece"
+                                                        onChange={(event) => handleChange(event, 'piece')}
+                                                        type="text"
+                                                        value={pieceValue.price}
+                                                        sx={{ backgroundColor: 'white', width: '10vw' }}
+                                                        variant="filled"
+                                                        error={errorPiece !== ''}
+                                                        helperText={errorPiece}
+                                                    />
+                                                </Typography>
+                                            </Box>
                                         </Box>
-                                    </Box>
-                                </Grid>
-                                <Grid item xs={2} sm={4} md={4}>
-                                    <Box display="flex" flexDirection="row" alignItems="center">
-                                        <Avatar
-                                            sx={{ width: 30, height: 30, bgcolor: grey[400] }}
-                                        >
+                                    </Grid>
+                                )}
+                                {selectedValueTypeannonce === "3" && (
+                                    <Grid item xs={2} sm={4} md={4}>
+                                        <Box display="flex" flexDirection="row" alignItems="center">
+                                            <Avatar
+                                                sx={{ width: 30, height: 30, bgcolor: grey[400] }}
+                                            >
 
-                                        </Avatar>
-                                        <Box
-                                            display="flex"
-                                            flexDirection="column"
-                                            alignItems="start"
-                                            ml="5px"
-                                        >
-                                            <Typography variant="caption">Personne(s)</Typography>
-                                            <Typography>
-                                                <TextField
-                                                    id="person"
-                                                    onChange={(event) => handleChange(event, 'person')}
-                                                    type="text"
-                                                    value={personValue.dep}
-                                                    sx={{ backgroundColor: 'white', width: '10vw' }}
-                                                    variant="filled"
-                                                    error={errorPerson !== ''}
-                                                    helperText={errorPerson}
-                                                />
-                                            </Typography>
+                                            </Avatar>
+                                            <Box
+                                                display="flex"
+                                                flexDirection="column"
+                                                alignItems="start"
+                                                ml="5px"
+                                            >
+                                                <Typography variant="caption">Personne(s)</Typography>
+                                                <Typography>
+                                                    <TextField
+                                                        id="person"
+                                                        onChange={(event) => handleChange(event, 'person')}
+                                                        type="text"
+                                                        value={personValue.person}
+                                                        sx={{ backgroundColor: 'white', width: '10vw' }}
+                                                        variant="filled"
+                                                        error={errorPerson !== ''}
+                                                        helperText={errorPerson}
+                                                    />
+                                                </Typography>
+                                            </Box>
                                         </Box>
-                                    </Box>
-                                </Grid>
+                                    </Grid>
+                                )}
                                 <Grid item xs={2} sm={4} md={4}>
                                     <Box display="flex" flexDirection="row" alignItems="center">
                                         <Avatar
@@ -430,112 +427,122 @@ function Add_Annonces(): JSX.Element {
                                         </Box>
                                     </Box>
                                 </Grid>
-                                <Grid item xs={2} sm={4} md={4}>
-                                    <Box display="flex" flexDirection="row" alignItems="center">
-                                        <Avatar
-                                            sx={{ width: 30, height: 30, bgcolor: grey[400] }}
-                                        >
-
-                                        </Avatar>
-                                        <Box
-                                            display="flex"
-                                            flexDirection="column"
-                                            alignItems="start"
-                                            ml="5px"
-                                        >
-                                            <Typography variant="caption">Salle(s) de bain</Typography>
-                                            <Typography>
-                                                <TextField
-                                                    id="bathroom"
-                                                    onChange={(event) => handleChange(event, 'bathroom')}
-                                                    type="text"
-                                                    value={bathroomValue.dep}
-                                                    sx={{ backgroundColor: 'white', width: '10vw' }}
-                                                    variant="filled"
-                                                    error={errorBathroom !== ''}
-                                                    helperText={errorBathroom}
-                                                />
-                                            </Typography>
-                                        </Box>
-                                    </Box>
-                                </Grid>
-                                <Grid item xs={2} sm={4} md={4}>
-                                    <Box display="flex" flexDirection="row" alignItems="center">
-                                        <Avatar
-                                            sx={{ width: 30, height: 30, bgcolor: grey[400] }}
-                                        >
-
-                                        </Avatar>
-                                        <Box
-                                            display="flex"
-                                            flexDirection="column"
-                                            alignItems="start"
-                                            ml="5px"
-                                        >
-                                            <Typography variant="caption">Toilette(s)</Typography>
-                                            <Typography>
-                                                <TextField
-                                                    id="wc"
-                                                    onChange={(event) => handleChange(event, 'wc')}
-                                                    type="text"
-                                                    value={wcValue.dep}
-                                                    sx={{ backgroundColor: 'white', width: '10vw' }}
-                                                    variant="filled"
-                                                    error={errorWc !== ''}
-                                                    helperText={errorWc}
-                                                />
-                                            </Typography>
-                                        </Box>
-                                    </Box>
-                                </Grid>
-                                <Grid item xs={2} sm={4} md={4}>
-                                    <Box display="flex" flexDirection="row" alignItems="center">
-                                        <Avatar
-                                            sx={{ width: 30, height: 30, bgcolor: grey[400] }}
-                                        >
-
-                                        </Avatar>
-                                        <Box
-                                            display="flex"
-                                            flexDirection="column"
-                                            alignItems="start"
-                                            ml="5px"
-                                        >
-                                            <Typography variant="caption">Charges comprises</Typography>
-                                            <TextField
-                                                id="chargescomp"
-                                                onChange={(event) => handleChange(event, 'chargescomp')}
-                                                select
-                                                value={selectedValueChargescomp}
-                                                sx={{ backgroundColor: 'white' }}
-                                                SelectProps={{
-                                                    native: true,
-                                                }}
-                                                variant="filled"
+                                {selectedValueTypeannonce === "3" && (
+                                    <Grid item xs={2} sm={4} md={4}>
+                                        <Box display="flex" flexDirection="row" alignItems="center">
+                                            <Avatar
+                                                sx={{width: 30, height: 30, bgcolor: grey[400]}}
                                             >
-                                                {charge.map((option) => (
-                                                    <option key={option.value} value={option.value}>
-                                                        {option.label}
-                                                    </option>
-                                                ))}
-                                            </TextField>
+
+                                            </Avatar>
+                                            <Box
+                                                display="flex"
+                                                flexDirection="column"
+                                                alignItems="start"
+                                                ml="5px"
+                                            >
+                                                <Typography variant="caption">Salle(s) de bain</Typography>
+                                                <Typography>
+                                                    <TextField
+                                                        id="bathroom"
+                                                        onChange={(event) => handleChange(event, 'bathroom')}
+                                                        type="text"
+                                                        value={bathroomValue.bathroom}
+                                                        sx={{backgroundColor: 'white', width: '10vw'}}
+                                                        variant="filled"
+                                                        error={errorBathroom !== ''}
+                                                        helperText={errorBathroom}/>
+                                                </Typography>
+                                            </Box>
                                         </Box>
-                                    </Box>
-                                </Grid>
+                                    </Grid>
+                                )}
+                                {selectedValueTypeannonce === "3" && (
+                                    <Grid item xs={2} sm={4} md={4}>
+                                        <Box display="flex" flexDirection="row" alignItems="center">
+                                            <Avatar
+                                                sx={{width: 30, height: 30, bgcolor: grey[400]}}
+                                            >
+
+                                            </Avatar>
+                                            <Box
+                                                display="flex"
+                                                flexDirection="column"
+                                                alignItems="start"
+                                                ml="5px"
+                                            >
+                                                <Typography variant="caption">Toilette(s)</Typography>
+                                                <Typography>
+                                                    <TextField
+                                                        id="wc"
+                                                        onChange={(event) => handleChange(event, 'wc')}
+                                                        type="text"
+                                                        value={wcValue.wc}
+                                                        sx={{backgroundColor: 'white', width: '10vw'}}
+                                                        variant="filled"
+                                                        error={errorWc !== ''}
+                                                        helperText={errorWc}/>
+                                                </Typography>
+                                            </Box>
+                                        </Box>
+                                    </Grid>
+                                )}
+                                {(selectedValueTypeannonce === "1" || selectedValueTypeannonce === "2") && (
+                                    <Grid item xs={2} sm={4} md={4}>
+                                        <Box display="flex" flexDirection="row" alignItems="center">
+                                            <Avatar
+                                                sx={{ width: 30, height: 30, bgcolor: grey[400] }}
+                                            >
+
+                                            </Avatar>
+                                            <Box
+                                                display="flex"
+                                                flexDirection="column"
+                                                alignItems="start"
+                                                ml="5px"
+                                            >
+                                                <Typography variant="caption">Charges comprises</Typography>
+                                                <TextField
+                                                    id="chargescomp"
+                                                    onChange={(event) => handleChange(event, 'chargescomp')}
+                                                    select
+                                                    value={selectedValueChargescomp}
+                                                    sx={{ backgroundColor: 'white' }}
+                                                    SelectProps={{
+                                                        native: true,
+                                                    }}
+                                                    variant="filled"
+                                                >
+                                                    {charge.map((option) => (
+                                                        <option key={option.value} value={option.value}>
+                                                            {option.label}
+                                                        </option>
+                                                    ))}
+                                                </TextField>
+                                            </Box>
+                                        </Box>
+                                    </Grid>
+                                )}
                             </Grid>
-                            <Divider sx={{ my: 5 }}></Divider>
-                            <Typography variant="h6" sx={{ fontSize: "17px", mb: 5 }}>
-                                Ce que compose ce logement
-                            </Typography>
-                            <TextField
-                                id="details1"
-                                label="Détails de votre annonce"
-                                multiline
-                                fullWidth
-                                rows={5}
-                                variant="outlined"
-                                sx={{ backgroundColor: 'white' }}
-                            />
+                            {selectedValueTypeannonce === "3" && (
+                                <Divider sx={{ my: 5 }}></Divider>
+                            )}
+                            {selectedValueTypeannonce === "3" && (
+                                <Typography variant="h6" sx={{ fontSize: "17px", mb: 5 }}>
+                                    Ce que compose ce logement
+                                </Typography>
+                            )}
+                            {selectedValueTypeannonce === "3" && (
+                                <TextField
+                                    id="details1"
+                                    label="Détails de votre annonce"
+                                    multiline
+                                    fullWidth
+                                    rows={5}
+                                    variant="outlined"
+                                    sx={{ backgroundColor: 'white' }}
+                                />
+                            )}
                         </Box>
                     </Grid>
                     <Grid
@@ -577,17 +584,17 @@ function Add_Annonces(): JSX.Element {
                             />
                             <Grid container xs={12} sm={12} sx={{ mb: 5, mt: 5, textAlign: 'center' }}>
                                 <Grid xs={6}>
-                                    <Typography variant="caption">DEP</Typography>
+                                    <Typography variant="caption">DPE</Typography>
                                     <Typography>
                                         <TextField
                                             id="dep"
-                                            onChange={(event) => handleChange(event, 'dep')}
+                                            onChange={(event) => handleChange(event, 'dpe')}
                                             type="text"
-                                            value={depValue.dep}
-                                            sx={{ backgroundColor: 'white', width: '10vw' }}
+                                            value={dpeValue.dpe}
+                                            sx={{ backgroundColor: 'white', width: '10vw', mb: 2 }}
                                             variant="filled"
-                                            error={errorDep !== ''}
-                                            helperText={errorDep}
+                                            error={errorDpe !== ''}
+                                            helperText={errorDpe}
                                         />
                                     </Typography>
                                 </Grid>
@@ -613,68 +620,82 @@ function Add_Annonces(): JSX.Element {
                                 </p>
                             </Grid>
                         </section>
-                        <Grid container spacing={2} xs={12} sm={12} sx={{ pt: 2 }}>
-                            <Card sx={{
-                                pt: 2, my: 'auto', width: '80%', marginLeft: '15%',
-                                backgroundColor: 'rgb(240,237,255)'
-                            }}
-                            >
-                                <Typography variant="caption" sx={{ mb: 5, mt: 1 }}>Prix / nuit</Typography>
-                                <Typography>
-                                    <TextField
-                                        id="prix"
-                                        onChange={(event) => handleChange(event, 'prix')}
-                                        type="text"
-                                        value={prixValue.prix}
-                                        sx={{ backgroundColor: 'white', width: '10vw' }}
-                                        variant="filled"
-                                        error={errorPrix !== ''}
-                                        helperText={errorPrix}
-                                    />
-                                </Typography>
-                                <Grid container xs={12} sm={12} sx={{ mb: 5, mt: 5 }}>
-                                    <Grid xs={6}>
-                                        <Typography variant="caption">Frais de services</Typography>
-                                        <Typography>
-                                            <TextField
-                                                id="frais"
-                                                onChange={(event) => handleChange(event, 'frais')}
-                                                type="text"
-                                                value={fraisValue.frais}
-                                                sx={{ backgroundColor: 'white', width: '10vw' }}
-                                                variant="filled"
-                                                error={errorFrais !== ''}
-                                                helperText={errorFrais}
-                                            />
-                                        </Typography>
+                        {selectedValueTypeannonce === "3" && (
+                            <Grid container spacing={2} xs={12} sm={12} sx={{ pt: 2 }}>
+                                <Card sx={{
+                                    pt: 2, my: 'auto', width: '80%', marginLeft: '15%',
+                                    backgroundColor: 'rgb(240,237,255)'
+                                }}
+                                >
+                                    <Typography variant="caption" sx={{ mb: 5, mt: 1 }}>Prix / nuit</Typography>
+                                    <Typography>
+                                        <TextField
+                                            id="prix"
+                                            onChange={(event) => handleChange(event, 'prix')}
+                                            type="text"
+                                            value={prixValue.prix}
+                                            sx={{ backgroundColor: 'white', width: '10vw' }}
+                                            variant="filled"
+                                            error={errorPrix !== ''}
+                                            helperText={errorPrix}
+                                        />
+                                    </Typography>
+                                    <Grid container xs={12} sm={12} sx={{ mb: 5, mt: 5 }}>
+                                        <Grid xs={6}>
+                                            <Typography variant="caption">Frais de services</Typography>
+                                            <Typography>
+                                                <TextField
+                                                    id="frais"
+                                                    onChange={(event) => handleChange(event, 'frais')}
+                                                    type="text"
+                                                    value={fraisValue.frais}
+                                                    sx={{ backgroundColor: 'white', width: '10vw' }}
+                                                    variant="filled"
+                                                    error={errorFrais !== ''}
+                                                    helperText={errorFrais}
+                                                />
+                                            </Typography>
+                                        </Grid>
+                                        <Grid xs={6}>
+                                            <Typography variant="caption">Charges</Typography>
+                                            <Typography>
+                                                <TextField
+                                                    id="charges"
+                                                    onChange={(event) => handleChange(event, 'charges')}
+                                                    type="text"
+                                                    value={chargesValue.charges}
+                                                    sx={{ backgroundColor: 'white', width: '10vw' }}
+                                                    variant="filled"
+                                                    error={errorCharges !== ''}
+                                                    helperText={errorCharges}
+                                                />
+                                            </Typography>
+                                        </Grid>
                                     </Grid>
-                                    <Grid xs={6}>
-                                        <Typography variant="caption">Charges</Typography>
-                                        <Typography>
-                                            <TextField
-                                                id="charges"
-                                                onChange={(event) => handleChange(event, 'charges')}
-                                                type="text"
-                                                value={chargesValue.charges}
-                                                sx={{ backgroundColor: 'white', width: '10vw' }}
-                                                variant="filled"
-                                                error={errorCharges !== ''}
-                                                helperText={errorCharges}
-                                            />
-                                        </Typography>
-                                    </Grid>
-                                    <Grid xs={12}>
-                                        <Button
-                                            type="submit"
-                                            variant="contained"
-                                            sx={{ mt: 3, backgroundColor: '#694ed4 !important;' }}
-                                            href="/voir_annonce_airbnb"
-                                        >
-                                            AJOUTER L'ANNONCE
-                                        </Button>
-                                    </Grid>
-                                </Grid>
-                            </Card>
+                                </Card>
+                            </Grid>
+                        )}
+                        <Grid xs={6} sx={{ mt: 5, mx: 'auto' }}>
+                            {(selectedValueTypeannonce === "1" || selectedValueTypeannonce === "2") && (
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    sx={{ backgroundColor: '#694ed4 !important;' }}
+                                    href="/details"
+                                >
+                                    AJOUTER L'ANNONCE
+                                </Button>
+                            )}
+                            {selectedValueTypeannonce === "3" && (
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    sx={{ backgroundColor: '#694ed4 !important;' }}
+                                    href="/airbnb"
+                                >
+                                    AJOUTER L'ANNONCE
+                                </Button>
+                            )}
                         </Grid>
                     </Grid>
                 </Grid>
