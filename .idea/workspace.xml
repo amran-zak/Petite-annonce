@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="026b130f-75da-4e7a-b9a2-b00a002a772b" name="Changes" comment="">
+    <list default="true" id="753cc4f7-f33c-4934-9e61-35f304903eab" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/Add_Annonces.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/Add_Annonces.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/AirBnb/DetailPage/DetailPage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/DetailPage.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/AirBnb/DetailPage/DetailPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/AirBnb/DetailPage/DetailPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/AirBnb/DetailPage/Gallery.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/AirBnb/DetailPage/Gallery.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/DetailPage/DetailPage.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/DetailPage/DetailPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/DetailPage/DetailPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/DetailPage/Gallery.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/DetailPage/Gallery.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/ItemList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces/ItemList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/New_password.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/New_password.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Content.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Content.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Sidebar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Steps/AnnouncementsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Steps/AnnouncementsList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Steps/FavouritesList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Steps/FavouritesList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Steps/ReservationsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/Profile/Steps/ReservationsList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/SignUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Auth/SignUp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/NavBar/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petite-annonce-frontend/src/Components/NavBar/Header.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,9 +46,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
-  <component name="ProjectId" id="2KXMyunQdmtihWszEXP1Qw29anL" />
+  <component name="ProjectId" id="2KaC8FVgGb4df9tNdYJplj0sPD1" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -48,12 +63,23 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/petite-annonce-frontend/src/Components/AirBnb" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/petite-annonce-frontend/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/petite-annonce-frontend/src/Components/AirBnb" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/petite-annonce-frontend/src/Components/Annonces" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

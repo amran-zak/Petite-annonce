@@ -1,8 +1,5 @@
 import * as React from 'react'
-import Tabs from '@mui/material/Tabs'
-import Tab from '@mui/material/Tab'
-import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
+import { Tabs, Tab, Typography, Box } from '@mui/material'
 import CottageIcon from '@mui/icons-material/Cottage'
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -64,10 +61,10 @@ export default function BasicTabs() {
     >
       <Box px={3} pt={2} sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Informations personnelles" icon={<ManageAccountsIcon/>} {...a11yProps(0)} />
-          <Tab label="Vos annonces" icon={<CottageIcon/>} {...a11yProps(1)} />
-          <Tab label="Vos favoris" icon={<FavoriteIcon/>} {...a11yProps(2)} />
-          <Tab label="Vos réservations" icon={<CalendarMonthIcon/>} {...a11yProps(3)} />
+          <Tab label="Informations personnelles" icon={<ManageAccountsIcon/>} {...a11yProps(0)} sx={{ backgroundColor: 'transparent !important' }}/>
+          <Tab label="Vos annonces" icon={<CottageIcon/>} {...a11yProps(1)} sx={{ backgroundColor: 'transparent !important' }}/>
+          <Tab label="Vos favoris" icon={<FavoriteIcon/>} {...a11yProps(2)} sx={{ backgroundColor: 'transparent !important' }}/>
+          <Tab label="Vos réservations" icon={<CalendarMonthIcon/>} {...a11yProps(3)} sx={{ backgroundColor: 'transparent !important' }}/>
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>

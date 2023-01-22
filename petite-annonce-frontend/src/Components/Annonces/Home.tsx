@@ -1,35 +1,14 @@
-/* eslint-disable react/react-in-jsx-scope */
 import * as React from "react";
-import {
-  Box,
-  Icon,
-  Divider,
-  Checkbox,
-  Typography,
-  FormControl,
-  ButtonGroup,
-  Button,
-  AppBar,
-  Toolbar,
-  FormGroup,
-  InputLabel,
-  MenuItem,
-  OutlinedInput,
-  InputAdornment,
-  FormControlLabel,
-} from "@mui/material";
+import { Box, Icon, Divider, Checkbox, Typography, FormControl, ButtonGroup, Button, AppBar, Toolbar, FormGroup, InputLabel, MenuItem, OutlinedInput, InputAdornment, FormControlLabel } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useNavigate } from "react-router-dom";
 import ItemList from "./ItemList";
-
 import { grey } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
-import MuiAccordionSummary, {
-  AccordionSummaryProps,
-} from "@mui/material/AccordionSummary";
+import MuiAccordionSummary, { AccordionSummaryProps } from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -259,12 +238,12 @@ function Home(): JSX.Element {
                     variant="outlined"
                     aria-label="outlined button group"
                   >
-                    <Button>1</Button>
-                    <Button>2</Button>
-                    <Button>3</Button>
-                    <Button>4</Button>
-                    <Button>5</Button>
-                    <Button>6+</Button>
+                    <Button sx={{ backgroundColor: 'white !important' }}>1</Button>
+                    <Button sx={{ backgroundColor: 'white !important' }}>2</Button>
+                    <Button sx={{ backgroundColor: 'white !important' }}>3</Button>
+                    <Button sx={{ backgroundColor: 'white !important' }}>4</Button>
+                    <Button sx={{ backgroundColor: 'white !important' }}>5</Button>
+                    <Button sx={{ backgroundColor: 'white !important' }}>6+</Button>
                   </ButtonGroup>
                 </AccordionDetails>
               </Accordion>
@@ -396,8 +375,8 @@ function Home(): JSX.Element {
             <Button fullWidth variant="contained" sx={{ marginRight: "14px" }}>
               Valider
             </Button>
-            <Button fullWidth variant="outlined">
-              Reset
+            <Button fullWidth variant="outlined" sx={{ color: 'white' }}>
+              Annuler
             </Button>
           </Toolbar>
         </AppBar>
@@ -436,7 +415,7 @@ function Home(): JSX.Element {
           sx={{
             pr: 3,
             display: "flex",
-            flexDirection: "column",
+            flexDirection: "column"
           }}
         >
           {Array.from(Array(10)).map((_, index) => (

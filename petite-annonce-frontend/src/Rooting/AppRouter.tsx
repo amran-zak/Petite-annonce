@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NotFoundPage from "../Components/404/NotFound";
 import Header from "../Components/NavBar/Header";
@@ -8,6 +8,9 @@ import Login from "../Components/Auth/Login";
 import SignUp from "../Components/Auth/SignUp";
 import New_password from "../Components/Auth/New_password";
 import UserProfile from "../Components/Auth/Profile/UserProfile"
+import AirBNB from "../Components/Annonces/AirBnb/DetailPage/DetailPage";
+import Add_Annonces from "../Components/Annonces/Add_Annonces";
+
 
 export default function AppRouter(): JSX.Element {
   return (
@@ -22,6 +25,8 @@ export default function AppRouter(): JSX.Element {
             <Route path="/inscription" element={<SignUp/>} />
             <Route path="/nouveau_mot_de_passe" element={<New_password/>} />
             <Route path="/profile" element={<UserProfile/>} />
+            <Route path="/airbnb" element={<AirBNB/>} />
+            <Route path="/ajouter_annonce" element={<Add_Annonces/>} />
             {/*<Route path='/forbiddenAccess' element={<LoginPage/>} />*/}
             <Route path="/*" element={<NotFoundPage />} />
           </Routes>

@@ -1,12 +1,9 @@
 import * as React from "react";
-import { Typography, Box, Icon } from "@mui/material";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import { Checkbox, CardActionArea } from "@mui/material";
+import { Typography, Box, Icon, Card, CardContent, CardMedia, Checkbox, CardActionArea } from "@mui/material";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import prod1 from "../../Style/Img/itemImg.jpg";
+
 export default function ItemList() {
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
   const addFavoris = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -16,7 +13,12 @@ export default function ItemList() {
   return (
     <Box sx={{ position: "relative", mb: 2 }}>
       <Card>
-        <CardActionArea sx={{ display: "flex", flexDirection: "row" }}>
+        <CardActionArea sx={{ 
+                            display: "flex", flexDirection: "row", 
+                            backgroundColor: 'white !important',
+                            borderBottom: '#694ed4 2px solid'
+                        }}
+        >
           <CardMedia
             component="img"
             height="180"
