@@ -3,6 +3,9 @@ import { useState, useRef } from 'react'
 import { Box, List, Icon, Avatar, Badge, Button, Stack, styled, IconButton, Typography, Divider, ListItemIcon, ListItem, ListItemText } from '@mui/material'
 import { PhotoCamera } from '@mui/icons-material'
 
+
+import AuthServices from '../../../Services/Auth.services';
+
 const SmallAvatar = styled(Avatar)(({ theme }) => ({
   width: 40,
   height: 40,
@@ -30,7 +33,7 @@ const list = [
 ]
 function Sidebar() {
   const [userProfile, setUserProfile] = useState('')
-
+  const currentUser = AuthServices.getCurrentUser();
   //   const { isOpen, onOpen, onClose } = useDisclosure()
   const profileImage = useRef(null)
 
@@ -86,7 +89,7 @@ function Sidebar() {
           </Badge>
           <Stack direction="column" sx={{ marginTop: '16px !important' }} spacing={0}>
             <Typography variant="h6" fontSize="xl">
-              NOM Prénom
+            {currentUser.firstname} {currentUser.lastname}
             </Typography>
             <Typography variant="caption" fontSize="sm">
               Compte actif depuis ...

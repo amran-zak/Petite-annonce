@@ -2,8 +2,20 @@ import * as React from 'react'
 import { Box, Stack, Container } from '@mui/material'
 import Sidebar from './Sidebar'
 import Content from './Content'
+import { Navigate } from 'react-router-dom';
+
+import AuthServices from '../../../Services/Auth.services';
+
 
 export default function UserProfile() {
+
+    const currentUser = AuthServices.getCurrentUser();
+
+    if(!currentUser._id){
+        return <Navigate replace to="/login"/>;
+    }
+    console.log(currentUser)
+
     return (
         <Box>
             <Container

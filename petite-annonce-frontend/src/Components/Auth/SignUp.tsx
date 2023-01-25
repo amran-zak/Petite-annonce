@@ -42,6 +42,20 @@ export default function SignUp() {
         setConfPassword(e.target.value);
     }
 
+    const onchangeAddress = (e: any) => {
+        setAddress(e.target.value);
+    }
+
+    const onchangeCode_postal = (e: any) => {
+        setCode_postal(e.target.value);
+    }
+
+    const onchangeCity = (e: any) => {
+        setCity(e.target.value);
+    }
+    
+
+
     const [images, setImages] = React.useState([]);
 
     const handleChange = (e: { target: { files: any; }; }) => {
@@ -68,7 +82,7 @@ export default function SignUp() {
             lastname: data.get('lastName'),
             email: data.get('email'),
             password: data.get('password'),
-            number: data.get('number'),
+            number: data.get('phone'),
             address: data.get('address'),
             code_postal: data.get('code_postal'),
             city: data.get('city')
@@ -147,8 +161,9 @@ export default function SignUp() {
                                     fullWidth
                                     name="phone"
                                     label="Numéro de téléphone"
-                                    id="phone"
+                                    id="number"
                                     autoComplete="phone"
+                                    type="number"
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -186,15 +201,20 @@ export default function SignUp() {
                                             label="Adresse"
                                             id="address"
                                             autoComplete="address"
+                                            value={address}
+                                            onChange={onchangeAddress}
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={12} sx={{ ml: 2, mt: 3 }}>
                                         <TextField
                                             fullWidth
-                                            name="codepostal"
+                                            name="code_postal"
                                             label="Code postal"
                                             id="codepostal"
                                             autoComplete="codepostal"
+                                            value={code_postal}
+                                            onChange={onchangeCode_postal}
+                                            type="number"
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={12} sx={{ ml: 2, mt: 3 }}>
@@ -204,6 +224,8 @@ export default function SignUp() {
                                             label="Ville"
                                             id="city"
                                             autoComplete="city"
+                                            value={city}
+                                            onChange={onchangeCity}
                                         />
                                     </Grid>
                                 </Grid>

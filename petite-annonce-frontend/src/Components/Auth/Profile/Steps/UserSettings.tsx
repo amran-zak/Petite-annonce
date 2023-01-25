@@ -1,7 +1,12 @@
 import * as React from 'react'
 import { Grid, TextField, Box, Button } from '@mui/material'
 
+import AuthServices from '../../../../Services/Auth.services';
+
+
 export default function AccountSettings() {
+    const currentUser = AuthServices.getCurrentUser();
+
     return (
         <Box pb={4} display="flex" flexDirection="column">
             <Grid container spacing={2} sx={{ mt: 2 }}>
@@ -12,7 +17,7 @@ export default function AccountSettings() {
                         fullWidth 
                         id="firstName" 
                         label="Nom de famille" 
-                        value="value"
+                        value={currentUser.firstname}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -22,7 +27,7 @@ export default function AccountSettings() {
                         id="lastName" 
                         label="Prénom" 
                         name="lastName"
-                        value="value"
+                        value={currentUser.lastname}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -32,7 +37,7 @@ export default function AccountSettings() {
                         id="email" 
                         label="Adresse Email" 
                         name="email" 
-                        value="value"
+                        value={currentUser.email}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -41,10 +46,10 @@ export default function AccountSettings() {
                         name="phone" 
                         label="Numéro de téléphone" 
                         id="phone" 
-                        value="value"
+                        value={currentUser.number}
                     />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                {/* <Grid item xs={12} sm={6}>
                     <TextField 
                         required 
                         fullWidth 
@@ -54,8 +59,8 @@ export default function AccountSettings() {
                         id="password" 
                         value="value"
                     />
-                </Grid>
-                <Grid item xs={12} sm={6}>
+                </Grid> */}
+                {/* <Grid item xs={12} sm={6}>
                     <TextField 
                         required 
                         fullWidth 
@@ -65,14 +70,14 @@ export default function AccountSettings() {
                         id="password-" 
                         value="value"
                     />
-                </Grid>
+                </Grid> */}
                 <Grid item xs={12}>
                     <TextField 
                         fullWidth 
                         name="address" 
                         label="Adresse" 
                         id="address" 
-                        value="value"
+                        value={currentUser.address}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -81,7 +86,7 @@ export default function AccountSettings() {
                         name="codepostal" 
                         label="Code postal" 
                         id="codepostal" 
-                        value="value"
+                        value={currentUser.code_postal}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -90,7 +95,7 @@ export default function AccountSettings() {
                         name="city" 
                         label="Ville" 
                         id="city" 
-                        value="value"
+                        value={currentUser.city}
                     />
                 </Grid>
             </Grid>

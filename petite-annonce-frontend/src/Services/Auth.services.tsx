@@ -11,6 +11,14 @@ class AuthService {
   login(data : LoginData) {
     return http.post<Array<LoginData>>("/users/login", data);
   }
+
+  getCurrentUser() {
+    return JSON.parse(localStorage.getItem("user") || "");
+  }
+
+  logout() {
+    localStorage.removeItem("user");
+  }
 }
 
 export default new AuthService();
