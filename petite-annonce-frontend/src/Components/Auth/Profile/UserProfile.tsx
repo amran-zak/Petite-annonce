@@ -12,7 +12,7 @@ export default function UserProfile() {
     const currentUser = AuthServices.getCurrentUser();
 
     if(!currentUser._id){
-        return <Navigate replace to="/login"/>;
+        return <Navigate replace to="/connexion"/>;
     }
     console.log(currentUser)
 

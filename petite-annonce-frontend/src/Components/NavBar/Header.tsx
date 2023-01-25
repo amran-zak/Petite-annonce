@@ -1,12 +1,25 @@
 import * as React from "react";
+/* material */
 import { styled, alpha } from "@mui/material/styles";
-import { AppBar, Box, Link, Toolbar, IconButton, Typography, InputBase, Badge, MenuItem, Menu } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import InputBase from "@mui/material/InputBase";
+import Badge from "@mui/material/Badge";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
+/* icons */
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
+
+
+import AuthService from '../../Services/Auth.services'
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -49,6 +62,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
+
+
+    const [currentUser, setCurrentUser] = React.useState(undefined); 
+
+    React.useEffect(() => {
+    const user = AuthService.getCurrentUser();
+    if (user._id) {
+        setCurrentUser(user);
+    }
+    }, []);
+
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -67,6 +92,14 @@ export default function PrimarySearchAppBar() {
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
+  };
+
+  const handleMenuCloseLogout = () => {
+    AuthService.logout();
+    setCurrentUser(undefined);
+    setAnchorEl(null);
+    handleMobileMenuClose();
+
   };
 
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -90,16 +123,15 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>
-        <Link href="/connexion" underline="none">
-          Connexion
-        </Link>
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
-        <Link href="/inscription" underline="none">
-          Inscription
-        </Link>
-      </MenuItem>
+      {currentUser ?(
+      <MenuItem onClick={handleMenuClose} href="/profile">Profile</MenuItem>)
+      :(<MenuItem onClick={handleMenuClose} href="/connexion">Connexion</MenuItem>)}
+
+{currentUser ?(
+      <MenuItem onClick={handleMenuCloseLogout} href="/">Logout</MenuItem>)
+      :(<MenuItem onClick={handleMenuClose} href="/inscription">Inscription</MenuItem>)}
+
+
     </Menu>
   );
 
