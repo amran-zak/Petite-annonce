@@ -42,6 +42,7 @@ export class AuthController {
             return res.json({
                 message: "Utilisateur bien connecté !",
                 userToken,
+                user,
             });
         }
 
