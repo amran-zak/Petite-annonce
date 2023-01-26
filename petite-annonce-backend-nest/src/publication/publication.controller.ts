@@ -4,7 +4,7 @@ import {
   Post,
   Body,
   UseGuards,
-  Res, Param, Patch, Delete,
+  Res, Param, Patch, Delete, Put,
 } from '@nestjs/common';
 import { PublicationService } from './publication.service';
 import {CreatePublicationDto, updatePublicationDto} from './dto/create-publication.dto';
@@ -49,10 +49,10 @@ export class PublicationController {
   @Get(':publicationID')
   async findById(
       @Res() res,
-      @Param('publicationID') id: string
+      @Param('publicationID') publicationID: string
   ): Promise<Publication> {
     try {
-      const publication = await this.publicationService.findById(id);
+      const publication = await this.publicationService.findById(publicationID);
 
       return res.json({
         message: "L'annonce a bien été récupérée !",
@@ -64,15 +64,15 @@ export class PublicationController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Patch(':publicationID')
+  @Put(':PublicationID')
   async update(
       @Res() res,
-      @Param('id') id: string,
+      @Param('PublicationID') PublicationID: string,
       @Body() updatePublicationDto: updatePublicationDto
   ): Promise<Publication> {
     try {
       const publication = await this.publicationService.updatePublication(
-          id,
+          PublicationID,
           updatePublicationDto
       );
 

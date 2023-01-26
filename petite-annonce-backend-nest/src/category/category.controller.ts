@@ -31,7 +31,7 @@ export class CategoryController {
     }
   }
 
-  @Get('/categories')
+  @Get()
   async findAll(@Res() res): Promise<Category[]> {
     try {
       const categories = await this.categoryService.findAll();
@@ -45,7 +45,7 @@ export class CategoryController {
     }
   }
 
-  @Get('categorie/:categoryID')
+  @Get(':categoryID')
   async findById(
       @Res() res,
       @Param('categoryID') categoryID: string

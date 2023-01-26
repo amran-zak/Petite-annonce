@@ -21,10 +21,7 @@ export class PublicationService {
   async findById(id: string): Promise<Publication> {
     try {
       const publication = await this.publicationModel
-          .findById(id)
-          .populate('type')
-          .populate('category')
-          .populate('user');
+          .findById(id).populate('author');
 
       if (!publication) {
         throw new HttpException('Annonce introuvable', HttpStatus.NO_CONTENT);
