@@ -4,6 +4,7 @@ import {Publication} from "./schemas/publication.schema";
 import {InjectModel} from "@nestjs/mongoose";
 import {Model} from "mongoose";
 import {User, UserSchema} from "../users/schemas/user.schema";
+import {UserRole} from "../users/interfaces/user.interface";
 
 @Injectable()
 export class PublicationService {
@@ -20,7 +21,10 @@ export class PublicationService {
 
   async findAllMe(user): Promise<Publication[]> {
     try {
-      return await this.publicationModel.find({user}).populate('user');
+      console.log(user);
+      if (user.role === UserRole.ADMIN)
+        return await this.publicationModel.find();
+      return await this.publicationModel.find({user});
     } catch (error) {
       throw new Error(error);
     }
