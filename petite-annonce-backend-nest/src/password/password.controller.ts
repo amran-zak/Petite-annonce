@@ -1,9 +1,11 @@
 import {BadRequestException, Body, Controller, NotFoundException, Post} from '@nestjs/common';
 import { PasswordService } from "./password.service";
 import {MailerService} from "@nestjs-modules/mailer";
-import {UsersService} from "../users/users.service";
+import {UserService} from "../users/user.service";
 import {Password} from "./password.model";
 import {UpdateUserDTO} from "../users/dto/register-user.dto";
+import { User, UserSchema } from '../users/schemas/user.schema';
+
 
 @Controller('password')
 export class PasswordController {
@@ -11,7 +13,7 @@ export class PasswordController {
     constructor(
         private passwordService: PasswordService,
         private mailerService: MailerService,
-        private readonly usersService: UsersService,
+        private readonly usersService: UserService,
     ) {}
 
     @Post('forgot')

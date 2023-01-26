@@ -2,14 +2,12 @@ import { HttpException, HttpStatus, Injectable} from "@nestjs/common";
 import { Model } from "mongoose";
 import { InjectModel} from "@nestjs/mongoose";
 import { CreateTypeDto, UpdateTypeDto } from './dto/create-type.dto';
-import { Type } from './model/type.model';
+import { Type } from './interfaces/type.interface';
 @Injectable()
 export class TypeService {
 
   constructor(@InjectModel('Type') private typeModel: Model<Type>) {
   }
-
-
 
   async findAll(): Promise<Type[]> {
     try {

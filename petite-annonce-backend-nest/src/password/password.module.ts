@@ -4,7 +4,7 @@ import { PasswordService } from './password.service';
 import {MongooseModule} from "@nestjs/mongoose";
 import {PasswordSchema} from "./password.model";
 import {MailerModule} from "@nestjs-modules/mailer";
-import {UsersModule} from "../users/users.module";
+import {UserModule} from "../users/user.module";
 
 @Module({
   imports: [
@@ -18,7 +18,7 @@ import {UsersModule} from "../users/users.module";
           from: 'admin@example.com'
         }
       }),
-      UsersModule
+      UserModule
   ],
   controllers: [PasswordController],
   providers: [PasswordService]

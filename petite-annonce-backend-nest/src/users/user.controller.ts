@@ -1,16 +1,16 @@
 import {  Body, Controller, Delete, Get, Param, Post, Put, Res, UploadedFile, UseGuards, UseInterceptors,} from '@nestjs/common';
-import { UsersService } from './users.service';
-import { RegisterUserDTO, UpdateUserDTO } from './dto/register-user.dto';
-import * as bcrypt from 'bcrypt';
-import { LocalAuthGuard} from "../auth/local.auth.guard";
+import { UserService } from './user.service';
+import { UpdateUserDTO } from './dto/register-user.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { User} from "./model/users.model";
+import {User, UserRole} from "./interfaces/user.interface";
 import {FileInterceptor} from "@nestjs/platform-express";
+import {RolesGuard} from "../auth/roles.guard";
+import {hasRoles} from "../auth/roles.decorator";
 
 
 @Controller('users')
-export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+export class UserController {
+  constructor(private readonly usersService: UserService) {}
 
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(FileInterceptor('file'))
@@ -24,8 +24,9 @@ export class UsersController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  // @hasRoles(UserRole.USER)
   async findAll(@Res() res): Promise<User[]> {
     try {
       const users = await this.usersService.findAll();

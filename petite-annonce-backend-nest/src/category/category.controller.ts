@@ -5,7 +5,7 @@ import {
   UpdateCategoryDto
 } from './dto/create-category.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { Category } from "./model/category.model";
+import { Category } from "./interfaces/category.interface";
 
 @Controller('category')
 export class CategoryController {
@@ -45,13 +45,13 @@ export class CategoryController {
     }
   }
 
-  @Get('categorie/:id')
+  @Get('categorie/:categoryID')
   async findById(
       @Res() res,
-      @Param('id') id: string
+      @Param('categoryID') categoryID: string
   ): Promise<Category> {
     try {
-      const category = await this.categoryService.findById(id);
+      const category = await this.categoryService.findById(categoryID);
 
       return res.json({
         message: "La catégorie à bien été récupérée !",
@@ -63,15 +63,15 @@ export class CategoryController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Put('update/:id')
+  @Put('update/:categoryID')
   async update(
       @Res() res,
-      @Param('id') id: string,
+      @Param('categoryID') categoryID: string,
       @Body() updateCategoryDto: UpdateCategoryDto
   ): Promise<Category> {
     try {
       const category = await this.categoryService.updateCategory(
-          id,
+          categoryID,
           updateCategoryDto
       );
 
@@ -85,13 +85,13 @@ export class CategoryController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Delete(':id')
+  @Delete(':categoryID')
   async delete(
       @Res() res,
-      @Param('id') id: string
-  ) {
+      @Param('categoryID') categoryID: string
+  ): Promise<Category> {
     try {
-      await this.categoryService.deleteCategory(id);
+      await this.categoryService.deleteCategory(categoryID);
 
       return res.json({
         message: "La catégorie à bien été supprimée !"
