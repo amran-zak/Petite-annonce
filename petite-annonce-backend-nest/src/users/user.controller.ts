@@ -2,8 +2,10 @@ import {  Body, Controller, Delete, Get, Param, Post, Put, Res, UploadedFile, Us
 import { UserService } from './user.service';
 import { UpdateUserDTO } from './dto/register-user.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { User} from "./interfaces/user.interface";
+import {User, UserRole} from "./interfaces/user.interface";
 import {FileInterceptor} from "@nestjs/platform-express";
+import {RolesGuard} from "../auth/roles.guard";
+import {hasRoles} from "../auth/roles.decorator";
 
 
 @Controller('users')
@@ -22,8 +24,9 @@ export class UserController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  // @hasRoles(UserRole.USER)
   async findAll(@Res() res): Promise<User[]> {
     try {
       const users = await this.usersService.findAll();

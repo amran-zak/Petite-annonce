@@ -32,9 +32,6 @@ export class AuthController {
             throw new Error(error);
         }
     }
-
-    // @UseGuards(LocalAuthGuard)
-    // @UseGuards(JwtAuthGuard)
     @Post('login')
     async login(@Res() res, @Request() req) {
 
@@ -45,7 +42,6 @@ export class AuthController {
             return res.json({
                 message: "Utilisateur bien connecté !",
                 userToken,
-                user
             });
         }
 

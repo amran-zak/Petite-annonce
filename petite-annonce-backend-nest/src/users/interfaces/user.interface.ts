@@ -12,5 +12,13 @@ export interface User extends Document {
     city: string;
     img: string;
     isEmailConfirmed: boolean;
+    role?: UserRole;
     createdAt?: Date;
+}
+
+export enum UserRole {
+    ADMIN = 'admin',
+    CHIEFEDITOR = 'chiefeditor',
+    EDITOR = 'editor',
+    USER = 'user'
 }

@@ -1,5 +1,6 @@
 import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
-import mongoose from "mongoose";
+import { Document } from "mongoose";
+import {UserRole} from "../interfaces/user.interface";
 
 export type UserSchema = User & Document;
 
@@ -13,7 +14,6 @@ export class User {
 
     @Prop({type: String, required: true, unique: true})
     email: string;
-
 
     @Prop({type: String, required: true})
     password: string;
@@ -35,6 +35,9 @@ export class User {
 
     @Prop({type: Boolean, default: true})
     isEmailConfirmed: boolean;
+
+    @Prop({type: String, enum: UserRole, default: UserRole.USER})
+    role: UserRole;
 
     @Prop({type: Date, default: Date.now})
     createdAt: Date;
