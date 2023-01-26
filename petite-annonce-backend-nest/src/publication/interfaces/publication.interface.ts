@@ -13,7 +13,7 @@ export interface Publication extends Document {
     images: string[];
     type: string;
     category: string;
-    author: string;
+    user: string;
     createdAt?: Date;
 
 }

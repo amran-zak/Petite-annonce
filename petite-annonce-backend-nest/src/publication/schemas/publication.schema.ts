@@ -40,7 +40,7 @@ export class Publication {
     images: string;
 
     @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'User'})
-    author: User;
+    user: User;
 
     @Prop({type: Date, default: Date.now})
     createdAt: Date;

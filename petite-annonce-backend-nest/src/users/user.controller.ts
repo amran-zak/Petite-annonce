@@ -1,11 +1,21 @@
-import {  Body, Controller, Delete, Get, Param, Post, Put, Res, UploadedFile, UseGuards, UseInterceptors,} from '@nestjs/common';
-import { UserService } from './user.service';
-import { UpdateUserDTO } from './dto/register-user.dto';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Res,
+  UploadedFile,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
+import {UserService} from './user.service';
+import {UpdateUserDTO} from './dto/register-user.dto';
+import {JwtAuthGuard} from '../auth/jwt-auth.guard';
 import {User, UserRole} from "./interfaces/user.interface";
 import {FileInterceptor} from "@nestjs/platform-express";
-import {RolesGuard} from "../auth/roles.guard";
-import {hasRoles} from "../auth/roles.decorator";
 
 
 @Controller('users')
