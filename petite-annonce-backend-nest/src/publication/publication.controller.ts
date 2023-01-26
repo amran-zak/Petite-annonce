@@ -17,22 +17,7 @@ import {User} from "../users/user.decorator";
 export class PublicationController {
   constructor(private publicationService: PublicationService) {}
 
-  @UseGuards(JwtAuthGuard)
-  @Post('/create')
-  async create(@Res() res, @Body() createPublicationDto: CreatePublicationDto, @Req() request: Request): Promise<Publication> {
-    try {
 
-      const user = request.user;
-      const publication = await this.publicationService.createPublication(createPublicationDto, user);
-
-      return res.json({
-        message: "L'annonce à bien été crée !",
-        publication
-      });
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
 
 
   @Get()
@@ -80,10 +65,27 @@ export class PublicationController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Put(':PublicationID')
-  async update(@Res() res, @Param() PublicationID: string, @Body() updatePublicationDto: updatePublicationDto): Promise<Publication> {
+  @Post('/create')
+  async create(@Res() res, @Body() createPublicationDto: CreatePublicationDto, @Req() request: Request): Promise<Publication> {
     try {
-      const publication = await this.publicationService.updatePublication(PublicationID, updatePublicationDto);
+
+      const user = request.user;
+      const publication = await this.publicationService.createPublication(createPublicationDto, user);
+
+      return res.json({
+        message: "L'annonce à bien été crée !",
+        publication
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Put(':publicationID')
+  async update(@Res() res, @Param('publicationID') publicationID: string, @Body() updatePublicationDto: updatePublicationDto, @User() user): Promise<Publication> {
+    try {
+      const publication = await this.publicationService.updatePublication(publicationID, updatePublicationDto, user);
 
       return res.json({
         message: "L'annonce à bien été modifiée !",
@@ -98,13 +100,15 @@ export class PublicationController {
   @Delete(':publicationID')
   async delete(
       @Res() res,
-      @Param('publicationID') publicationID: string
+      @Param('publicationID') publicationID: string,
+      @User() user,
   ) {
     try {
-      const publication = await this.publicationService.deletePublication(publicationID);
+      const publication = await this.publicationService.deletePublication(publicationID, user);
 
       return res.json({
-        message: "L'annonce à bien été supprimée !"
+        message: "L'annonce à bien été supprimée !",
+        publication,
       });
     } catch (error) {
       throw new Error(error);
