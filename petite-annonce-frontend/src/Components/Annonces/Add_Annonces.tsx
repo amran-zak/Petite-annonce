@@ -654,40 +654,40 @@ function Add_Annonces(): JSX.Element {
                                     />
                                 </Typography>
                                 {selectedValueTypeannonce === "3" && (
-                                <Grid container xs={12} sm={12} sx={{ mb: 5 }}>
-                                    <Grid xs={6}>
-                                        <Typography variant="caption">Frais de services</Typography>
-                                        <Typography>
-                                            <TextField
-                                                id="frais"
-                                                required
-                                                onChange={(event) => handleChange(event, 'frais')}
-                                                type="text"
-                                                value={fraisValue.frais}
-                                                sx={{ backgroundColor: 'white', width: '10vw' }}
-                                                variant="filled"
-                                                error={errorFrais !== ''}
-                                                helperText={errorFrais}
-                                            />
-                                        </Typography>
+                                    <Grid container xs={12} sm={12} sx={{ mb: 5 }}>
+                                        <Grid xs={6}>
+                                            <Typography variant="caption">Frais de services</Typography>
+                                            <Typography>
+                                                <TextField
+                                                    id="frais"
+                                                    required
+                                                    onChange={(event) => handleChange(event, 'frais')}
+                                                    type="text"
+                                                    value={fraisValue.frais}
+                                                    sx={{ backgroundColor: 'white', width: '10vw' }}
+                                                    variant="filled"
+                                                    error={errorFrais !== ''}
+                                                    helperText={errorFrais}
+                                                />
+                                            </Typography>
+                                        </Grid>
+                                        <Grid xs={6}>
+                                            <Typography variant="caption">Charges</Typography>
+                                            <Typography>
+                                                <TextField
+                                                    id="charges"
+                                                    required
+                                                    onChange={(event) => handleChange(event, 'charges')}
+                                                    type="text"
+                                                    value={chargesValue.charges}
+                                                    sx={{ backgroundColor: 'white', width: '10vw' }}
+                                                    variant="filled"
+                                                    error={errorCharges !== ''}
+                                                    helperText={errorCharges}
+                                                />
+                                            </Typography>
+                                        </Grid>
                                     </Grid>
-                                    <Grid xs={6}>
-                                        <Typography variant="caption">Charges</Typography>
-                                        <Typography>
-                                            <TextField
-                                                id="charges"
-                                                required
-                                                onChange={(event) => handleChange(event, 'charges')}
-                                                type="text"
-                                                value={chargesValue.charges}
-                                                sx={{ backgroundColor: 'white', width: '10vw' }}
-                                                variant="filled"
-                                                error={errorCharges !== ''}
-                                                helperText={errorCharges}
-                                            />
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
                                 )}
                             </Card>
                         </Grid>
