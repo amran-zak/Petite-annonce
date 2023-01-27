@@ -58,6 +58,14 @@ export class AuthService {
     return null;
   }
 
+  async logout() {
+    try {
+      localStorage.removeItem("user")
+      return "Utilisateur déconnecté"
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
   async login(user: any) {
     const payload = {
       userID: user._doc._id,

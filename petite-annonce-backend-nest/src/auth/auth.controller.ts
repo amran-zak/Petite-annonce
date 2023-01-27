@@ -1,6 +1,6 @@
 import {
     Body,
-    Controller,
+    Controller, Get,
     Post,
     Request,
     Res,
@@ -50,5 +50,16 @@ export class AuthController {
         })
 
     }
-
+    @UseGuards(JwtAuthGuard)
+    @Get('logout')
+    async logout(@Res() res) {
+        try {
+            const message = this.authService.logout();
+            return res.json({
+                message,
+            });
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
 }
