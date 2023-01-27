@@ -633,28 +633,28 @@ function Add_Annonces(): JSX.Element {
                                 </p>
                             </Grid>
                         </section>
-                        {selectedValueTypeannonce === "3" && (
-                            <Grid container spacing={2} xs={12} sm={12} sx={{ pt: 2 }}>
-                                <Card sx={{
-                                    pt: 2, my: 'auto', width: '80%', marginLeft: '15%',
-                                    backgroundColor: 'rgb(240,237,255)'
-                                }}
-                                >
-                                    <Typography variant="caption" sx={{ mb: 5, mt: 1 }}>Prix / nuit</Typography>
-                                    <Typography>
-                                        <TextField
-                                            id="prix"
-                                            required
-                                            onChange={(event) => handleChange(event, 'prix')}
-                                            type="text"
-                                            value={prixValue.prix}
-                                            sx={{ backgroundColor: 'white', width: '10vw' }}
-                                            variant="filled"
-                                            error={errorPrix !== ''}
-                                            helperText={errorPrix}
-                                        />
-                                    </Typography>
-                                    <Grid container xs={12} sm={12} sx={{ mb: 5, mt: 5 }}>
+                        <Grid container spacing={2} xs={12} sm={12} sx={{ pt: 2 }}>
+                            <Card sx={{
+                                pt: 2, my: 'auto', width: '80%', marginLeft: '15%',
+                                backgroundColor: 'rgb(240,237,255)'
+                            }}
+                            >
+                                <Typography variant="caption" sx={{ mb: 5, mt: 1 }}>Prix / nuit</Typography>
+                                <Typography>
+                                    <TextField
+                                        id="prix"
+                                        required
+                                        onChange={(event) => handleChange(event, 'prix')}
+                                        type="text"
+                                        value={prixValue.prix}
+                                        sx={{ backgroundColor: 'white', width: '10vw', mb: 5 }}
+                                        variant="filled"
+                                        error={errorPrix !== ''}
+                                        helperText={errorPrix}
+                                    />
+                                </Typography>
+                                {selectedValueTypeannonce === "3" && (
+                                    <Grid container xs={12} sm={12} sx={{ mb: 5 }}>
                                         <Grid xs={6}>
                                             <Typography variant="caption">Frais de services</Typography>
                                             <Typography>
@@ -688,9 +688,9 @@ function Add_Annonces(): JSX.Element {
                                             </Typography>
                                         </Grid>
                                     </Grid>
-                                </Card>
-                            </Grid>
-                        )}
+                                )}
+                            </Card>
+                        </Grid>
                         <Grid xs={6} sx={{ mt: 5, mx: 'auto' }}>
                             {(selectedValueTypeannonce === "1" || selectedValueTypeannonce === "2") && (
                                 <Button
