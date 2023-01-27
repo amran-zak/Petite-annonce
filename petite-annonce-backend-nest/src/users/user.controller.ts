@@ -16,6 +16,9 @@ import {UpdateUserDTO} from './dto/register-user.dto';
 import {JwtAuthGuard} from '../auth/jwt-auth.guard';
 import {User, UserRole} from "./interfaces/user.interface";
 import {FileInterceptor} from "@nestjs/platform-express";
+import {RolesGuard} from "../auth/roles.guard";
+import {hasRoles} from "../auth/roles.decorator";
+import {UserPermission} from "./user.decorator";
 
 
 @Controller('users')
@@ -35,7 +38,8 @@ export class UserController {
   }
 
   @Get()
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @hasRoles(UserRole.ADMIN)
   async findAll(@Res() res): Promise<User[]> {
     try {
       const users = await this.usersService.findAll();
@@ -64,9 +68,13 @@ export class UserController {
 
   @UseGuards(JwtAuthGuard)
   @Put(':userID')
-  async update(@Res() res, @Param('userID') userID, @Body() updateUserDTO: UpdateUserDTO,): Promise<User> {
+  async update(
+      @Res() res,
+      @Param('userID') userID,
+      @Body() updateUserDTO: UpdateUserDTO,
+      @UserPermission() user_): Promise<User> {
     try {
-      const user = await this.usersService.updateUser(userID, updateUserDTO);
+      const user = await this.usersService.updateUser(userID, updateUserDTO, user_);
       return res.json({
         message: 'Utilisateur mis à jour',
         user,
@@ -79,9 +87,12 @@ export class UserController {
 
   @UseGuards(JwtAuthGuard)
   @Delete(':userID')
-  async delete(@Res() res, @Param('userID') userID: string): Promise<User> {
+  async delete(
+      @Res() res,
+      @Param('userID') userID: string,
+      @UserPermission() user_): Promise<User> {
     try {
-      const user = await this.usersService.deleteUSer(userID);
+      const user = await this.usersService.deleteUSer(userID, user_);
       return res.json({
         message: 'Utilisateur supprimé',
         user,

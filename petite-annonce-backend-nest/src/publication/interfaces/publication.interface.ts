@@ -11,6 +11,9 @@ export interface Publication extends Document {
     isVerified: Boolean;
     nbImageMax: number;
     images: string[];
+    surface_habitable: string;
+    surface_terrain: string;
+    nbre_piece: string;
     type: string;
     category: string;
     user: string;

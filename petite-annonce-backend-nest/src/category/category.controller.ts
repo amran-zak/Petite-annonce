@@ -6,12 +6,16 @@ import {
 } from './dto/create-category.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { Category } from "./interfaces/category.interface";
+import {RolesGuard} from "../auth/roles.guard";
+import {UserRole} from "../users/interfaces/user.interface";
+import {hasRoles} from "../auth/roles.decorator";
 
 @Controller('category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @hasRoles(UserRole.ADMIN)
   @Post('/create')
   async create(
       @Res() res,
@@ -62,7 +66,9 @@ export class CategoryController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @hasRoles(UserRole.ADMIN)
   @Put(':categoryID')
   async update(
       @Res() res,
@@ -84,7 +90,8 @@ export class CategoryController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @hasRoles(UserRole.ADMIN)
   @Delete(':categoryID')
   async delete(
       @Res() res,

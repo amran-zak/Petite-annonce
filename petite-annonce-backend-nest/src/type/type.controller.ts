@@ -11,13 +11,17 @@ import { TypeService } from './type.service';
 import { CreateTypeDto, UpdateTypeDto } from './dto/create-type.dto';
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 import { Type } from './interfaces/type.interface';
+import {RolesGuard} from "../auth/roles.guard";
+import {hasRoles} from "../auth/roles.decorator";
+import {UserRole} from "../users/interfaces/user.interface";
 
 
 @Controller('type')
 export class TypeController {
   constructor(private readonly typeService: TypeService) {}
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @hasRoles(UserRole.ADMIN)
   @Post('/create')
   async create(@Res() res, @Body() createTypeDto: CreateTypeDto): Promise<Type> {
     try {
@@ -59,7 +63,8 @@ export class TypeController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @hasRoles(UserRole.ADMIN)
   @Put(':typeID')
   async update(@Res() res, @Param('typeID') typeID: string, @Body() UpdateTypeDto: UpdateTypeDto,): Promise<Type> {
     try {
@@ -77,7 +82,8 @@ export class TypeController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @hasRoles(UserRole.ADMIN)
   @Delete(':typeID')
   async delete(
       @Res() res,

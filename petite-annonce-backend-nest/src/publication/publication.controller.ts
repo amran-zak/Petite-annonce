@@ -66,7 +66,10 @@ export class PublicationController {
 
   @UseGuards(JwtAuthGuard)
   @Post('/create')
-  async create(@Res() res, @Body() createPublicationDto: CreatePublicationDto, @Req() request: Request): Promise<Publication> {
+  async create(
+      @Res() res,
+      @Body() createPublicationDto: CreatePublicationDto,
+      @Req() request: Request): Promise<Publication> {
     try {
 
       const user = request.user;
@@ -83,7 +86,11 @@ export class PublicationController {
 
   @UseGuards(JwtAuthGuard)
   @Put(':publicationID')
-  async update(@Res() res, @Param('publicationID') publicationID: string, @Body() updatePublicationDto: updatePublicationDto, @UserPermission() user): Promise<Publication> {
+  async update(
+      @Res() res,
+      @Param('publicationID') publicationID: string,
+      @Body() updatePublicationDto: updatePublicationDto,
+      @UserPermission() user): Promise<Publication> {
     try {
       const publication = await this.publicationService.updatePublication(publicationID, updatePublicationDto, user);
 

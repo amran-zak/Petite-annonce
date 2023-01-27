@@ -54,7 +54,7 @@ export class PasswordController {
             throw new NotFoundException("Utilisateur introuvable");
         }
 
-        await this.usersService.updateUser(user._id, updateUserDTO);
+        await this.usersService.resetPassword(user._id, updateUserDTO);
 
         return {
             message: "Mot de passe modifié avec succès !"
