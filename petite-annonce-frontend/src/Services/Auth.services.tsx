@@ -1,15 +1,15 @@
-import http from "../server";
+import api from "../server";
 import UserData from "../Types/User.types"
 import LoginData from "../Types/Login.types"
 
 
 class AuthService {
   signUp(data : UserData) {
-    return http.post<Array<UserData>>("/users/signup", data);
+    return api.post<Array<UserData>>("/auth/register", data);
   }
 
   login(data : LoginData) {
-    return http.post<Array<LoginData>>("/users/login", data);
+    return api.post<Array<LoginData>>("/auth/login", data);
   }
 
   getCurrentUser() {

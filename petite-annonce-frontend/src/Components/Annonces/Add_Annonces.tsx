@@ -5,6 +5,8 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { useState } from "react";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AnnonceData from "../../Types/Annones.types";
+import AnnoncesServices from "../../Services/Annonces.services";
 
 const type_annonce = [
     { value: '1', label: 'Vente', },
@@ -71,6 +73,28 @@ function Add_Annonces(): JSX.Element {
     const chargesValue = useValue("charges");
     const [selectedValueChargescomp, setSelectedValueChargescomp] = useState("1");
 
+
+    const [detailsAnnonceAirbnb, setDetailsAnnonceAirbnb] = useState("");
+    const [titreAnnonce, setTitreAnnonce] = useState("");
+    const [adresse_complet, setAdresseComplet] = useState("");
+    const [description, setDescription] = useState("");
+    
+
+    const onchangeDetailsAnnonceAirbnb = (e: any) => {
+        setDetailsAnnonceAirbnb(e.target.value);
+    }
+    const onchangeTitreAnnonce = (e: any) => {
+        setTitreAnnonce(e.target.value);
+    }
+    const onchangeAdresseComplet = (e: any) => {
+        setAdresseComplet(e.target.value);
+    }
+    const onchangeDescription = (e: any) => {
+        setDescription(e.target.value);
+    }
+
+
+
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, type: string) => {
         const value = event.target.value;
 
@@ -124,9 +148,93 @@ function Add_Annonces(): JSX.Element {
             if(type === 'frais'){ setErrorFrais(""); fraisValue.setSelectedValue(value); }
             if(type === 'charges'){ setErrorCharges(""); chargesValue.setSelectedValue(value); }
         }
+
+
+
     };
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>)  => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+
+        let type_annonce : string;
+        type_annonce = 'Vente';
+
+        if(selectedValueTypeannonce == '2')
+        {
+            type_annonce= 'Location';
+        }
+        else if(selectedValueTypeannonce == '3')
+        {
+            type_annonce= 'AirBNB';
+
+        }
+
+        let Typebien : string;
+        Typebien = 'Maison';
+
+        if(selectedValueTypebien == '2')
+        {
+            Typebien= 'Appartement';
+        }
+        else if(selectedValueTypebien == '3')
+        {
+            Typebien= 'Villa';
+        }
+
+        let ValueGarden : string;
+        ValueGarden = 'Oui';
+
+        if(selectedValueGarden == '2')
+        {
+            ValueGarden= 'Non';
+        }
+        const annonce_data: AnnonceData = {
+            Typeannonce : type_annonce,
+            titreAnnonce : data.get('titreannonce'),
+            adresse_complet : data.get('adresse_complet'),
+            description : data.get('description'),
+            
+            surfaceValue : data.get('surfaceValue'),
+            roomValue : data.get('roomValue'),
+        
+            dpeValue : data.get('dpeValue'),
+            gesValue : data.get('gesValue'),
+            prixValue : data.get('prixValue'),
+
+            Typebien : Typebien,
+            ValueGarden : ValueGarden
+        };
+        if (selectedValueTypeannonce == '1' || selectedValueTypeannonce == '2') {
+            annonce_data.pieceValue = data.get('pieceValue')
+            annonce_data.Chargescomp = 'Oui'
+            if(selectedValueChargescomp == '2')
+            {
+                annonce_data.Chargescomp = 'Non'
+            }
+        } else {
+            annonce_data.wcValue = data.get('wcValue')
+            annonce_data.bathroomValue = data.get('bathroomValue')
+            annonce_data.personValue = data.get('personValue')
+            annonce_data.fraisValue = data.get('fraisValue')
+            annonce_data.chargesValue = data.get('chargesValue')
+            annonce_data.detailsAnnonceAirbnb = data.get('detailsAnnonceAirbnb')
+        }
+
+
+        AnnoncesServices.createAnnonce(annonce_data)
+        .then((response: any) => {
+          console.log(response)
+        })
+        .catch((e: Error) => {
+        console.log(e);
+        });       
+
+    }
+
+
     return (
-        <Box sx={{ mt: 6 }} component="form" noValidate>
+        <Box sx={{ mt: 6 }} component="form" noValidate onSubmit={handleSubmit}>
             <Container maxWidth="xl" sx={{ overflowY: "scroll", height: "80vh" }}>
                 <Grid container>
                     <Grid item xs={7}>
@@ -292,7 +400,8 @@ function Add_Annonces(): JSX.Element {
                                                     id="surface"
                                                     required
                                                     onChange={(event) => handleChange(event, 'surface')}
-                                                    type="text"
+                                                    type="number"
+                                                    name="surfaceValue"
                                                     value={surfaceValue.surface}
                                                     sx={{ backgroundColor: 'white', width: '10vw' }}
                                                     variant="filled"
@@ -323,6 +432,7 @@ function Add_Annonces(): JSX.Element {
                                                     required
                                                     onChange={(event) => handleChange(event, 'room')}
                                                     type="text"
+                                                    name="roomValue"
                                                     value={roomValue.room}
                                                     sx={{ backgroundColor: 'white', width: '10vw' }}
                                                     variant="filled"
@@ -353,6 +463,7 @@ function Add_Annonces(): JSX.Element {
                                                         required
                                                         onChange={(event) => handleChange(event, 'piece')}
                                                         type="text"
+                                                        name="pieceValue"
                                                         value={pieceValue.price}
                                                         sx={{ backgroundColor: 'white', width: '10vw' }}
                                                         variant="filled"
@@ -383,6 +494,7 @@ function Add_Annonces(): JSX.Element {
                                                     <TextField
                                                         id="person"
                                                         required
+                                                        name="personValue"
                                                         onChange={(event) => handleChange(event, 'person')}
                                                         type="text"
                                                         value={personValue.person}
@@ -413,6 +525,7 @@ function Add_Annonces(): JSX.Element {
                                             <Typography>
                                                 <TextField
                                                     id="garden"
+                                                    name="ValueGarden"
                                                     required
                                                     onChange={(event) => handleChange(event, 'garden')}
                                                     select
@@ -454,6 +567,7 @@ function Add_Annonces(): JSX.Element {
                                                         required
                                                         onChange={(event) => handleChange(event, 'bathroom')}
                                                         type="text"
+                                                        name="bathroomValue"
                                                         value={bathroomValue.bathroom}
                                                         sx={{backgroundColor: 'white', width: '10vw'}}
                                                         variant="filled"
@@ -485,6 +599,7 @@ function Add_Annonces(): JSX.Element {
                                                         required
                                                         onChange={(event) => handleChange(event, 'wc')}
                                                         type="text"
+                                                        name="wcValue"
                                                         value={wcValue.wc}
                                                         sx={{backgroundColor: 'white', width: '10vw'}}
                                                         variant="filled"
@@ -548,8 +663,11 @@ function Add_Annonces(): JSX.Element {
                                     label="Détails de votre annonce"
                                     multiline
                                     fullWidth
+                                    name="detailsAnnonceAirbnb"
                                     rows={5}
                                     variant="outlined"
+                                    value={detailsAnnonceAirbnb}
+                                    onChange={onchangeDetailsAnnonceAirbnb}
                                     sx={{ backgroundColor: 'white' }}
                                 />
                             )}
@@ -572,7 +690,11 @@ function Add_Annonces(): JSX.Element {
                                     label="Titre de l'annonce"
                                     fullWidth
                                     variant="outlined"
+                                    name="titreannonce"
                                     sx={{ backgroundColor: 'white' }}
+
+                                    value={titreAnnonce}
+                                    onChange={onchangeTitreAnnonce}
                                 />
                             </Box>
                             <Box sx={{ width: "100%" }}>
@@ -580,9 +702,12 @@ function Add_Annonces(): JSX.Element {
                                     id="adresse"
                                     required
                                     label="Adresse"
+                                    name="adresse_complet"
                                     fullWidth
                                     variant="outlined"
                                     sx={{ backgroundColor: 'white' }}
+                                    value={adresse_complet}
+                                    onChange={onchangeAdresseComplet}
                                 />
                             </Box>
                             <TextField
@@ -591,9 +716,12 @@ function Add_Annonces(): JSX.Element {
                                 label="Décrivez l'équipement présent dans votre logement"
                                 multiline
                                 fullWidth
+                                name="description"
                                 rows={8}
                                 variant="outlined"
                                 sx={{ backgroundColor: 'white' }}
+                                value={description}
+                                onChange={onchangeDescription}
                             />
                             <Grid container xs={12} sm={12} sx={{ mb: 5, mt: 5, textAlign: 'center' }}>
                                 <Grid xs={6}>
@@ -603,6 +731,7 @@ function Add_Annonces(): JSX.Element {
                                             id="dep"
                                             onChange={(event) => handleChange(event, 'dpe')}
                                             type="text"
+                                            name="dpeValue"
                                             value={dpeValue.dpe}
                                             sx={{ backgroundColor: 'white', width: '10vw', mb: 2 }}
                                             variant="filled"
@@ -618,6 +747,7 @@ function Add_Annonces(): JSX.Element {
                                             id="ges"
                                             onChange={(event) => handleChange(event, 'ges')}
                                             type="text"
+                                            name="gesValue"
                                             value={gesValue.ges}
                                             sx={{ backgroundColor: 'white', width: '10vw' }}
                                             variant="filled"
@@ -646,6 +776,7 @@ function Add_Annonces(): JSX.Element {
                                         required
                                         onChange={(event) => handleChange(event, 'prix')}
                                         type="text"
+                                        name="prixValue"
                                         value={prixValue.prix}
                                         sx={{ backgroundColor: 'white', width: '10vw', mb: 5 }}
                                         variant="filled"
@@ -663,6 +794,7 @@ function Add_Annonces(): JSX.Element {
                                                     required
                                                     onChange={(event) => handleChange(event, 'frais')}
                                                     type="text"
+                                                    name="fraisValue"
                                                     value={fraisValue.frais}
                                                     sx={{ backgroundColor: 'white', width: '10vw' }}
                                                     variant="filled"
@@ -679,6 +811,7 @@ function Add_Annonces(): JSX.Element {
                                                     required
                                                     onChange={(event) => handleChange(event, 'charges')}
                                                     type="text"
+                                                    name="chargesValue"
                                                     value={chargesValue.charges}
                                                     sx={{ backgroundColor: 'white', width: '10vw' }}
                                                     variant="filled"
@@ -697,7 +830,7 @@ function Add_Annonces(): JSX.Element {
                                     type="submit"
                                     variant="contained"
                                     sx={{ backgroundColor: '#694ed4 !important;' }}
-                                    href="/details"
+                                    // href="/details"
                                 >
                                     AJOUTER L'ANNONCE
                                 </Button>
@@ -707,7 +840,7 @@ function Add_Annonces(): JSX.Element {
                                     type="submit"
                                     variant="contained"
                                     sx={{ backgroundColor: '#694ed4 !important;' }}
-                                    href="/airbnb"
+                                    // href="/airbnb"
                                 >
                                     AJOUTER L'ANNONCE
                                 </Button>

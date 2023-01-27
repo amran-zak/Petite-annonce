@@ -11,10 +11,9 @@ export default function UserProfile() {
 
     const currentUser = AuthServices.getCurrentUser();
 
-    if(!currentUser._id){
+    if(!currentUser.acces_token){
         return <Navigate replace to="/connexion"/>;
     }
-    console.log(currentUser)
 
     return (
         <Box>

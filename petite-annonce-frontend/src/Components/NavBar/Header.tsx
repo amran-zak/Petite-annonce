@@ -68,7 +68,7 @@ export default function PrimarySearchAppBar() {
 
     React.useEffect(() => {
     const user = AuthService.getCurrentUser();
-    if (user._id) {
+    if (user.acces_token) {
         setCurrentUser(user);
     }
     }, []);
