@@ -9,9 +9,10 @@ const theme = createTheme();
 
 export default function Login(): JSX.Element {
 
-    const [user, setUser] = React.useState(undefined);
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+
+    const [message, setMessage] = React.useState(undefined);
     
     const onchangeEmail = (e: any) => {
         setEmail(e.target.value);
@@ -30,9 +31,9 @@ export default function Login(): JSX.Element {
         };
         AuthService.login(login_data)
         .then((response: any) => {
-            setUser(response.data.User.firstname);
-            if (response.data.User) {
-                localStorage.setItem("user", JSON.stringify(response.data.User));
+            setMessage(response.data.message)
+            if (response.data.userToken) {
+                localStorage.setItem("user", JSON.stringify(response.data.userToken));
                 setEmail(''); setPassword('');
             }
         })
@@ -76,8 +77,8 @@ export default function Login(): JSX.Element {
                         <Typography component="h1" variant="h5">
                             Connexion
                         </Typography>
-                        { user ? (<Typography component="h1" variant="h5">
-                       Hi {user} 👋🙂
+                        { message ? (<Typography component="h1" variant="h5">
+                       {message} 🙂
                     </Typography>)
                     : (<Typography component="h1" variant="h5">
                         

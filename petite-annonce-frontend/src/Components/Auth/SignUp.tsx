@@ -10,6 +10,7 @@ import AuthService from '../../Services/Auth.services'
 export default function SignUp() {
 
     const [message, setMessage] = React.useState(undefined);
+    const [user, setUser] = React.useState(undefined);
 
     const [firstname, setFirstname] = React.useState('');
     const [lastname, setLastname] = React.useState('');
@@ -53,6 +54,10 @@ export default function SignUp() {
     const onchangeCity = (e: any) => {
         setCity(e.target.value);
     }
+
+    const onchangeNumber = (e: any) => {
+        setNumber(e.target.value);
+    }
     
 
 
@@ -90,10 +95,11 @@ export default function SignUp() {
         console.log(user_data)
         AuthService.signUp(user_data)
         .then((response: any) => {
-            setMessage(response.data.msg);
+            setMessage(response.data.message);
+            setUser(response.data.user.firstname)
             setEmail(''); setLastname(''); setFirstname('');
             setNumber(''); setAddress(''); setCity(''); setCode_postal('');
-            setPassword(''); setConfPassword('');
+            setPassword(''); setConfPassword(''); 
         })
         .catch((e: Error) => {
         console.log(e);
@@ -114,6 +120,12 @@ export default function SignUp() {
                         {message} 👍✅
                     </Typography>)
                     : (<Typography component="h1" variant="h5">
+
+                    </Typography>)}
+                    { user ? (<Typography component="h4" variant="h5">
+                       Bienvenue {user} 👋 !
+                    </Typography>)
+                    : (<Typography component="h4" variant="h5">
 
                     </Typography>)}
 
@@ -164,6 +176,8 @@ export default function SignUp() {
                                     id="number"
                                     autoComplete="phone"
                                     type="number"
+                                    value={number}
+                                    onChange={onchangeNumber}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
