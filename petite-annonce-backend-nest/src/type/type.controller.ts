@@ -84,10 +84,10 @@ export class TypeController {
       @Param('typeID') typeID: string
   ) {
     try {
-      await this.typeService.deleteType(typeID);
+      const message = await this.typeService.deleteType(typeID);
 
       return res.json({
-        message: "Le type a bien été supprimé !"
+        message
       })
     } catch (error) {
       throw new Error(error);

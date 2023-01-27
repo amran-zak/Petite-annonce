@@ -63,7 +63,7 @@ export class CategoryController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Put('update/:categoryID')
+  @Put(':categoryID')
   async update(
       @Res() res,
       @Param('categoryID') categoryID: string,
@@ -91,10 +91,10 @@ export class CategoryController {
       @Param('categoryID') categoryID: string
   ): Promise<Category> {
     try {
-      await this.categoryService.deleteCategory(categoryID);
+      const message = await this.categoryService.deleteCategory(categoryID);
 
       return res.json({
-        message: "La catégorie à bien été supprimée !"
+        message
       })
     } catch (error) {
       throw new Error(error);

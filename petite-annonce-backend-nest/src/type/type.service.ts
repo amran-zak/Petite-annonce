@@ -61,7 +61,8 @@ export class TypeService {
     try {
       await this.typeModel.findByIdAndDelete(id);
 
-      throw new HttpException("Type supprimé", HttpStatus.OK);
+      const message = "Le type a bien été supprimé !";
+      return message;
     } catch (error) {
       throw new Error(error);
     }

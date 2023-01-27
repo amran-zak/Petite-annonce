@@ -61,8 +61,8 @@ export class CategoryService {
   async deleteCategory(categoryID: string) {
     try {
       await this.categoryModel.findByIdAndDelete(categoryID);
-
-      throw new HttpException("Catégorie supprimée", HttpStatus.OK);
+      const message = "Catégorie supprimée !";
+      return message;
     } catch (error) {
       throw new Error(error);
     }

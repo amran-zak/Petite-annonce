@@ -104,11 +104,10 @@ export class PublicationController {
       @UserPermission() user,
   ) {
     try {
-      const publication = await this.publicationService.deletePublication(publicationID, user);
+      const message = await this.publicationService.deletePublication(publicationID, user);
 
       return res.json({
-        message: "L'annonce à bien été supprimée !",
-        publication,
+        message
       });
     } catch (error) {
       throw new Error(error);

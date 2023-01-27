@@ -101,8 +101,11 @@ export class PublicationService {
         if (!publication) {
             throw new NotFoundException('Annonce introuvable')
         }
+
         if (user.role === UserRole.ADMIN || publication.user._id.valueOf() === user?._id.valueOf()) {
-            throw new HttpException('Annonce supprimée', HttpStatus.OK);
+            const message = "Annonce supprimée !";
+            return message;
+
         } else {
             throw new UnauthorizedException();
         }
