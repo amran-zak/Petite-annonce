@@ -34,7 +34,7 @@ export class Publication {
     details: string;
     @Prop({type: Boolean, required: false})
     charges: boolean;
-    @Prop({type: Boolean, required: false})
+    @Prop({type: String, required: false})
     Meuble: string;
     @Prop({type: String, required: false})
     ValueGarden: string;
