@@ -58,7 +58,7 @@ export class Publication {
     fraisValue: number;
     @Prop({type: Number, required: false})
     chargesValue: number;
-    @Prop({type: String, required: true})
+    @Prop({type: String, required: false})
     detailsAnnonceAirbnb: string;
     @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'User'})
     user: User;
