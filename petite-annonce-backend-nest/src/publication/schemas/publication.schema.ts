@@ -34,11 +34,9 @@ export class Publication {
     details: string;
     @Prop({type: Boolean, required: false})
     charges: boolean;
-    @Prop({type: Boolean, required: false, default: false})
-    piscine: boolean;
     @Prop({type: Boolean, required: false})
     Meuble: string;
-    @Prop({type: String, required: false, default: false})
+    @Prop({type: String, required: false})
     ValueGarden: string;
     @Prop({type: Number, required: false})
     surfaceValue: number;
@@ -80,3 +78,5 @@ export const PublicationSchema = SchemaFactory.createForClass(Publication);
 // Typeannonce: mongoose.Schema.Types.ObjectId;
 // @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Type', required: false})
 // type: mongoose.Schema.Types.ObjectId;
+// @Prop({type: Boolean, required: false, default: false})
+// piscine: boolean;
