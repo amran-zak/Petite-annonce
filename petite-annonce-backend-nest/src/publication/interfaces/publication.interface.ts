@@ -15,7 +15,7 @@ export interface Publication extends Document {
     Meuble: string;
     dpeValue: number;
     gesValue: number;
-    Chargescomp: number;
+    Chargescomp: string;
     ValueGarden: string;
     surfaceValue: number;
     pieceValue: number;

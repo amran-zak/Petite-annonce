@@ -26,8 +26,8 @@ export class Publication {
     dpeValue: number;
     @Prop({type: Number, required: false})
     gesValue: number;
-    @Prop({type: Number, required: false})
-    Chargescomp: number;
+    @Prop({type: String, required: false})
+    Chargescomp: string;
     @Prop({type: Array, required: false})
     images: string;
     @Prop({type: Array, required: false})
