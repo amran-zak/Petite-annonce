@@ -7,25 +7,27 @@ export type PublicationSchema = Publication & Document;
 @Schema()
 export class Publication {
     @Prop({type: String, required: true})
-    title: string;
+    titreAnnonce: string;
     @Prop({type: String, required: true})
     description: string;
-    @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: false})
-    category: mongoose.Schema.Types.ObjectId;
-    @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Type', required: false})
-    type: mongoose.Schema.Types.ObjectId;
-    @Prop({type: Number, required: true})
-    price: number;
     @Prop({type: String, required: true})
-    address: string;
-    @Prop({type: Number, required: true})
-    code_postal: number;
+    Typeannonce: string;
     @Prop({type: String, required: true})
-    city: string;
+    Typebien: string;
+    @Prop({type: Number, required: true})
+    prixValue: number;
+    @Prop({type: String, required: true})
+    adresse_complet: string;
     @Prop({type: Boolean, required: false})
     isVerified: boolean;
     @Prop({type: Number, required: true})
     nbImageMax: number;
+    @Prop({type: Number, required: false})
+    dpeValue: number;
+    @Prop({type: Number, required: false})
+    gesValue: number;
+    @Prop({type: Number, required: false})
+    Chargescomp: number;
     @Prop({type: Array, required: false})
     images: string;
     @Prop({type: Array, required: false})
@@ -35,25 +37,29 @@ export class Publication {
     @Prop({type: Boolean, required: false, default: false})
     piscine: boolean;
     @Prop({type: Boolean, required: false})
-    meubler: boolean;
-    @Prop({type: Boolean, required: true, default: false})
-    jardin: boolean;
-    @Prop({type: String, required: false})
-    surface_jardin: string;
-    @Prop({type: String, required: false})
-    surface_habitable: string;
-    @Prop({type: String, required: false})
-    surface_terrain: string;
-    @Prop({type: String, required: false})
-    nbre_piece: string;
+    Meuble: string;
+    @Prop({type: String, required: true, default: false})
+    ValueGarden: string;
     @Prop({type: Number, required: false})
-    nbre_chambres: number;
+    surfaceValue: number;
+    @Prop({type: Number, required: false})
+    pieceValue: number;
+    @Prop({type: Number, required: false})
+    roomValue: number;
     @Prop({type: Number, required: false})
     nbre_lits: number;
     @Prop({type: Number, required: false})
-    nbre_sb: number;
+    bathroomValue: number;
     @Prop({type: Number, required: false})
-    nbre_wc: number;
+    personValue: number;
+    @Prop({type: Number, required: false})
+    wcValue: number;
+    @Prop({type: Number, required: false})
+    fraisValue: number;
+    @Prop({type: Number, required: false})
+    chargesValue: number;
+    @Prop({type: String, required: true})
+    detailsAnnonceAirbnb: string;
     @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'User'})
     user: User;
     @Prop({type: Date, default: Date.now})
@@ -61,3 +67,16 @@ export class Publication {
 }
 
 export const PublicationSchema = SchemaFactory.createForClass(Publication);
+
+// @Prop({type: String, required: false})
+// surface_terrain: string;
+// @Prop({type: String, required: false})
+// surface_jardin: string;
+// @Prop({type: Number, required: true})
+// code_postal: number;
+// @Prop({type: String, required: true})
+// city: string;
+// @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: false})
+// Typeannonce: mongoose.Schema.Types.ObjectId;
+// @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Type', required: false})
+// type: mongoose.Schema.Types.ObjectId;

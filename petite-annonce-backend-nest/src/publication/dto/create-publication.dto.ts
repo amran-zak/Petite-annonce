@@ -23,9 +23,7 @@ export class CreatePublicationDto {
 
     @IsNotEmpty()
     @MinLength(25, { message: 'The min length of address is 25 characters' })
-    @MaxLength(250, {
-        message: 'The max length of address is 250 characters',
-    })
+    @MaxLength(250, {message: 'The max length of address is 250 characters'})
     address: string;
 
     @IsNotEmpty()
@@ -34,7 +32,7 @@ export class CreatePublicationDto {
 
     @IsNotEmpty()
     @MinLength(5, { message: 'The min length of city is 5 characters' })
-    @MaxLength(250, {message: 'The max length of city is 250 characters',})
+    @MaxLength(250, {message: 'The max length of city is 250 characters'})
     city: string;
 
     @IsNotEmpty()

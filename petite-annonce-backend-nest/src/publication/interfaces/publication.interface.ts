@@ -2,31 +2,39 @@ import { Document } from 'mongoose';
 
 export interface Publication extends Document {
     _id: string;
-    title: string;
+    titreAnnonce: string;
     description: string;
-    price: number;
-    address: string;
-    code_postal: number;
-    city: string;
+    prixValue: number;
+    adresse_complet: string;
     isVerified: boolean;
     nbImageMax: number;
     images: string[];
     details: string[];
     charges: boolean;
     piscine: boolean;
-    meubler: boolean;
-    jardin: boolean;
-    surface_jardin: string;
-    surface_habitable: string;
-    surface_terrain: string;
-    nbre_piece: string;
-    nbre_chambres: number;
+    Meuble: string;
+    dpeValue: number;
+    gesValue: number;
+    Chargescomp: number;
+    ValueGarden: string;
+    surfaceValue: number;
+    pieceValue: number;
+    roomValue: number;
     nbre_lits: number;
-    nbre_sb: number;
-    nbre_wc: number;
-    type: string;
-    category: string;
+    bathroomValue: number;
+    personValue: number;
+    wcValue: number;
+    fraisValue: number;
+    chargesValue: number;
+    detailsAnnonceAirbnb: string;
+    Typebien: string;
+    Typeannonce: string;
     user: string;
     createdAt?: Date;
 
 }
+
+// surface_terrain: string;
+// surface_jardin: string;
+// code_postal: number;
+// city: string;
