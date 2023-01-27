@@ -11,7 +11,7 @@ import {CreatePublicationDto, updatePublicationDto} from './dto/create-publicati
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import {Publication} from "./schemas/publication.schema"
 import {Request} from "express";
-import {User} from "../users/user.decorator";
+import {UserPermission} from "../users/user.decorator";
 
 @Controller('publication')
 export class PublicationController {
@@ -35,7 +35,7 @@ export class PublicationController {
 
   @Get('me')
   @UseGuards(JwtAuthGuard)
-  async findAllMe(@Res() res, @User() user): Promise<Publication[]> {
+  async findAllMe(@Res() res, @UserPermission() user): Promise<Publication[]> {
     try {
       const publications = await this.publicationService.findAllMe(user);
       return res.json({
@@ -83,7 +83,7 @@ export class PublicationController {
 
   @UseGuards(JwtAuthGuard)
   @Put(':publicationID')
-  async update(@Res() res, @Param('publicationID') publicationID: string, @Body() updatePublicationDto: updatePublicationDto, @User() user): Promise<Publication> {
+  async update(@Res() res, @Param('publicationID') publicationID: string, @Body() updatePublicationDto: updatePublicationDto, @UserPermission() user): Promise<Publication> {
     try {
       const publication = await this.publicationService.updatePublication(publicationID, updatePublicationDto, user);
 
@@ -101,7 +101,7 @@ export class PublicationController {
   async delete(
       @Res() res,
       @Param('publicationID') publicationID: string,
-      @User() user,
+      @UserPermission() user,
   ) {
     try {
       const publication = await this.publicationService.deletePublication(publicationID, user);
