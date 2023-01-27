@@ -6,21 +6,21 @@ import {User} from "../../users/schemas/user.schema";
 export type PublicationSchema = Publication & Document;
 @Schema()
 export class Publication {
-    @Prop({type: String, required: true})
+    @Prop({type: String, required: false})
     titreAnnonce: string;
-    @Prop({type: String, required: true})
+    @Prop({type: String, required: false})
     description: string;
-    @Prop({type: String, required: true})
+    @Prop({type: String, required: false})
     Typeannonce: string;
-    @Prop({type: String, required: true})
+    @Prop({type: String, required: false})
     Typebien: string;
-    @Prop({type: Number, required: true})
+    @Prop({type: Number, required: false})
     prixValue: number;
-    @Prop({type: String, required: true})
+    @Prop({type: String, required: false})
     adresse_complet: string;
     @Prop({type: Boolean, required: false})
     isVerified: boolean;
-    @Prop({type: Number, required: true})
+    @Prop({type: Number, required: false})
     nbImageMax: number;
     @Prop({type: Number, required: false})
     dpeValue: number;
@@ -32,13 +32,13 @@ export class Publication {
     images: string;
     @Prop({type: Array, required: false})
     details: string;
-    @Prop({type: Boolean, required: true})
+    @Prop({type: Boolean, required: false})
     charges: boolean;
     @Prop({type: Boolean, required: false, default: false})
     piscine: boolean;
     @Prop({type: Boolean, required: false})
     Meuble: string;
-    @Prop({type: String, required: true, default: false})
+    @Prop({type: String, required: false, default: false})
     ValueGarden: string;
     @Prop({type: Number, required: false})
     surfaceValue: number;
