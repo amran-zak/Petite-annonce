@@ -24,7 +24,7 @@ export class PasswordController {
 
         await this.passwordService.create(email, token);
 
-        const url = `http://localhost:3000/password/reset/${token}`;
+        const url = `https://petite-annonce.netlify.app/password/reset/${token}`;
 
         await this.mailerService.sendMail({
             to: email,
