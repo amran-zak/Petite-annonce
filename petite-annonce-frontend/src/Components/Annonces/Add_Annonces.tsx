@@ -189,6 +189,15 @@ function Add_Annonces(): JSX.Element {
         {
             ValueGarden= 'Non';
         }
+        let meuble : string;
+        meuble = 'Oui';
+
+        if(selectedValueMeuble == '2')
+        {
+            meuble= 'Non';
+        }
+
+
         const annonce_data: AnnonceData = {
             Typeannonce : type_annonce,
             titreAnnonce : data.get('titreannonce'),
@@ -203,8 +212,11 @@ function Add_Annonces(): JSX.Element {
             prixValue : data.get('prixValue'),
 
             Typebien : Typebien,
-            ValueGarden : ValueGarden
+            ValueGarden : ValueGarden,
+
+            Meuble : meuble
         };
+        
         if (selectedValueTypeannonce == '1' || selectedValueTypeannonce == '2') {
             annonce_data.pieceValue = data.get('pieceValue')
             annonce_data.Chargescomp = 'Oui'
@@ -228,7 +240,7 @@ function Add_Annonces(): JSX.Element {
         })
         .catch((e: Error) => {
         console.log(e);
-        });       
+        });     
 
     }
 

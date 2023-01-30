@@ -6,7 +6,7 @@ export default interface AnnonceData {
 
     Typeannonce: null | FormDataEntryValue | String,
     Typebien: null | FormDataEntryValue | String,
-    // Meuble: null | FormDataEntryValue | String,
+    Meuble: null | FormDataEntryValue | String,
     surfaceValue: null | FormDataEntryValue | Number,
     roomValue: null | FormDataEntryValue | Number,
     ValueGarden: null | FormDataEntryValue | String,
@@ -14,7 +14,7 @@ export default interface AnnonceData {
     gesValue: null | FormDataEntryValue | Number,
     prixValue: null | FormDataEntryValue | Number,
     
-    Chargescomp?: null | FormDataEntryValue | Number,
+    Chargescomp?: null | FormDataEntryValue | String,
     pieceValue?: null | FormDataEntryValue | Number,
 
     wcValue?: null | FormDataEntryValue | Number,
