@@ -445,9 +445,10 @@ function Home(): JSX.Element {
           }}
         >
          { console.log(pub)}
-          {   pub? (pub.map(({titreAnnonce,_id, prixValue}) => (
+          {   pub? (pub.map(({titreAnnonce,_id, prixValue, description, pieceValue, surfaceValue, adresse_complet}) => (
             <div key={_id}>
-              <ItemList   titreAnnonce={titreAnnonce} prixValue={prixValue}  />  
+              <ItemList   titreAnnonce={titreAnnonce} prixValue={prixValue}  description={description} pieceValue={pieceValue} surfaceValue={surfaceValue}
+              adresse_complet={adresse_complet} />  
             </div>
           )  ) ):(<h1>en cours ...  </h1>)}
        

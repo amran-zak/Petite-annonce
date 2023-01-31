@@ -9,6 +9,10 @@ import prod1 from "../../Style/Img/itemImg.jpg";
 interface ItemListprops {
   titreAnnonce : string;
   prixValue : number;
+  description : string;
+  pieceValue : number;
+  surfaceValue : number;
+  adresse_complet: string;
 
 
 }
@@ -64,7 +68,7 @@ interface ItemListprops {
                   color="text.secondary"
                   align="left"
                 >
-                  Villenave d ornon 33140
+                  {props.adresse_complet}
                 </Typography>
               </div>
               <Checkbox
@@ -82,9 +86,7 @@ interface ItemListprops {
               align="left"
               mb="15px"
             >
-              L agence Twist, la référence de l agence à prix fixe 4990€ sur
-              Bordeaux vous présente à la vente cette maison dans le secteur
-              Pontac.
+              {props.description}
             </Typography>
 
             <Box display="flex" flexDirection="row">
@@ -109,7 +111,7 @@ interface ItemListprops {
                   component="span"
                   sx={{ fontSize: "16px" }}
                 >
-                  <b>5 portes</b>
+                  <b>{props.pieceValue} pièces</b>
                 </Typography>
               </Box>
               <Box
@@ -124,7 +126,7 @@ interface ItemListprops {
                   component="span"
                   sx={{ fontSize: "16px" }}
                 >
-                  <b>66 m²</b>
+                  <b>{props.surfaceValue} m²</b>
                 </Typography>
               </Box>
             </Box>
