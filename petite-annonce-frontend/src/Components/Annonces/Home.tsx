@@ -9,6 +9,7 @@ import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
 import MuiAccordionSummary, { AccordionSummaryProps } from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import AnnoncesServices from "../../Services/Annonces.services";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -45,6 +46,31 @@ const FilterHeader = styled(Typography)(() => ({
 }));
 function Home(): JSX.Element {
   const [expanded, setExpanded] = React.useState<string | boolean>("panel1");
+
+  const [pub, setPub] = React.useState<any>(undefined);
+  const [message, setMessage] = React.useState<string | undefined>(undefined);
+
+
+  
+  React.useEffect(() => {
+
+  AnnoncesServices.findAll().then(
+    (response) => {
+
+            setPub(response.data.publications)
+            setMessage(response.data.message)
+       
+
+    }).catch(
+        (error) => {
+            setMessage(error.message);
+        }
+    );
+
+      }, [])
+
+
+
 
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
@@ -418,11 +444,13 @@ function Home(): JSX.Element {
             flexDirection: "column"
           }}
         >
-          {Array.from(Array(10)).map((_, index) => (
-            <div key={index}>
-              <ItemList></ItemList>
+         { console.log(pub)}
+          {   pub? (pub.map(({titreAnnonce,_id, prixValue}) => (
+            <div key={_id}>
+              <ItemList   titreAnnonce={titreAnnonce} prixValue={prixValue}  />  
             </div>
-          ))}
+          )  ) ):(<h1>en cours ...  </h1>)}
+       
         </Box>
       </Box>
     </Box>

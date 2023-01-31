@@ -4,7 +4,17 @@ import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import prod1 from "../../Style/Img/itemImg.jpg";
 
-export default function ItemList() {
+
+
+interface ItemListprops {
+  titreAnnonce : string;
+  prixValue : number;
+
+
+}
+
+      const ItemList : React.FC<ItemListprops> = (props) =>   {
+
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
   const addFavoris = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
@@ -46,7 +56,7 @@ export default function ItemList() {
                   component="div"
                   sx={{ fontSize: "16px" }}
                 >
-                  <b>Maison 5 pièces 115 m²</b>
+                  <b>{props.titreAnnonce}</b>
                 </Typography>
                 <Typography
                   gutterBottom
@@ -83,7 +93,7 @@ export default function ItemList() {
                 component="span"
                 sx={{ fontSize: "16px", marginRight: "10px" }}
               >
-                <b>€2.300</b>
+                <b>€{props.prixValue}</b>
               </Typography>
               <Box
                 display="flex"
@@ -124,3 +134,4 @@ export default function ItemList() {
     </Box>
   );
 }
+export default ItemList;

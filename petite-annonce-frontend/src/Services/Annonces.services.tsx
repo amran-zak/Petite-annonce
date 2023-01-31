@@ -4,6 +4,7 @@ import AnnonceData from '../Types/Annones.types'
 class AnnoncesService {
   findAll() {
     return api.get<any>("/publication");
+    
   }
 
   createAnnonce(data : AnnonceData) {
@@ -13,6 +14,7 @@ class AnnoncesService {
         'Authorization': `Bearer ${token.acces_token}`
       },});
   }
+
 }
 
 export default new AnnoncesService();
