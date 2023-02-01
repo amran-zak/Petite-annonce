@@ -9,7 +9,7 @@ Ces instructions vous permettront d'obtenir une copie de travail du projet sur v
 
 ## Conditions préalables ( installations à faire avant d'installer le projet )
 
-...
+```
 
 NodeJS v18.13.0
 
@@ -19,7 +19,8 @@ Git v2.35.1
 
 ## Installation
 
-...
+```
+```
 
 Install Git
 
@@ -27,8 +28,8 @@ Install Node
 
 npm i -g @nestjs/cli
 
-...
-
+```
+```
 https://github.com/amran-zak/Petite-annonce.git
 
 cd petite-annonce-backend-nest
