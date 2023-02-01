@@ -17,9 +17,9 @@ NestJS v9.1.8
 
 Git v2.35.1
 
-## Installation
 
 ```
+## Installation
 ```
 
 Install Git
@@ -28,8 +28,6 @@ Install Node
 
 npm i -g @nestjs/cli
 
-```
-```
 https://github.com/amran-zak/Petite-annonce.git
 
 cd petite-annonce-backend-nest
@@ -37,3 +35,10 @@ cd petite-annonce-backend-nest
 npm install
 
 npm run start:dev
+```
+##Construit avec
+
+NestJS - Framework backend utilisé
+MongoDB - Utilisé comme base de données
+Postman - Utilisé pour tester et documenter mes terminaux
+NPM - Gestionnaire de dépendances
