@@ -1,9 +1,11 @@
 import {BadRequestException, Body, Controller, NotFoundException, Post} from '@nestjs/common';
 import { PasswordService } from "./password.service";
 import {MailerService} from "@nestjs-modules/mailer";
-import {UsersService} from "../users/users.service";
+import {UserService} from "../users/user.service";
 import {Password} from "./password.model";
-import * as bcrypt from "bcrypt";
+import {UpdateUserDTO} from "../users/dto/register-user.dto";
+import { User, UserSchema } from '../users/schemas/user.schema';
+
 
 @Controller('password')
 export class PasswordController {
@@ -11,7 +13,7 @@ export class PasswordController {
     constructor(
         private passwordService: PasswordService,
         private mailerService: MailerService,
-        private readonly usersService: UsersService
+        private readonly usersService: UserService,
     ) {}
 
     @Post('forgot')
@@ -22,7 +24,7 @@ export class PasswordController {
 
         await this.passwordService.create(email, token);
 
-        const url = `http://localhost:3000/password/reset/${token}`;
+        const url = `https://petite-annonce.netlify.app/password/reset/${token}`;
 
         await this.mailerService.sendMail({
             to: email,
@@ -37,7 +39,8 @@ export class PasswordController {
     async reset(
         @Body('token') token: string,
         @Body('password') password: string,
-        @Body('password_confirm') password_confirm: string
+        @Body('password_confirm') password_confirm: string,
+        @Body() updateUserDTO: UpdateUserDTO
     ){
         if (password !== password_confirm) {
             throw new BadRequestException("Les mots de passe sont différents");
@@ -45,15 +48,13 @@ export class PasswordController {
 
         const passwordReset: Password = await this.passwordService.findOne(token);
 
-        const user = await this.usersService.getUser(passwordReset.email);
+        const user = await this.usersService.findOne(passwordReset.email);
 
         if (!user) {
             throw new NotFoundException("Utilisateur introuvable");
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        await this.usersService.updatePassword(user._id, hashedPassword);
+        await this.usersService.resetPassword(user._id, updateUserDTO);
 
         return {
             message: "Mot de passe modifié avec succès !"
