@@ -4,7 +4,7 @@ Il s'agit d'un projet Nest sur la création d'annonces immobilières entre parti
 
 Caractéristiques principales : Publications, Types, Catégories, Utilisateurs.
 
-## Installation du projet
+## Installation le backend du projet
 Ces instructions vous permettront d'obtenir une copie de travail du projet sur votre machine locale à des fins de développement et de test.
 
 ## Conditions préalables ( installations à faire avant d'installer le projet )
