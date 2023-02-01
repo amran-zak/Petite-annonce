@@ -39,6 +39,9 @@ npm run start:dev
 ##Construit avec
 
 NestJS - Framework backend utilisé
+
 MongoDB - Utilisé comme base de données
+
 Postman - Utilisé pour tester et documenter mes terminaux
+
 NPM - Gestionnaire de dépendances
