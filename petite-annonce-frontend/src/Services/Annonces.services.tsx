@@ -7,6 +7,10 @@ class AnnoncesService {
     
   }
 
+  findByID(id : string | undefined) {
+    return api.get<any>("/publication/" + id);
+    
+  }
   createAnnonce(data : AnnonceData) {
     const token = JSON.parse(localStorage.getItem("user") || '{}');
     return api.post<Array<AnnonceData>>("/publication/create", data, {

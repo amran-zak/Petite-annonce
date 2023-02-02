@@ -4,9 +4,12 @@ import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import prod1 from "../../Style/Img/itemImg.jpg";
 
+import { useNavigate } from "react-router-dom";
+
 
 
 interface ItemListprops {
+  id : string;
   titreAnnonce : string;
   prixValue : number;
   description : string;
@@ -23,7 +26,6 @@ interface ItemListprops {
   const addFavoris = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
   };
-
   return (
     <Box sx={{ position: "relative", mb: 2 }}>
       <Card>

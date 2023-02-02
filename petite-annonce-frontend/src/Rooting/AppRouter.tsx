@@ -10,7 +10,7 @@ import New_password from "../Components/Auth/New_password";
 import UserProfile from "../Components/Auth/Profile/UserProfile"
 import AirBNB from "../Components/Annonces/AirBnb/DetailPage/DetailPage";
 import Add_Annonces from "../Components/Annonces/Add_Annonces";
-
+import Details_id from "../Components/Annonces/DetailPage/DetailPageid";
 
 export default function AppRouter(): JSX.Element {
   return (
@@ -28,6 +28,8 @@ export default function AppRouter(): JSX.Element {
             <Route path="/airbnb" element={<AirBNB/>} />
             <Route path="/ajouter_annonce" element={<Add_Annonces/>} />
             {/*<Route path='/forbiddenAccess' element={<LoginPage/>} />*/}
+
+            <Route path="/details/:id" element={<Details_id/>} />
             <Route path="/*" element={<NotFoundPage />} />
           </Routes>
         </div>
