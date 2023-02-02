@@ -9,6 +9,9 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { DPE, GES } from "react-dpe-generator";
 import { useParams } from "react-router-dom";
 
+import Stack from '@mui/material/Stack';
+import CircularProgress from '@mui/material/CircularProgress';
+
 import AnnoncesServices from "../../../Services/Annonces.services";
 
 const token =
@@ -25,52 +28,74 @@ const label = { inputProps: { "aria-label": "Checkbox demo" } };
 const addFavoris = (event: React.MouseEvent<HTMLButtonElement>) => {
   event.stopPropagation();
 };
-const criteres = [
+
+function DetailPage(): JSX.Element {
+
+    const [data, setData] = React.useState(undefined);
+    const [maison, setMaison] = React.useState("");
+
+    const [meuble, setMeuble] = React.useState("");
+    const [m2, setM2] = React.useState("");
+    const [chambre, setChambre] = React.useState("");
+    const [pieces, setPieces] = React.useState("");
+    const [jardin, setJardin] = React.useState("");
+    const [charges, setCharges] = React.useState("");
+
+
+    const { id } = useParams<{ id: string }>();
+    const criteres = [
+  
   {
+
     icon: "home",
     name: "Type de bien",
-    value: "Maison",
+    value: maison,
   },
   {
     icon: "chair",
     name: "Meublé / Non meublé",
-    value: "Meublé",
+    value: meuble,
   },
   {
     icon: "aspect_ratio",
     name: "Surface",
-    value: "100 m²",
+    value: m2,
   },
   {
     icon: "bed",
     name: "Chambres",
-    value: "2 ch",
+    value: chambre,
   },
   {
     icon: "room_preferences",
     name: "Pièces",
-    value: "5",
+    value: pieces,
   },
   {
     icon: "yard",
     name: "Jardin",
-    value: "Oui",
+    value: jardin,
   },
   {
     icon: "grid_3x3",
     name: "Charges comprises",
-    value: "Oui",
+    value: charges,
   },
 ];
-function DetailPage(): JSX.Element {
-
-    const [data, setData] = React.useState(undefined);
-    const { id } = useParams<{ id: string }>();
- 
+    
     React.useEffect(() => {
        AnnoncesServices.findByID(id).then(
         (response) => {
           setData(response.data.publication)
+          setMaison(response.data.publication.Typebien)
+          setMeuble(response.data.publication.Meuble)
+          setM2(response.data.publication.surfaceValue)
+          setChambre(response.data.publication.roomValue)
+          setPieces(response.data.publication.pieceValue)
+          setJardin(response.data.publication.ValueGarden)
+          setCharges(response.data.publication.Chargescomp)
+
+
         }).catch(
             (error) => {
                 console.log(error.message);
@@ -79,6 +104,7 @@ function DetailPage(): JSX.Element {
     }, []); 
   return (
       <Box sx={{ mt: 6 }}>
+        {data ? ( 
         <Container maxWidth="xl" sx={{ overflowY: "scroll", height: "80vh" }}>
           <Grid container>
             <Grid item xs={7}>
@@ -126,8 +152,8 @@ function DetailPage(): JSX.Element {
                     justifyContent: "space-between",
                   }}
               >
-                <DPE value={200} />
-                <GES value={60} />
+                <DPE value={data.dpeValue} />
+                <GES value={data.gesValue} />
               </Box>
               <p>
                 Montant estimé des dépenses annuelles d’énergie pour un usage
@@ -160,9 +186,9 @@ function DetailPage(): JSX.Element {
                         color="text.secondary"
                         align="left"
                     >
-                      18/01/2023 à 21:07
+                       {data.createdAt}
                     </Typography>
-
+                      {console.log(data)}
                     <div>
                       <Checkbox
                           {...label}
@@ -175,19 +201,19 @@ function DetailPage(): JSX.Element {
                       </IconButton>
                     </div>
                   </Box>
-                  <h1>Maison 5 pièces 115 m²</h1>
+                  <h1>{data.titreAnnonce}</h1>
                   <Typography
                       gutterBottom
                       variant="body2"
                       color="text.secondary"
                       align="left"
                   >
-                    5 Pièces · 115 m² · Villenave-d Ornon 33140
+                    {data.pieceValue} pièces · {data.surfaceValue} m2 · {data.adresse_complet}
                   </Typography>
 
                   <div className="price">
                     <div className="main-tag">
-                      <p>479 990 € · Charges comprises</p>
+                      <p>{data.prixValue} € · Charges comprises : {data.Chargescomp}</p>
                     </div>
                   </div>
                 </Box>
@@ -216,12 +242,12 @@ function DetailPage(): JSX.Element {
                     />
                     <Box sx={{ display: "flex", flexDirection: "column" }}>
                       <Typography variant="h6" sx={{ fontSize: "17px" }}>
-                        Lary Smith
+                        {data.user.firstname.toUpperCase()}    {data.user.lastname.toUpperCase()}
                       </Typography>
                       <Typography variant="subtitle2" sx={{ fontSize: "11px" }}>
                         Owner
                       </Typography>
-                      <Link href="#" variant="body2">
+                      <Link href="/" variant="body2">
                         Voir les 28 annonces
                       </Link>
                     </Box>
@@ -244,52 +270,18 @@ function DetailPage(): JSX.Element {
                     Voir plus
                   </a>
                   <p>
-                    L agence Twist, la référence de l agence à prix fixe 4990€ sur
-                    Bordeaux vous présente à la vente cette maison dans le secteur
-                    Pontac.
-                    <br />
-                    La visite virtuelle du bien est disponible sur notre site
-                    internet. Pour plus de réactivité, vous pouvez joindre Nicolas
-                    Prado au [Coordonnées masquées].Dans un environnement
-                    privilégié, localisée Emile Lalanne, vous serez séduit par l
-                    emplacement que vous offre cette maison, à proximité immédiate
-                    des commerces, transports ( tram et bus) et écoles.
-                    <br />
-                    Sur une parcelle de 700m2 cette maison a été édifiée dans les
-                    années 2001. Très bien entretenue, vous n avez plus qu à poser
-                    vos valises ! Le jardin est calme et à l abris des regards.
-                    Les volumes sont généreux et la luminosité est omniprésente
-                    grâce à son exposition SUD. Intégralement de plain-pied, on
-                    découvre une belle entrée, un espace salon/salle à manger
-                    confortable, une cuisine ouverte aménagée, un cellier. Le tout
-                    donnant sur 2 terrasses qui accueilleront parfaitement vos
-                    repas d été. Côté nuit, on retrouve 1 chambre parentale avec
-                    dressing et salle d eau , 2 chambres de belles dimensions avec
-                    rangements, 1 salle de bains, un bureau ou une chambre d
-                    enfant. Un garage de 28m2 vient compléter ce bien. Surface :
-                    115 m² <br />
-                    Prix du bien :479990.00 €<br /> Prix du bien hors honoraires :
-                    475000 €<br /> Honoraires TTC : 1.05 % soit 4990 € <br />
-                    Honoraires à la charge de : Acquéreur Date de réalisation du
-                    diagnostic énergétique : 15/12/2022
-                    <br /> Montant estimé des dépenses annuelles d énergie pour un
-                    usage standard : entre 1080 € et 1510 € par an
-                    <br /> Prix moyens des énergies indexés sur l année 2021
-                    (abonnements compris)
-                    <br /> Consommation énergie primaire : 134 kWh/m²/an
-                    <br />
-                    Consommation énergie finale : Non communiquée.
+                    {data.description}
                   </p>
                 </div>
               </section>
               <Typography variant="body2" sx={{ fontSize: "16px", mb: 2 }}>
-                89 Quai des Chartrons, 33300 Bordeaux
-              </Typography>
+              {data.adresse_complet}              </Typography>
               <Map
                   initialViewState={{
                     longitude: -122.4,
                     latitude: 37.8,
                     zoom: 14,
+                    
                   }}
                   mapboxAccessToken={token}
                   style={{ width: "100%", height: 400 }}
@@ -301,6 +293,15 @@ function DetailPage(): JSX.Element {
             </Grid>
           </Grid>
         </Container>
+        ): (
+          <Stack sx={{ color: 'grey.500' }}
+               direction="row"
+              justifyContent="center"
+              alignItems="center"
+              spacing={3}>
+              <CircularProgress color="secondary" />
+          </Stack>
+        )}
       </Box>
   );
 }

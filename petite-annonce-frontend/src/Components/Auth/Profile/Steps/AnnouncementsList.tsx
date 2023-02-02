@@ -57,9 +57,9 @@ export default function CollapsibleTable() {
               <TableCell/>
             </TableRow>
           </TableHead>
-            {Array.from(Array(10)).map((_, index) => (
-              <TableBody key={index}>
-                <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} key={index}>
+            {data.map(({_id,titreAnnonce, prixValue, adresse_complet, description}) => (
+              <TableBody key={_id}>
+                <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} key={_id}>
                   <TableCell>
                     <IconButton aria-label="expand row" sx={{ backgroundColor: 'transparent !important' }} size="small" onClick={() => setOpen(!open)}>
                       {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -71,13 +71,13 @@ export default function CollapsibleTable() {
                       src="https://www.kontio.com/static/studio/pub/Models/My+House/My+House+115/Kontio+My+House+115B+harja1+muuttovalmis+hirsitalo_finaali_web.jpg?c=model_xl" 
                       sx={{ objectFit: 'cover', mr: 2 }}
                     ></Avatar>
-                    <Typography>à Dax</Typography>
+                    <Typography>{adresse_complet}</Typography>
                   </TableCell>
                   <TableCell>
-                    <Typography>À VENDRE MAISON 3 PIÈCES 58 M2</Typography>
+                    <Typography>{titreAnnonce}</Typography>
                   </TableCell>
                   <TableCell>
-                    155 000 €
+                    {prixValue} €
                   </TableCell>
                   <TableCell>
                     <Grid container>
@@ -107,13 +107,7 @@ export default function CollapsibleTable() {
                     <Collapse in={open} timeout="auto" unmountOnExit>
                       <Box sx={{ margin: 1 }}>
                         <Typography sx={{ fontWeight: 'bold' }}>Description</Typography>
-                        <p>Dans un quartier calme de Dax, maison mitoyenne par un coté composée d&apos;un salon séjour, une cuisine, 2 chambres, une salle d&apos;eau, WC.</p>
-                        <p>En extérieur attenant à la cuisine, une véranda ainsi qu&apos;un cabanon présent sur la parcelle.<br></br>
-                        Le tout sur une parcelle d&apos;environ 390m² entièrement clôturée.</p>
-                        <p>Travaux de gros oeuvre à prévoir</p>
-                        <p>EXCLUSIVITE STEPHANE PLAZA IMMOBILIER.</p>
-                        <p>* Honoraires à la charge du vendeur<br/>
-                        Hors frais notariés, de publicité et d’enregistrement.</p>
+                        {description}
                       </Box>
                     </Collapse>
                   </TableCell>
