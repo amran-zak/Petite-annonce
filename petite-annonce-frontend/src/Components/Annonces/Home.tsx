@@ -485,8 +485,6 @@ function Home(): JSX.Element {
             alignItems="center"
             spacing={3}>
             <CircularProgress color="secondary" />
-            <CircularProgress color="success" />
-            <CircularProgress color="inherit" />
           </Stack>
           )}
        

@@ -19,7 +19,7 @@ export default function CollapsibleTable() {
       AnnoncesServices.findAllMe()
         .then((response: any) => {
             console.log(response);
-            setData(response.data.publication)
+            setData(response.data.publications)
         })
         .catch((e: Error) => {
         console.log(e);
@@ -129,8 +129,6 @@ export default function CollapsibleTable() {
             alignItems="center"
             spacing={3}>
             <CircularProgress color="secondary" />
-            <CircularProgress color="success" />
-            <CircularProgress color="inherit" />
           </Stack>
       )}
     </React.Fragment>
