@@ -28,7 +28,7 @@ import MuiAccordionSummary, {
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import AnnoncesServices from "../../Services/Annonces.services";
-
+import { useNavigate } from "react-router-dom";
 import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -90,7 +90,7 @@ function Home(): JSX.Element {
       }, [])
 
 
-
+    const  navigate = useNavigate();
 
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
