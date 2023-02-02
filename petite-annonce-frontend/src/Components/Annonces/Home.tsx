@@ -1,12 +1,30 @@
 import * as React from "react";
-import { Box, Icon, Divider, Checkbox, Typography, FormControl, ButtonGroup, Button, AppBar, Toolbar, FormGroup, InputLabel, MenuItem, OutlinedInput, InputAdornment, FormControlLabel } from "@mui/material";
+import {
+  Box,
+  Icon,
+  Divider,
+  Checkbox,
+  Typography,
+  FormControl,
+  ButtonGroup,
+  Button,
+  AppBar,
+  Toolbar,
+  FormGroup,
+  InputLabel,
+  MenuItem,
+  OutlinedInput,
+  InputAdornment,
+  FormControlLabel,
+} from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { useNavigate } from "react-router-dom";
 import ItemList from "./ItemList";
 import { grey } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
 import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
-import MuiAccordionSummary, { AccordionSummaryProps } from "@mui/material/AccordionSummary";
+import MuiAccordionSummary, {
+  AccordionSummaryProps,
+} from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import AnnoncesServices from "../../Services/Annonces.services";
@@ -84,11 +102,7 @@ function Home(): JSX.Element {
   const handleSelectChange = (event: SelectChangeEvent) => {
     setState(event.target.value);
   };
-  const navigate = useNavigate();
-  const routeChange = () => {
-    const path = `/details`;
-    navigate(path);
-  };
+
   const tri: Array<string> = [
     "Plus récent",
     "Plus ancien",
@@ -97,7 +111,6 @@ function Home(): JSX.Element {
   ];
   return (
     <Box
-      onClick={routeChange}
       sx={{
         display: "flex",
         flexDirection: "row",
@@ -267,12 +280,24 @@ function Home(): JSX.Element {
                     variant="outlined"
                     aria-label="outlined button group"
                   >
-                    <Button sx={{ backgroundColor: 'white !important' }}>1</Button>
-                    <Button sx={{ backgroundColor: 'white !important' }}>2</Button>
-                    <Button sx={{ backgroundColor: 'white !important' }}>3</Button>
-                    <Button sx={{ backgroundColor: 'white !important' }}>4</Button>
-                    <Button sx={{ backgroundColor: 'white !important' }}>5</Button>
-                    <Button sx={{ backgroundColor: 'white !important' }}>6+</Button>
+                    <Button sx={{ backgroundColor: "white !important" }}>
+                      1
+                    </Button>
+                    <Button sx={{ backgroundColor: "white !important" }}>
+                      2
+                    </Button>
+                    <Button sx={{ backgroundColor: "white !important" }}>
+                      3
+                    </Button>
+                    <Button sx={{ backgroundColor: "white !important" }}>
+                      4
+                    </Button>
+                    <Button sx={{ backgroundColor: "white !important" }}>
+                      5
+                    </Button>
+                    <Button sx={{ backgroundColor: "white !important" }}>
+                      6+
+                    </Button>
                   </ButtonGroup>
                 </AccordionDetails>
               </Accordion>
@@ -404,7 +429,7 @@ function Home(): JSX.Element {
             <Button fullWidth variant="contained" sx={{ marginRight: "14px" }}>
               Valider
             </Button>
-            <Button fullWidth variant="outlined" sx={{ color: 'white' }}>
+            <Button fullWidth variant="outlined" sx={{ color: "white" }}>
               Annuler
             </Button>
           </Toolbar>
@@ -444,7 +469,7 @@ function Home(): JSX.Element {
           sx={{
             pr: 3,
             display: "flex",
-            flexDirection: "column"
+            flexDirection: "column",
           }}
         >
          { console.log(pub)}
