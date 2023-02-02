@@ -14,6 +14,7 @@ export default function UserProfile() {
     if(!currentUser.acces_token){
         return <Navigate replace to="/connexion"/>;
     }
+    
 
     return (
         <Box>
