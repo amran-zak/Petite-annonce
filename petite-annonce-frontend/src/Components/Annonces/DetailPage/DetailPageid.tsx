@@ -9,6 +9,9 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { DPE, GES } from "react-dpe-generator";
 import { useParams } from "react-router-dom";
 
+import Stack from '@mui/material/Stack';
+import CircularProgress from '@mui/material/CircularProgress';
+
 import AnnoncesServices from "../../../Services/Annonces.services";
 
 const token =
@@ -79,6 +82,7 @@ function DetailPage(): JSX.Element {
     }, []); 
   return (
       <Box sx={{ mt: 6 }}>
+        {data ? ( 
         <Container maxWidth="xl" sx={{ overflowY: "scroll", height: "80vh" }}>
           <Grid container>
             <Grid item xs={7}>
@@ -175,7 +179,7 @@ function DetailPage(): JSX.Element {
                       </IconButton>
                     </div>
                   </Box>
-                  <h1>Maison 5 pièces 115 m²</h1>
+                  <h1>{data.titreAnnonce}</h1>
                   <Typography
                       gutterBottom
                       variant="body2"
@@ -301,6 +305,15 @@ function DetailPage(): JSX.Element {
             </Grid>
           </Grid>
         </Container>
+        ): (
+          <Stack sx={{ color: 'grey.500' }}
+               direction="row"
+              justifyContent="center"
+              alignItems="center"
+              spacing={3}>
+              <CircularProgress color="secondary" />
+          </Stack>
+        )}
       </Box>
   );
 }
