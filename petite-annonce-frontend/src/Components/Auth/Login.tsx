@@ -18,20 +18,24 @@ import {
   InputAdornment,
   FormHelperText,
 } from "@mui/material";
+import Alert, { AlertColor } from "@mui/material/Alert";
+import Collapse from "@mui/material/Collapse";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import background from "../../Style/Img/house.jpeg";
 import LoginData from "../../Types/Login.types";
 import AuthService from "../../Services/Auth.services";
-
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 export default function Login(): JSX.Element {
-    const [user, setUser] = React.useState(undefined);
+  const [currentUser, setCurrentUser] = React.useState(undefined);
 
-    const [message, setMessage] = React.useState(undefined);
+  const [message, setMessage] = React.useState({ text: "", severity: "" });
+  const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -61,10 +65,29 @@ export default function Login(): JSX.Element {
     console.log(data);
     AuthService.login(data)
       .then((response: any) => {
-        setMessage(response.data.message)
-            if (response.data.userToken) {
-                localStorage.setItem("user", JSON.stringify(response.data.userToken));
-            }
+        if (response.data.userToken) {
+          setMessage({ text: response.data.message, severity: "success" });
+          localStorage.setItem("user", JSON.stringify(response.data.userToken));
+          setOpen(true);
+          setInterval(function () {
+            setOpen(false);
+          }, 4000);
+          const user = AuthService.getCurrentUser();
+          if (user.acces_token) {
+            setCurrentUser(user);
+          }
+          navigate("/");
+        } else {
+          setMessage({
+            text: response.data.message,
+            severity: "error",
+          });
+
+          setOpen(true);
+          setInterval(function () {
+            setOpen(false);
+          }, 4000);
+        }
       })
       .catch((e: Error) => {
         console.log(e);
@@ -77,6 +100,9 @@ export default function Login(): JSX.Element {
       component="main"
       sx={{ overflowY: "scroll", height: "100vh" }}
     >
+      <Collapse in={open} sx={{ position: "absolute", top: "70px" }}>
+        <Alert severity={message.severity as AlertColor}>{message.text}</Alert>
+      </Collapse>
       <CssBaseline />
       <Grid
         item
@@ -110,13 +136,6 @@ export default function Login(): JSX.Element {
           <Typography component="h1" variant="h5">
             Connexion
           </Typography>
-          {message ? (
-            <Typography component="h1" variant="h5">
-              Hi {message} 👋🙂
-            </Typography>
-          ) : (
-            <Typography component="h1" variant="h5"></Typography>
-          )}
           <form style={{ width: "100%" }} onSubmit={handleSubmit(onSubmit)}>
             <TextField
               margin="normal"
