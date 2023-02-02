@@ -247,7 +247,7 @@ function DetailPage(): JSX.Element {
                       <Typography variant="subtitle2" sx={{ fontSize: "11px" }}>
                         Owner
                       </Typography>
-                      <Link href="#" variant="body2">
+                      <Link href="/" variant="body2">
                         Voir les 28 annonces
                       </Link>
                     </Box>

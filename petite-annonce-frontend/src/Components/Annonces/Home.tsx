@@ -472,9 +472,8 @@ function Home(): JSX.Element {
             flexDirection: "column",
           }}
         >
-         { console.log(pub)}
-          {   pub? (pub.map(({titreAnnonce,_id, prixValue, description, pieceValue, surfaceValue, adresse_complet}) => (
-            <div key={_id} onClick={()=> navigate(`/details/` + _id)}>
+          {   pub? (pub.map(({titreAnnonce,_id, prixValue, description, pieceValue, surfaceValue, adresse_complet, Typeannonce}) => (
+            <div key={_id} onClick={()=> Typeannonce == 'AirBNB' ? (navigate(`/airbnb/` + _id)) : (navigate(`/details/` + _id))}>
               <ItemList  id = {_id} titreAnnonce={titreAnnonce} prixValue={prixValue}  description={description} pieceValue={pieceValue} surfaceValue={surfaceValue}
               adresse_complet={adresse_complet} />  
             </div>
