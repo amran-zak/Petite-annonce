@@ -11,6 +11,9 @@ import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import AnnoncesServices from "../../Services/Annonces.services";
 
+import Stack from '@mui/material/Stack';
+import CircularProgress from '@mui/material/CircularProgress';
+
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(() => ({
@@ -56,7 +59,7 @@ function Home(): JSX.Element {
 
   AnnoncesServices.findAll().then(
     (response) => {
-
+      console.log(response)
             setPub(response.data.publications)
             setMessage(response.data.message)
        
@@ -450,7 +453,17 @@ function Home(): JSX.Element {
               <ItemList   titreAnnonce={titreAnnonce} prixValue={prixValue}  description={description} pieceValue={pieceValue} surfaceValue={surfaceValue}
               adresse_complet={adresse_complet} />  
             </div>
-          )  ) ):(<h1>en cours ...  </h1>)}
+          )  ) ):(
+            <Stack sx={{ color: 'grey.500' }}
+             direction="row"
+            justifyContent="center"
+            alignItems="center"
+            spacing={3}>
+            <CircularProgress color="secondary" />
+            <CircularProgress color="success" />
+            <CircularProgress color="inherit" />
+          </Stack>
+          )}
        
         </Box>
       </Box>
