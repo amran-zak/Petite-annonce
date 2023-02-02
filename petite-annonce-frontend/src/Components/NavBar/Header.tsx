@@ -1,78 +1,32 @@
 import * as React from "react";
-/* material */
-import { styled, alpha } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
-import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-/* icons */
-import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
+import {
+  Link,
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Badge,
+  MenuItem,
+  Menu,
+} from "@mui/material";
+import { HomeWork } from "@mui/icons-material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 
-
-import AuthService from '../../Services/Auth.services'
-
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-}));
+import AuthService from "../../Services/Auth.services";
 
 export default function PrimarySearchAppBar() {
+  const [currentUser, setCurrentUser] = React.useState(undefined);
 
-
-    const [currentUser, setCurrentUser] = React.useState(undefined); 
-
-    React.useEffect(() => {
+  React.useEffect(() => {
     const user = AuthService.getCurrentUser();
     if (user.acces_token) {
-        setCurrentUser(user);
+      setCurrentUser(user);
     }
-    }, []);
-
+  }, []);
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
@@ -99,7 +53,6 @@ export default function PrimarySearchAppBar() {
     setCurrentUser(undefined);
     setAnchorEl(null);
     handleMobileMenuClose();
-
   };
 
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -123,15 +76,34 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {currentUser ?(
-      <MenuItem onClick={handleMenuClose} href="/profile">Profile</MenuItem>)
-      :(<MenuItem onClick={handleMenuClose} href="/connexion">Connexion</MenuItem>)}
+      {currentUser ? (
+        <MenuItem onClick={handleMenuClose}>
+          <Link href="/profile" underline="none">
+            Profile
+          </Link>
+        </MenuItem>
+      ) : (
+        <MenuItem onClick={handleMenuClose}>
+          <Link href="/connexion" underline="none">
+            Connexion
+          </Link>
+        </MenuItem>
+      )}
 
-{currentUser ?(
-      <MenuItem onClick={handleMenuCloseLogout} href="/">Logout</MenuItem>)
-      :(<MenuItem onClick={handleMenuClose} href="/inscription">Inscription</MenuItem>)}
-
-
+      {currentUser ? (
+        <MenuItem onClick={handleMenuCloseLogout}>
+          <Link href="/" underline="none">
+            Logout
+          </Link>
+        </MenuItem>
+      ) : (
+        <MenuItem onClick={handleMenuClose}>
+          <Link href="/inscription" underline="none">
+            {" "}
+            Inscription
+          </Link>
+        </MenuItem>
+      )}
     </Menu>
   );
 
@@ -191,32 +163,22 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar component="nav" sx={{ backgroundColor: "#694ED4" }}>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+          <HomeWork sx={{ display: { xs: "none", md: "flex" }, mx: 2 }} />
           <Typography
             variant="h6"
             noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
+            component="a"
+            href="/"
+            sx={{
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              color: "inherit",
+              textDecoration: "none",
+            }}
           >
-            Petite annonce
+            Petite Annonce
           </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton

@@ -1,10 +1,10 @@
 export default interface UserData {
-    firstname: null | FormDataEntryValue | String,
-    lastname: null | FormDataEntryValue | String,
-    email: null | FormDataEntryValue | String,
-    password: null | FormDataEntryValue | String,
-    number: null | FormDataEntryValue | Number,
-    address: null | FormDataEntryValue | String,
-    code_postal: null | FormDataEntryValue | Number,
-    city: null | FormDataEntryValue | String
+  firstname: null | FormDataEntryValue | string;
+  lastname: null | FormDataEntryValue | string;
+  email: null | FormDataEntryValue | string;
+  password: null | FormDataEntryValue | string;
+  number: null | FormDataEntryValue | number;
+  address: null | FormDataEntryValue | string;
+  code_postal: null | FormDataEntryValue | number;
+  city: null | FormDataEntryValue | string;
 }
