@@ -29,7 +29,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 export default function Login(): JSX.Element {
-  const [user, setUser] = React.useState(undefined);
+    const [user, setUser] = React.useState(undefined);
+
+    const [message, setMessage] = React.useState(undefined);
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -59,10 +61,10 @@ export default function Login(): JSX.Element {
     console.log(data);
     AuthService.login(data)
       .then((response: any) => {
-        setUser(response.data.User.firstname);
-        if (response.data.User) {
-          localStorage.setItem("user", JSON.stringify(response.data.User));
-        }
+        setMessage(response.data.message)
+            if (response.data.userToken) {
+                localStorage.setItem("user", JSON.stringify(response.data.userToken));
+            }
       })
       .catch((e: Error) => {
         console.log(e);
@@ -108,9 +110,9 @@ export default function Login(): JSX.Element {
           <Typography component="h1" variant="h5">
             Connexion
           </Typography>
-          {user ? (
+          {message ? (
             <Typography component="h1" variant="h5">
-              Hi {user} 👋🙂
+              Hi {message} 👋🙂
             </Typography>
           ) : (
             <Typography component="h1" variant="h5"></Typography>
