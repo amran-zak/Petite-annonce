@@ -77,7 +77,6 @@ function Home(): JSX.Element {
 
   AnnoncesServices.findAll().then(
     (response) => {
-      console.log(response)
             setPub(response.data.publications)
             setMessage(response.data.message)
        
@@ -111,6 +110,7 @@ function Home(): JSX.Element {
   ];
   return (
     <Box
+      // onClick={routeChange}
       sx={{
         display: "flex",
         flexDirection: "row",
@@ -474,8 +474,8 @@ function Home(): JSX.Element {
         >
          { console.log(pub)}
           {   pub? (pub.map(({titreAnnonce,_id, prixValue, description, pieceValue, surfaceValue, adresse_complet}) => (
-            <div key={_id}>
-              <ItemList   titreAnnonce={titreAnnonce} prixValue={prixValue}  description={description} pieceValue={pieceValue} surfaceValue={surfaceValue}
+            <div key={_id} onClick={()=> navigate(`/details/` + _id)}>
+              <ItemList  id = {_id} titreAnnonce={titreAnnonce} prixValue={prixValue}  description={description} pieceValue={pieceValue} surfaceValue={surfaceValue}
               adresse_complet={adresse_complet} />  
             </div>
           )  ) ):(
