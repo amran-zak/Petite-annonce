@@ -34,8 +34,23 @@ const list = [
 function Sidebar() {
   const [userProfile, setUserProfile] = useState('')
   const currentUser = AuthServices.getCurrentUser();
+
+  const [data, setData] = React.useState(undefined);
   //   const { isOpen, onOpen, onClose } = useDisclosure()
   const profileImage = useRef(null)
+
+  React.useEffect(() => {
+    AuthServices.getUser(id).then(
+      (response) => {
+        console.log(response)
+        setData(response.data)
+        }).catch(
+        (error) => {
+          console.log(error.message);
+        }
+      );
+  }, []);
+
 
   const changeProfileImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/jpg']

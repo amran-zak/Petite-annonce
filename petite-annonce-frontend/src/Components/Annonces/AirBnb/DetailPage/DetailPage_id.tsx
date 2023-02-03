@@ -40,11 +40,10 @@ const currencies = [ // a adapter en fonction des informations qu'aura indiquer 
 ];
 function DetailPage(): JSX.Element {
   const [selectedValue, setSelectedValue] = useState("1");
-  const result = 0;
   const frais_services = 200;
   const taxes = 20;
 
-
+  const [result, setResult] = React.useState(0);
 
   const [data, setData] = React.useState(undefined);
   const [maison, setMaison] = React.useState("");
@@ -56,15 +55,14 @@ function DetailPage(): JSX.Element {
   const [bain, setBain] = React.useState("");
   const [toilette, setToilette] = React.useState("");
 
+
   const { id } = useParams<{ id: string }>();
 
 
   const criteres = [{
-
     icon: "home",
     name: "Type de bien",
     value: maison,
-
   },
 
   {
