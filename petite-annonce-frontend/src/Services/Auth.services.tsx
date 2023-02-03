@@ -11,13 +11,13 @@ class AuthService {
   login(data: LoginData) {
     return api.post<Array<LoginData>>("/auth/login", data);
   }
-  // getUser(id : string) {
-  //   const token = JSON.parse(localStorage.getItem("user") || '{}');
-  //   return api.post<Array<LoginData>>("/users/me" + id, {
-  //     headers: {
-  //       'Authorization': `Bearer ${token.acces_token}`
-  //     },});
-  // }
+  getUser() {
+    const token = JSON.parse(localStorage.getItem("user") || '{}');
+    return api.get<any>("/users/me", {
+      headers: {
+        'Authorization': `Bearer ${token.acces_token}`
+      },});
+  }
 
   getCityByCode(code: number | FormDataEntryValue | null) {
     return axios.get<Array<any>>(

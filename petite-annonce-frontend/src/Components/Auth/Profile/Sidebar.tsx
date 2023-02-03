@@ -3,7 +3,7 @@ import { useState, useRef } from 'react'
 import { Box, List, Icon, Avatar, Badge, Button, Stack, styled, IconButton, Typography, Divider, ListItemIcon, ListItem, ListItemText } from '@mui/material'
 import { PhotoCamera } from '@mui/icons-material'
 
-
+import CircularProgress from '@mui/material/CircularProgress';
 import AuthServices from '../../../Services/Auth.services';
 
 const SmallAvatar = styled(Avatar)(({ theme }) => ({
@@ -36,20 +36,21 @@ function Sidebar() {
   const currentUser = AuthServices.getCurrentUser();
 
   const [data, setData] = React.useState(undefined);
+
   //   const { isOpen, onOpen, onClose } = useDisclosure()
   const profileImage = useRef(null)
 
-  // React.useEffect(() => {
-  //   AuthServices.getUser(id).then(
-  //     (response) => {
-  //       console.log(response)
-  //       setData(response.data)
-  //       }).catch(
-  //       (error) => {
-  //         console.log(error.message);
-  //       }
-  //     );
-  // }, []);
+  React.useEffect(() => {
+    AuthServices.getUser().then(
+      (response) => {
+        console.log(response)
+        setData(response.data.user_)
+      }).catch(
+        (error) => {
+          console.log(error.message);
+        }
+      );
+  }, []);
 
 
   const changeProfileImage = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,72 +68,84 @@ function Sidebar() {
     }
   }
   return (
-      <Box
-        sx={{
-          transform: 'translateY(60px)',
-          border: '1px solid #e9ebee',
-          bgcolor: 'white',
-          borderRadius: 3,
-          width: '300px',
-        }}
-      >
-        <Stack direction="column" alignItems="center" spacing={3} pt={5} pb={1}>
-          <Badge
-            sx={{ width: 'fit-content' }}
-            overlap="circular"
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-            badgeContent={
-              <SmallAvatar sx={{ bgcolor: 'blue' }} alt="Remy Sharp">
-                <IconButton aria-label="upload picture" component="label">
-                  <input
-                    ref={profileImage}
-                    onChange={changeProfileImage}
-                    hidden
-                    accept="image/*"
-                    type="file"
-                  />{' '}
-                  <PhotoCamera sx={{ color: 'white' }} />
-                </IconButton>
-              </SmallAvatar>
-            }
-          >
-            <Avatar
-              src={userProfile ? userProfile : '/img/tim-cook.jpg'}
-              sx={{ width: 128, height: 128, cursor: 'pointer' }}
-              alt="Travis Howard"
-            ></Avatar>
-          </Badge>
-          <Stack direction="column" sx={{ marginTop: '16px !important' }} spacing={0}>
-            <Typography variant="h6" fontSize="xl">
-            {currentUser.firstname} {currentUser.lastname}
-            </Typography>
-            <Typography variant="caption" fontSize="sm">
-              Compte actif depuis ...
-            </Typography>
+    <div>
+      {data ? (
+        <Box
+          sx={{
+            transform: 'translateY(60px)',
+            border: '1px solid #e9ebee',
+            bgcolor: 'white',
+            borderRadius: 3,
+            width: '300px',
+          }}
+        >
+          <Stack direction="column" alignItems="center" spacing={3} pt={5} pb={1}>
+            <Badge
+              sx={{ width: 'fit-content' }}
+              overlap="circular"
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+              badgeContent={
+                <SmallAvatar sx={{ bgcolor: 'blue' }} alt="Remy Sharp">
+                  <IconButton aria-label="upload picture" component="label">
+                    <input
+                      ref={profileImage}
+                      onChange={changeProfileImage}
+                      hidden
+                      accept="image/*"
+                      type="file"
+                    />{' '}
+                    <PhotoCamera sx={{ color: 'white' }} />
+                  </IconButton>
+                </SmallAvatar>
+              }
+            >
+              <Avatar
+                src={userProfile ? userProfile : '/img/tim-cook.jpg'}
+                sx={{ width: 128, height: 128, cursor: 'pointer' }}
+                alt="Travis Howard"
+              ></Avatar>
+            </Badge>
+            <Stack direction="column" sx={{ marginTop: '16px !important' }} spacing={0}>
+              <Typography variant="h6" fontSize="xl">
+                {data.firstname.toUpperCase()} {data.lastname.toUpperCase()}
+              </Typography>
+              <Typography variant="caption" fontSize="sm">
+                Compte actif depuis {data.createdAt}
+              </Typography>
+            </Stack>
           </Stack>
-        </Stack>
 
-        <List sx={{ width: '100%', maxWidth: 360, mt: 5, bgcolor: 'background.paper' }}>
+          <List sx={{ width: '100%', maxWidth: 360, mt: 5, bgcolor: 'background.paper' }}>
+            <Divider light />
+            {list.map((item) => (
+              <ListItem key={item.name}>
+                <ListItemIcon>
+                  <Icon>{item.icon}</Icon>
+                </ListItemIcon>
+                <ListItemText primary={item.name} />
+                <Typography textAlign="end">{item.value}</Typography>
+              </ListItem>
+            ))}
+          </List>
           <Divider light />
-          {list.map((item) => (
-            <ListItem key={item.name}>
-              <ListItemIcon>
-                <Icon>{item.icon}</Icon>
-              </ListItemIcon>
-              <ListItemText primary={item.name} />
-              <Typography textAlign="end">{item.value}</Typography>
-            </ListItem>
-          ))}
-        </List>
-        <Divider light />
-        <Stack p={5} spacing={3}>
-          <Button variant="outlined" color="error"
-                  sx={{ backgroundColor: 'transparent !important' }}
-          >
-            Supprimer votre compte
-          </Button>
+          <Stack p={5} spacing={3}>
+            <Button variant="outlined" color="error"
+              sx={{ backgroundColor: 'transparent !important' }}
+            >
+              Supprimer votre compte
+            </Button>
+          </Stack>
+        </Box>
+      ) : (
+        <Stack sx={{ color: 'grey.500' }}
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          spacing={3}>
+          <CircularProgress color="secondary" />
         </Stack>
-      </Box>
+      )}
+    </div>
   )
 }
 
