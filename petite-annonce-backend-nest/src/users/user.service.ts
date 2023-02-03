@@ -5,6 +5,7 @@ import {User, UserRole} from "./interfaces/user.interface";
 import * as bcrypt from 'bcrypt';
 import { UpdateUserDTO } from './dto/register-user.dto';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
+import {Publication} from "../publication/schemas/publication.schema";
 
 @Injectable()
 export class UserService {
@@ -43,6 +44,14 @@ export class UserService {
                 throw new HttpException('User not found', HttpStatus.NO_CONTENT);
             }
             return user;
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+
+    async findAllMe(user): Promise<User> {
+        try {
+            return await this.userModel.findById(user._id);
         } catch (error) {
             throw new Error(error);
         }

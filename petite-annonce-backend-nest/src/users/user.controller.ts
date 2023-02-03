@@ -19,6 +19,7 @@ import {FileInterceptor} from "@nestjs/platform-express";
 import {RolesGuard} from "../auth/roles.guard";
 import {hasRoles} from "../auth/roles.decorator";
 import {UserPermission} from "./user.decorator";
+import {Publication} from "../publication/schemas/publication.schema";
 
 
 @Controller('users')
@@ -52,19 +53,19 @@ export class UserController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Get(':userID')
-  async findById(@Res() res, @Param('userID') userID): Promise<User> {
-    try {
-      const user = await this.usersService.findUserById(userID);
-      return res.json({
-        message: 'Utilisateur obtenu ',
-        user,
-      });
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
+  // @UseGuards(JwtAuthGuard)
+  // @Get(':userID')
+  // async findById(@Res() res, @Param('userID') userID): Promise<User> {
+  //   try {
+  //     const user = await this.usersService.findUserById(userID);
+  //     return res.json({
+  //       message: 'Utilisateur obtenu ',
+  //       user,
+  //     });
+  //   } catch (error) {
+  //     throw new Error(error);
+  //   }
+  // }
 
   @UseGuards(JwtAuthGuard)
   @Put(':userID')
@@ -96,6 +97,20 @@ export class UserController {
       return res.json({
         message: 'Utilisateur supprimé',
         user,
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  @Get('me')
+  @UseGuards(JwtAuthGuard)
+  async findAllMe(@Res() res, @UserPermission() user): Promise<User> {
+    try {
+      const user_ = await this.usersService.findAllMe(user);
+      return res.json({
+        message: "Mes informations bien récupérées !",
+        user_
       });
     } catch (error) {
       throw new Error(error);
