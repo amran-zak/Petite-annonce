@@ -12,7 +12,6 @@ import {
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import prod1 from "../../Style/Img/itemImg.jpg";
-
 import { useNavigate } from "react-router-dom";
 
 interface ItemListprops {
@@ -23,7 +22,15 @@ interface ItemListprops {
   pieceValue: number;
   surfaceValue: number;
   adresse_complet: string;
+  Typeannonce: string;
+  Typebien: string;
 }
+
+const formatter = new Intl.NumberFormat("fr-FR", {
+  style: "currency",
+  currency: "EUR",
+  minimumFractionDigits: 0,
+});
 
 const ItemList: React.FC<ItemListprops> = (props) => {
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
@@ -76,7 +83,11 @@ const ItemList: React.FC<ItemListprops> = (props) => {
                   color="text.secondary"
                   align="left"
                 >
-                  {props.adresse_complet}
+                  {props.adresse_complet +
+                    " • " +
+                    props.Typebien +
+                    " • " +
+                    props.Typeannonce}
                 </Typography>
               </div>
               <Checkbox
@@ -93,6 +104,14 @@ const ItemList: React.FC<ItemListprops> = (props) => {
               color="text.secondary"
               align="left"
               mb="15px"
+              sx={{
+                textOverflow: "ellipsis",
+                overflow: "hidden",
+                display: "-webkit-box !important",
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: "vertical",
+                WhiteSpace: "normal",
+              }}
             >
               {props.description}
             </Typography>
@@ -103,7 +122,7 @@ const ItemList: React.FC<ItemListprops> = (props) => {
                 component="span"
                 sx={{ fontSize: "16px", marginRight: "10px" }}
               >
-                <b>€{props.prixValue}</b>
+                <b>{formatter.format(props.prixValue)}</b>
               </Typography>
               <Box
                 display="flex"
