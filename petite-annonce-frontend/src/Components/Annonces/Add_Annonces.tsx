@@ -7,6 +7,7 @@ import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AnnonceData from "../../Types/Annones.types";
 import AnnoncesServices from "../../Services/Annonces.services";
+import { useNavigate } from "react-router-dom";
 
 const type_annonce = [
     { value: '1', label: 'Vente', },
@@ -31,7 +32,7 @@ const jardin = [
     { value: '2', label: 'Non', }
 ];
 function Add_Annonces(): JSX.Element {
-
+    const navigate = useNavigate();
     const handleDelete = (index: number) => {
         setImages(prevImages => Array.from(prevImages).filter((_, i) => i !== index));
     };
@@ -236,6 +237,7 @@ function Add_Annonces(): JSX.Element {
 
         AnnoncesServices.createAnnonce(annonce_data)
         .then((response: any) => {
+            navigate("/");
           console.log(response)
         })
         .catch((e: Error) => {
