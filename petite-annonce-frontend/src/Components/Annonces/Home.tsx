@@ -75,7 +75,7 @@ function Home(): JSX.Element {
 
   const [search, setSearch] = React.useState<string>("");
   const [min, setMin] = React.useState<number>(0);
-  const [max, setMax] = React.useState<number>(800);
+  const [max, setMax] = React.useState<number>(500000);
   const [minSurf, setMinSurf] = React.useState<number>(0);
   const [maxSurf, setMaxSurf] = React.useState<number>(100);
   const [searchAddress, setSearchAddress] = React.useState<string>("");
@@ -210,10 +210,16 @@ function Home(): JSX.Element {
         element.adresse_complet
           .toLowerCase()
           .includes(searchAddress.toLowerCase()) &&
-        element.Typeannonce.toLowerCase().includes(
-          annonceFilter.toLowerCase()
-        ) &&
-        element.Typebien.toLowerCase().includes(logementFilter.toLowerCase()) &&
+        (logementFilter !== ""
+          ? logementFilter
+              .toLowerCase()
+              .includes(element.Typebien.toLowerCase())
+          : logementFilter.toLowerCase().includes("")) &&
+        (annonceFilter !== ""
+          ? annonceFilter
+              .toLowerCase()
+              .includes(element.Typeannonce.toLowerCase())
+          : annonceFilter.toLowerCase().includes("")) &&
         element.prixValue >= min &&
         element.prixValue <= max &&
         element.surfaceValue >= minSurf &&
@@ -222,6 +228,27 @@ function Home(): JSX.Element {
     console.log(filtered);
 
     setPubFilted(filtered);
+  };
+
+  const handleResetFilter = () => {
+    setPubFilted(pub);
+    setSearch("");
+    setSearchAddress("");
+    setMin(0);
+    setMax(500000);
+    setMinSurf(0);
+    setMaxSurf(100);
+    setTypeAnnonce({
+      Location: false,
+      Vente: false,
+      Airbnb: false,
+    });
+    setTypeLogement({
+      Appartement: false,
+      Maison: false,
+      Villa: false,
+    });
+    setSlider([20, 60]);
   };
 
   return (
@@ -603,7 +630,7 @@ function Home(): JSX.Element {
             >
               Valider
             </Button>
-            <Button fullWidth variant="outlined">
+            <Button fullWidth variant="outlined" onClick={handleResetFilter}>
               Annuler
             </Button>
           </Toolbar>
