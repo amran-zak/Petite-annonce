@@ -7,6 +7,7 @@ import {
   Link,
   Grid,
   Box,
+  MenuItem,
   FormControl,
   Typography,
   Container,
@@ -16,6 +17,8 @@ import {
   InputAdornment,
   FormHelperText,
 } from "@mui/material";
+import Alert, { AlertColor } from "@mui/material/Alert";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -23,14 +26,17 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import UserData from "../../Types/User.types";
 import AuthService from "../../Services/Auth.services";
-
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 export default function SignUp() {
-  const [message, setMessage] = React.useState(undefined);
-
+  const [message, setMessage] = React.useState({ text: "", severity: "" });
+  const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
   const [validated, setvalidated] = React.useState(false);
+  const [cities, setcities] = React.useState([{ nomCommune: "" }]);
+  const [city, setCity] = React.useState("");
   const [confPassword, setConfPassword] = React.useState("");
 
   const handleMouseDownPassword = (
@@ -41,6 +47,10 @@ export default function SignUp() {
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const phoneRegExp =
+    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
+  const numberRegExp = /^[0-9]+$/;
 
   const validationSchema = Yup.object().shape({
     lastname: Yup.string().required("Prénom est requis"),
@@ -48,17 +58,19 @@ export default function SignUp() {
     email: Yup.string()
       .required("Email est requis")
       .email("Email n'est pas valide"),
-    number: Yup.number()
+    number: Yup.string()
       .required("Téléphone est requis")
-      .min(10, "Entrer un numéro valide")
+      .matches(phoneRegExp, "Entrer un numéro valide")
+      .min(9, "Entrer un numéro valide")
       .max(10, "Entrer un numéro valide"),
     password: Yup.string()
       .required("Mot de passe est requis")
       .min(6, "Doit contenir au moins 6 caractères")
       .max(40, "Doit contenir au plus 40 caractères"),
     address: Yup.string().required("Adresse est requise"),
-    code_postal: Yup.number()
+    code_postal: Yup.string()
       .required("Code postale est requis")
+      .matches(numberRegExp, "Entrer un code postale valide")
       .min(5, "Entrer un code postale valide")
       .max(5, "Entrer un code postale valide"),
     city: Yup.string().required("Ville est requise"),
@@ -73,6 +85,11 @@ export default function SignUp() {
     resolver: yupResolver(validationSchema),
     criteriaMode: "all",
   });
+
+  const handleCity = (event: SelectChangeEvent) => {
+    console.log(event.target.value);
+    setCity(event.target.value as string);
+  };
 
   const onchangeConfPassword = (e: any) => {
     setConfPassword(e.target.value);
@@ -95,13 +112,37 @@ export default function SignUp() {
     );
   };
 
-  const onSubmit = (data) => {
-    AuthService.signUp(data)
+  const handleCodePostal = (code: number | FormDataEntryValue | null) => {
+    AuthService.getCityByCode(code)
       .then((response: any) => {
-        setMessage(response.data.msg);
+        if (response.data) {
+          setcities(response.data);
+        } else {
+          setcities([]);
+        }
       })
       .catch((e: Error) => {
         console.log(e);
+      });
+  };
+
+  const onSubmit = (data) => {
+    AuthService.signUp(data)
+      .then((response: any) => {
+        setMessage({ text: response.data.message, severity: "success" });
+        navigate("/connexion");
+      })
+      .catch((e: Error) => {
+        console.log(e);
+        setMessage({
+          text: e.message,
+          severity: "error",
+        });
+
+        setOpen(true);
+        setInterval(function () {
+          setOpen(false);
+        }, 4000);
       });
   };
 
@@ -131,19 +172,12 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Inscription
         </Typography>
-        {message ? (
-          <Typography component="h1" variant="h5">
-            {message} 👍✅
-          </Typography>
-        ) : (
-          <Typography component="h1" variant="h5"></Typography>
-        )}
 
         <form style={{ marginTop: "10px" }} onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-                autoComplete="given-name"
+                autoComplete="family-name"
                 required
                 fullWidth
                 id="firstName"
@@ -156,11 +190,11 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+                autoComplete="given-name"
                 required
                 fullWidth
                 id="lastName"
                 label="Prénom"
-                autoComplete="family-name"
                 {...register("lastname")}
                 error={errors.lastname ? true : false}
                 helperText={errors.lastname?.message}
@@ -259,7 +293,7 @@ export default function SignUp() {
                   error={errors.password ? true : false}
                   htmlFor="outlined-adornment-password"
                 >
-                  Mot de passe
+                  Confirmez mot de passe
                 </InputLabel>
                 <OutlinedInput
                   required
@@ -323,25 +357,45 @@ export default function SignUp() {
                     fullWidth
                     label="Code postal"
                     id="codepostal"
-                    autoComplete="codepostal"
+                    autoComplete="postal-code"
                     type="numeric"
-                    inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-                    {...register("code_postal")}
+                    {...register("code_postal", {
+                      onChange: () =>
+                        handleCodePostal(getValues("code_postal")),
+                    })}
                     error={errors.code_postal ? true : false}
                     helperText={errors.code_postal?.message}
                   />
                 </Grid>
                 <Grid item xs={12} sm={12} sx={{ ml: 2, mt: 3 }}>
-                  <TextField
-                    required
-                    fullWidth
-                    label="Ville"
-                    id="city"
-                    autoComplete="city"
-                    {...register("city")}
-                    error={errors.city ? true : false}
-                    helperText={errors.city?.message}
-                  />
+                  <FormControl fullWidth required sx={{ textAlign: "start" }}>
+                    <InputLabel id="demo-simple-select-label">Ville</InputLabel>
+                    <Select
+                      label="Ville"
+                      id="city"
+                      autoComplete="city"
+                      {...register("city", {
+                        onChange: (e) => {
+                          handleCity(e);
+                        },
+                      })}
+                      error={errors.city ? true : false}
+                      value={city}
+                    >
+                      {Array.from(cities).map((item, index) => (
+                        <MenuItem value={item.nomCommune} key={index}>
+                          {item.nomCommune}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {errors.city ? (
+                      <FormHelperText error id="component-error-text">
+                        {errors.city.message}
+                      </FormHelperText>
+                    ) : (
+                      ""
+                    )}
+                  </FormControl>
                 </Grid>
               </Grid>
               <Grid item xs={12} sm={6} sx={{ mt: 3 }}>

@@ -13,6 +13,7 @@ import {
   FormGroup,
   InputLabel,
   MenuItem,
+  Slider,
   OutlinedInput,
   InputAdornment,
   FormControlLabel,
@@ -29,8 +30,8 @@ import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import AnnoncesServices from "../../Services/Annonces.services";
 import { useNavigate } from "react-router-dom";
-import Stack from '@mui/material/Stack';
-import CircularProgress from '@mui/material/CircularProgress';
+import Stack from "@mui/material/Stack";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -66,31 +67,76 @@ const FilterHeader = styled(Typography)(() => ({
   color: "rgba(0, 0, 0, 0.6)",
 }));
 function Home(): JSX.Element {
-  const [expanded, setExpanded] = React.useState<string | boolean>("panel1");
+  const [expanded, setExpanded] = React.useState<string | boolean>("panel0");
 
-  const [pub, setPub] = React.useState<any>(undefined);
+  const [pub, setPub] = React.useState<any>([]);
+  const [PubFilted, setPubFilted] = React.useState<any>([]);
   const [message, setMessage] = React.useState<string | undefined>(undefined);
 
+  const [search, setSearch] = React.useState<string>("");
+  const [min, setMin] = React.useState<number>(0);
+  const [max, setMax] = React.useState<number>(500000);
+  const [minSurf, setMinSurf] = React.useState<number>(0);
+  const [maxSurf, setMaxSurf] = React.useState<number>(100);
+  const [searchAddress, setSearchAddress] = React.useState<string>("");
+  const [typeAnnonce, setTypeAnnonce] = React.useState({
+    Location: false,
+    Vente: false,
+    Airbnb: false,
+  });
+  const [typeLogement, setTypeLogement] = React.useState({
+    Appartement: false,
+    Maison: false,
+    Villa: false,
+  });
 
-  
+  const [slider, setSlider] = React.useState<number[]>([20, 60]);
+  const marks = [
+    {
+      value: 0,
+      label: "1",
+    },
+    {
+      value: 20,
+      label: "2",
+    },
+    {
+      value: 40,
+      label: "3",
+    },
+    {
+      value: 60,
+      label: "4",
+    },
+    {
+      value: 80,
+      label: "5",
+    },
+    {
+      value: 100,
+      label: "6+",
+    },
+  ];
+  function valueLabelFormat(value: number) {
+    return marks.findIndex((mark) => mark.value === value) + 1;
+  }
+  const handleSlider = (event: Event, newValue: number | number[]) => {
+    setSlider(newValue as number[]);
+  };
+
   React.useEffect(() => {
+    AnnoncesServices.findAll()
+      .then((response) => {
+        setPub(response.data.publications);
+        setPubFilted(response.data.publications);
+        setMessage(response.data.message);
+      })
+      .catch((error) => {
+        setMessage(error.message);
+      });
+  }, []);
 
-  AnnoncesServices.findAll().then(
-    (response) => {
-            setPub(response.data.publications)
-            setMessage(response.data.message)
-       
-
-    }).catch(
-        (error) => {
-            setMessage(error.message);
-        }
-    );
-
-      }, [])
-
-
-    const  navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
@@ -101,6 +147,40 @@ function Home(): JSX.Element {
   const handleSelectChange = (event: SelectChangeEvent) => {
     setState(event.target.value);
   };
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+  };
+  const handleMin = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMin(+event.target.value);
+  };
+  const handleMax = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMax(+event.target.value);
+  };
+  const handleMinSurf = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMinSurf(+event.target.value);
+  };
+  const handleMaxSurf = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMaxSurf(+event.target.value);
+  };
+  const handleSearchAddress = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchAddress(event.target.value);
+  };
+
+  const handleTypeAnnonce = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTypeAnnonce({
+      ...typeAnnonce,
+      [event.target.name]: event.target.checked,
+    });
+  };
+  const handleTypeLogement = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTypeLogement({
+      ...typeLogement,
+      [event.target.name]: event.target.checked,
+    });
+    console.log(typeAnnonce);
+  };
+  const { Location, Vente, Airbnb } = typeAnnonce;
+  const { Appartement, Maison, Villa } = typeLogement;
 
   const tri: Array<string> = [
     "Plus récent",
@@ -108,6 +188,69 @@ function Home(): JSX.Element {
     "Prix croissant",
     "Prix décroissant",
   ];
+
+  const handleFilter = () => {
+    let annonceFilter = "";
+    let logementFilter = "";
+    for (const key in typeAnnonce) {
+      if (typeAnnonce[key]) {
+        annonceFilter = key + "" + annonceFilter;
+      }
+    }
+    for (const key in typeLogement) {
+      if (typeLogement[key]) {
+        logementFilter = key + "" + logementFilter;
+      }
+    }
+    console.log(annonceFilter);
+    console.log(logementFilter);
+    const filtered = pub.filter(
+      (element) =>
+        element.titreAnnonce.toLowerCase().includes(search.toLowerCase()) &&
+        element.adresse_complet
+          .toLowerCase()
+          .includes(searchAddress.toLowerCase()) &&
+        (logementFilter !== ""
+          ? logementFilter
+              .toLowerCase()
+              .includes(element.Typebien.toLowerCase())
+          : logementFilter.toLowerCase().includes("")) &&
+        (annonceFilter !== ""
+          ? annonceFilter
+              .toLowerCase()
+              .includes(element.Typeannonce.toLowerCase())
+          : annonceFilter.toLowerCase().includes("")) &&
+        element.prixValue >= min &&
+        element.prixValue <= max &&
+        element.surfaceValue >= minSurf &&
+        element.surfaceValue <= maxSurf
+    );
+    console.log(filtered);
+
+    setPubFilted(filtered);
+  };
+
+  const handleResetFilter = () => {
+    setPubFilted(pub);
+    setSearch("");
+    setSearchAddress("");
+    setMin(0);
+    setMax(500000);
+    setMinSurf(0);
+    setMaxSurf(100);
+    setTypeAnnonce({
+      Location: false,
+      Vente: false,
+      Airbnb: false,
+    });
+    setTypeLogement({
+      Appartement: false,
+      Maison: false,
+      Villa: false,
+    });
+    setSlider([20, 60]);
+  };
+
   return (
     <Box
       // onClick={routeChange}
@@ -119,7 +262,7 @@ function Home(): JSX.Element {
       <Box
         sx={{
           overflowY: "scroll",
-          width: "330px",
+          width: "350px",
           height: "92vh",
         }}
         flexDirection="column"
@@ -136,7 +279,7 @@ function Home(): JSX.Element {
               display={"flex"}
               flexDirection={"row"}
               sx={{
-                paddingY: "15px",
+                paddingY: "20px",
                 top: 0,
                 zIndex: 1,
                 backgroundColor: "white",
@@ -155,6 +298,8 @@ function Home(): JSX.Element {
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-amount"
+                value={search}
+                onChange={handleSearch}
                 startAdornment={
                   <InputAdornment position="start">
                     <Icon fontSize="small" sx={{ marginRight: "10px" }}>
@@ -171,6 +316,8 @@ function Home(): JSX.Element {
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-location"
+                value={searchAddress}
+                onChange={handleSearchAddress}
                 endAdornment={
                   <InputAdornment position="end">
                     <Icon fontSize="small" sx={{ marginLeft: "10px" }}>
@@ -182,6 +329,54 @@ function Home(): JSX.Element {
               />
             </FormControl>
             <div>
+              <Accordion
+                expanded={expanded === "panel0"}
+                onChange={handleChange("panel0")}
+              >
+                <AccordionSummary
+                  aria-controls="panel1d-content"
+                  id="panel1d-header"
+                >
+                  <FilterHeader>Type de annonce</FilterHeader>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={Location}
+                          size="small"
+                          name="Location"
+                          onChange={handleTypeAnnonce}
+                        />
+                      }
+                      label="Location"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={Vente}
+                          size="small"
+                          name="Vente"
+                          onChange={handleTypeAnnonce}
+                        />
+                      }
+                      label="Vente"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={Airbnb}
+                          size="small"
+                          name="Airbnb"
+                          onChange={handleTypeAnnonce}
+                        />
+                      }
+                      label="Airbnb"
+                    />
+                  </FormGroup>
+                </AccordionDetails>
+              </Accordion>
               <Accordion
                 expanded={expanded === "panel1"}
                 onChange={handleChange("panel1")}
@@ -196,31 +391,36 @@ function Home(): JSX.Element {
                   <FormGroup>
                     <FormControlLabel
                       control={
-                        <Checkbox checked={true} size="small" name="Location" />
+                        <Checkbox
+                          checked={Appartement}
+                          size="small"
+                          name="Appartement"
+                          onChange={handleTypeLogement}
+                        />
                       }
-                      label="Location"
+                      label="Appartement"
                     />
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={true}
+                          checked={Maison}
                           size="small"
-                          name="Colocation"
+                          name="Maison"
+                          onChange={handleTypeLogement}
                         />
-                      }
-                      label="Colocation"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox checked={false} size="small" name="Maison" />
                       }
                       label="Maison"
                     />
                     <FormControlLabel
                       control={
-                        <Checkbox checked={false} size="small" name="Airbnb" />
+                        <Checkbox
+                          checked={Villa}
+                          size="small"
+                          name="Villa"
+                          onChange={handleTypeLogement}
+                        />
                       }
-                      label="Airbnb"
+                      label="Villa"
                     />
                   </FormGroup>
                 </AccordionDetails>
@@ -243,6 +443,9 @@ function Home(): JSX.Element {
                       </InputLabel>
                       <OutlinedInput
                         id="outlined-adornment-amount"
+                        type="number"
+                        value={min}
+                        onChange={handleMin}
                         endAdornment={
                           <InputAdornment position="end">€</InputAdornment>
                         }
@@ -255,6 +458,9 @@ function Home(): JSX.Element {
                       </InputLabel>
                       <OutlinedInput
                         id="outlined-adornment-amount"
+                        type="number"
+                        value={max}
+                        onChange={handleMax}
                         endAdornment={
                           <InputAdornment position="end">€</InputAdornment>
                         }
@@ -275,30 +481,14 @@ function Home(): JSX.Element {
                   <FilterHeader>Nombre de pièces</FilterHeader>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <ButtonGroup
-                    fullWidth
-                    variant="outlined"
-                    aria-label="outlined button group"
-                  >
-                    <Button sx={{ backgroundColor: "white !important" }}>
-                      1
-                    </Button>
-                    <Button sx={{ backgroundColor: "white !important" }}>
-                      2
-                    </Button>
-                    <Button sx={{ backgroundColor: "white !important" }}>
-                      3
-                    </Button>
-                    <Button sx={{ backgroundColor: "white !important" }}>
-                      4
-                    </Button>
-                    <Button sx={{ backgroundColor: "white !important" }}>
-                      5
-                    </Button>
-                    <Button sx={{ backgroundColor: "white !important" }}>
-                      6+
-                    </Button>
-                  </ButtonGroup>
+                  <Slider
+                    valueLabelFormat={valueLabelFormat}
+                    getAriaLabel={() => "range"}
+                    value={slider}
+                    onChange={handleSlider}
+                    valueLabelDisplay="auto"
+                    marks={marks}
+                  />
                 </AccordionDetails>
               </Accordion>
               <Accordion
@@ -319,6 +509,9 @@ function Home(): JSX.Element {
                       </InputLabel>
                       <OutlinedInput
                         id="outlined-adornment-amount"
+                        type="number"
+                        value={minSurf}
+                        onChange={handleMinSurf}
                         endAdornment={
                           <InputAdornment position="end">m²</InputAdornment>
                         }
@@ -331,6 +524,9 @@ function Home(): JSX.Element {
                       </InputLabel>
                       <OutlinedInput
                         id="outlined-adornment-amount"
+                        type="number"
+                        value={maxSurf}
+                        onChange={handleMaxSurf}
                         endAdornment={
                           <InputAdornment position="end">m²</InputAdornment>
                         }
@@ -355,7 +551,7 @@ function Home(): JSX.Element {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={true}
+                          checked={false}
                           size="small"
                           name="Particuliers"
                         />
@@ -389,7 +585,7 @@ function Home(): JSX.Element {
                   <FormGroup>
                     <FormControlLabel
                       control={
-                        <Checkbox checked={true} size="small" name="Meublé" />
+                        <Checkbox checked={false} size="small" name="Meublé" />
                       }
                       label="Meublé"
                     />
@@ -426,10 +622,15 @@ function Home(): JSX.Element {
               justifyContent: "space-between",
             }}
           >
-            <Button fullWidth variant="contained" sx={{ marginRight: "14px" }}>
+            <Button
+              fullWidth
+              variant="contained"
+              sx={{ marginRight: "14px" }}
+              onClick={handleFilter}
+            >
               Valider
             </Button>
-            <Button fullWidth variant="outlined" sx={{ color: "white" }}>
+            <Button fullWidth variant="outlined" onClick={handleResetFilter}>
               Annuler
             </Button>
           </Toolbar>
@@ -457,7 +658,7 @@ function Home(): JSX.Element {
               onChange={handleSelectChange}
               displayEmpty
               inputProps={{ "aria-label": "Without label" }}
-              sx={{ width: "200px" }}
+              sx={{ width: "200px", textAlign: "start" }}
             >
               {tri.map((item, index) => (
                 <MenuItem key={index} value={item}>{`${item}`}</MenuItem>
@@ -472,21 +673,60 @@ function Home(): JSX.Element {
             flexDirection: "column",
           }}
         >
-          {   pub? (pub.map(({titreAnnonce,_id, prixValue, description, pieceValue, surfaceValue, adresse_complet, Typeannonce}) => (
-            <div key={_id} onClick={()=> Typeannonce == 'AirBNB' ? (navigate(`/airbnb/` + _id)) : (navigate(`/details/` + _id))}>
-              <ItemList  id = {_id} titreAnnonce={titreAnnonce} prixValue={prixValue}  description={description} pieceValue={pieceValue} surfaceValue={surfaceValue}
-              adresse_complet={adresse_complet} />  
-            </div>
-          )  ) ):(
-            <Stack sx={{ color: 'grey.500' }}
-             direction="row"
-            justifyContent="center"
-            alignItems="center"
-            spacing={3}>
-            <CircularProgress color="secondary" />
-          </Stack>
+          <Typography
+            variant="caption"
+            display="block"
+            sx={{ textAlign: "end", fontStyle: "italic" }}
+            gutterBottom
+          >
+            {PubFilted.length > 0 ? PubFilted.length + " annonces trouvés" : ""}
+          </Typography>
+          {PubFilted ? (
+            PubFilted.map(
+              ({
+                titreAnnonce,
+                _id,
+                prixValue,
+                description,
+                pieceValue,
+                surfaceValue,
+                adresse_complet,
+                Typeannonce,
+                Typebien,
+              }) => (
+                <div
+                  key={_id}
+                  onClick={() =>
+                    Typeannonce == "AirBNB"
+                      ? navigate(`/airbnb/` + _id)
+                      : navigate(`/details/` + _id)
+                  }
+                >
+                  <ItemList
+                    id={_id}
+                    titreAnnonce={titreAnnonce}
+                    prixValue={prixValue}
+                    description={description}
+                    pieceValue={pieceValue}
+                    surfaceValue={surfaceValue}
+                    adresse_complet={adresse_complet}
+                    Typeannonce={Typeannonce}
+                    Typebien={Typebien}
+                  />
+                </div>
+              )
+            )
+          ) : (
+            <Stack
+              sx={{ color: "grey.500" }}
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              spacing={3}
+            >
+              <CircularProgress color="secondary" />
+            </Stack>
           )}
-       
         </Box>
       </Box>
     </Box>
