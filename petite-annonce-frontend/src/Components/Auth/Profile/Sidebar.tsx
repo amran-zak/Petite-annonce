@@ -39,17 +39,17 @@ function Sidebar() {
   //   const { isOpen, onOpen, onClose } = useDisclosure()
   const profileImage = useRef(null)
 
-  React.useEffect(() => {
-    AuthServices.getUser(id).then(
-      (response) => {
-        console.log(response)
-        setData(response.data)
-        }).catch(
-        (error) => {
-          console.log(error.message);
-        }
-      );
-  }, []);
+  // React.useEffect(() => {
+  //   AuthServices.getUser(id).then(
+  //     (response) => {
+  //       console.log(response)
+  //       setData(response.data)
+  //       }).catch(
+  //       (error) => {
+  //         console.log(error.message);
+  //       }
+  //     );
+  // }, []);
 
 
   const changeProfileImage = (event: React.ChangeEvent<HTMLInputElement>) => {
